@@ -11,4 +11,14 @@ yarn-debug.log*
 yarn-error.log*
 public/uploads/*
 !public/uploads/.gitkeep
+
+# Curated landing media referenced by data/cms.json and deployed with the site.
+!public/uploads/landing-media/
+public/uploads/landing-media/*
+!public/uploads/landing-media/current/
+!public/uploads/landing-media/current/**
+
+# Keep generated/raw media drafts local unless explicitly promoted to current/.
+public/uploads/landing-media/raw/
+public/uploads/landing-media/video/
 .vercel
