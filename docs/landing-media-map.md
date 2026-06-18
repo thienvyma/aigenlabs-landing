@@ -24,7 +24,7 @@ Processed images to use in the landing CMS:
 public/uploads/landing-media/current/
 ```
 
-Processing applied to each image:
+Processing applied to the first static screenshot set:
 
 ```text
 crop to exact 16:9 -> resize to 1920x1080 -> gentle sharpening -> WebP quality 88
@@ -34,6 +34,29 @@ Machine-readable manifest:
 
 ```text
 public/uploads/landing-media/current/manifest.json
+```
+
+## Platform media refresh — light theme animated zoom
+
+The Platform / "Nền tảng" section uses animated WebP files generated from real AigenLabs Desktop light-theme screenshots with demo data visible in the UI.
+
+```text
+scripts/build_platform_zoom_media.py
+media-sources/platform-zoom-2026-06-18/
+```
+
+Rules for this platform set:
+
+- Do not use dark-theme screenshots for public landing platform media.
+- Do not draw fake UI/mock data into the image.
+- Use real app screenshots as source, then render animated WebP pan/zoom so details are readable inside the landing media frame.
+- Keep the existing `public/uploads/landing-media/current/platform-*.webp` filenames so CMS URLs do not need to change.
+- The current Automation/Cron media uses a real workflow map screenshot because the real Cron page screenshot was empty. Replace only that source later when a real Cron job list with demo runs is captured.
+
+Rebuild command:
+
+```bash
+python3 scripts/build_platform_zoom_media.py
 ```
 
 ## How Codex should apply these images
