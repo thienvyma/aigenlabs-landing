@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-06-18T09:59:11Z",
+  "fps": 24,
+  "durationSeconds": 15,
+  "resolution": "1920x1080",
+  "sources": {
+    "command_center": "/home/huynhvy/Desktop/aigenlabs-agent/landing/aigenlabs-landing/public/uploads/landing-media/video/raw/2026-06-18/command_center.png",
+    "workflow_map": "/home/huynhvy/Desktop/aigenlabs-agent/landing/aigenlabs-landing/public/uploads/landing-media/video/raw/2026-06-18/workflow_map.png",
+    "workflow_approval": "/home/huynhvy/Desktop/aigenlabs-agent/landing/aigenlabs-landing/public/uploads/landing-media/video/raw/2026-06-18/workflow_approval.png",
+    "execution_board": "/home/huynhvy/Desktop/aigenlabs-agent/landing/aigenlabs-landing/public/uploads/landing-media/video/raw/2026-06-18/execution_board.png",
+    "approvals_page": "/home/huynhvy/Desktop/aigenlabs-agent/landing/aigenlabs-landing/public/uploads/landing-media/video/raw/2026-06-18/approvals_page.png",
+    "skills_tools": "/home/huynhvy/Desktop/aigenlabs-agent/landing/aigenlabs-landing/public/uploads/landing-media/video/raw/2026-06-18/skills_tools.png"
+  },
+  "draftOutputs": {
+    "mp4": "/home/huynhvy/Desktop/aigenlabs-agent/landing/aigenlabs-landing/public/uploads/landing-media/video/draft/hero-business-os-demo-draft.mp4",
+    "webm": "/home/huynhvy/Desktop/aigenlabs-agent/landing/aigenlabs-landing/public/uploads/landing-media/video/draft/hero-business-os-demo-draft.webm",
+    "poster": "/home/huynhvy/Desktop/aigenlabs-agent/landing/aigenlabs-landing/public/uploads/landing-media/video/draft/hero-business-os-demo-poster.webp"
+  },
+  "script": "Founder launch request → AI staff workflow → approval → COO report",
+  "safety": "Uses current app captures plus simulated local approval overlay; no publish/deploy/outreach/spend/connector action."
+}

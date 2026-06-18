@@ -1,0 +1,20 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#FFFFFF"/>
+  <rect x="64" y="64" width="1072" height="502" rx="24" fill="#F4F6F8" stroke="#D0D5DD" stroke-width="2"/>
+  <circle cx="936" cy="158" r="178" fill="#F9E9E9"/>
+  <circle cx="1002" cy="482" r="146" fill="#D9F4F1"/>
+  <g transform="translate(122 122)">
+    <text x="0" y="78" fill="#101828" font-family="Space Grotesk, Arial, sans-serif" font-size="86" font-weight="900">AigenLabs</text>
+    <path d="M36 84L53 38L70 84H58L53 68H40L35 84H36Z" fill="#C61F26"/>
+    <path d="M47 76L53 58L60 76H56L53 68L50 76H47Z" fill="#16B3A3"/>
+    <text x="0" y="172" fill="#101828" font-family="Space Grotesk, Arial, sans-serif" font-size="46" font-weight="800">Build reliable AI products faster</text>
+    <text x="0" y="238" fill="#667085" font-family="Be Vietnam Pro, Arial, sans-serif" font-size="30" font-weight="500">Precision, velocity, and trust for real AI workflows.</text>
+  </g>
+  <g transform="translate(760 272)">
+    <rect width="274" height="170" rx="16" fill="#FFFFFF" stroke="#D0D5DD" stroke-width="2"/>
+    <rect x="28" y="30" width="92" height="14" rx="7" fill="#C61F26"/>
+    <rect x="28" y="66" width="218" height="12" rx="6" fill="#D0D5DD"/>
+    <rect x="28" y="96" width="180" height="12" rx="6" fill="#D0D5DD"/>
+    <rect x="28" y="126" width="132" height="12" rx="6" fill="#16B3A3"/>
+  </g>
+</svg>
