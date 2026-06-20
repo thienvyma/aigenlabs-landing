@@ -116,6 +116,24 @@ export function createSectionTemplate(type: SectionType, order: number): CmsSect
           note: ""
         }
       };
+    case "conversionCards":
+      return {
+        ...base,
+        content: {
+          eyebrow: "Business value",
+          heading: "Turn AI into practical operations",
+          description: "Use this section for pain points, benefits, offers, or a final CTA.",
+          variant: "default",
+          cards: [{
+            title: "Clear workflow",
+            description: "Describe the business outcome this card supports.",
+            icon: "check",
+            bullets: ["Input", "Output", "Approval"]
+          }],
+          cta: { label: "Đặt lịch tư vấn", href: "mailto:edu@aigenlabs.vn", enabled: true },
+          note: ""
+        }
+      };
     case "faq":
       return {
         ...base,

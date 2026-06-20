@@ -9,6 +9,7 @@ import { UseCaseTabsSection } from "@/components/landing/sections/UseCaseTabsSec
 import { PlatformFeaturesSection } from "@/components/landing/sections/PlatformFeaturesSection";
 import { ReleaseNotesSection } from "@/components/landing/sections/ReleaseNotesSection";
 import { SecurityCardsSection } from "@/components/landing/sections/SecurityCardsSection";
+import { ConversionCardsSection } from "@/components/landing/sections/ConversionCardsSection";
 import { FaqSection } from "@/components/landing/sections/FaqSection";
 import { FloatingDock } from "@/components/landing/sections/FloatingDock";
 
@@ -32,6 +33,9 @@ const sectionRenderers: Record<SectionType, (section: CmsSection, settings: Site
   ),
   securityCards: (section) => (
     <SecurityCardsSection id={section.id} content={parseSectionContent("securityCards", section.content)} />
+  ),
+  conversionCards: (section) => (
+    <ConversionCardsSection id={section.id} content={parseSectionContent("conversionCards", section.content)} />
   ),
   faq: (section) => (
     <FaqSection id={section.id} content={parseSectionContent("faq", section.content)} />

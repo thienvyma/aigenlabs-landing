@@ -5,7 +5,7 @@ const root = process.cwd();
 const packageJson = JSON.parse(readFileSync(path.join(root, "package.json"), "utf8"));
 const cms = JSON.parse(readFileSync(path.join(root, "data", "cms.json"), "utf8"));
 const requiredPaths = ["/"];
-const requiredSectionTypes = new Set(["hero", "useCaseTabs", "platformFeatures", "releaseNotes", "securityCards", "faq", "floatingDock"]);
+const requiredSectionTypes = new Set(["hero", "useCaseTabs", "platformFeatures", "releaseNotes", "securityCards", "conversionCards", "faq", "floatingDock"]);
 const bannedPattern = /\b(mock|placeholder|lorem|todo|Raw JSON|raw-json|MediaMockup)\b/i;
 const checks = [];
 

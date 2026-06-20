@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type {
   CmsSection,
+  ConversionCardsContent,
   FaqContent,
   FloatingDockContent,
   HeroSectionContent,
@@ -16,6 +17,7 @@ export const sectionTypeOptions = [
   "platformFeatures",
   "releaseNotes",
   "securityCards",
+  "conversionCards",
   "faq",
   "floatingDock"
 ] as const;
@@ -28,6 +30,7 @@ export const sectionLabels: Record<SectionType, string> = {
   platformFeatures: "Platform features",
   releaseNotes: "Release notes",
   securityCards: "Security cards",
+  conversionCards: "Conversion cards",
   faq: "FAQ",
   floatingDock: "Floating dock"
 };
@@ -38,6 +41,7 @@ export interface SectionContentByType {
   platformFeatures: PlatformFeaturesContent;
   releaseNotes: ReleaseNotesContent;
   securityCards: SecurityCardsContent;
+  conversionCards: ConversionCardsContent;
   faq: FaqContent;
   floatingDock: FloatingDockContent;
 }
@@ -124,6 +128,23 @@ const securityCardsContentSchema = z.object({
   note: z.string()
 }) satisfies z.ZodType<SecurityCardsContent>;
 
+const conversionCardsContentSchema = z.object({
+  eyebrow: z.string(),
+  heading: z.string(),
+  description: z.string(),
+  variant: z.enum(["default", "soft", "pricing", "cta"]).optional(),
+  cards: z.array(z.object({
+    title: z.string(),
+    description: z.string(),
+    icon: z.string(),
+    badge: z.string().optional(),
+    bullets: z.array(z.string()).optional(),
+    cta: ctaSchema.optional()
+  })),
+  cta: ctaSchema.optional(),
+  note: z.string().optional()
+}) satisfies z.ZodType<ConversionCardsContent>;
+
 const faqContentSchema = z.object({
   heading: z.string(),
   items: z.array(z.object({
@@ -162,6 +183,7 @@ export const sectionContentSchemas = {
   platformFeatures: platformFeaturesContentSchema,
   releaseNotes: releaseNotesContentSchema,
   securityCards: securityCardsContentSchema,
+  conversionCards: conversionCardsContentSchema,
   faq: faqContentSchema,
   floatingDock: floatingDockContentSchema
 } satisfies { [TType in SectionType]: z.ZodType<SectionContentByType[TType]> };
