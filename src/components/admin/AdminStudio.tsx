@@ -10,6 +10,7 @@ import type {
   CmsPage,
   CmsSection,
   CtaLink,
+  ConversionCardsContent,
   EditableMedia,
   FaqContent,
   FloatingDockContact,
@@ -917,13 +918,13 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
           <TextInput label="Small label" value={content.eyebrow} onChange={(eyebrow) => updateSectionContent<SecurityCardsContent>({ eyebrow })} />
           <TextInput label="Heading" value={content.heading} onChange={(heading) => updateSectionContent<SecurityCardsContent>({ heading })} />
           <TextAreaInput label="Description" value={content.description} onChange={(description) => updateSectionContent<SecurityCardsContent>({ description })} />
-          <TextAreaInput label="Note below cards" value={content.note} onChange={(note) => updateSectionContent<SecurityCardsContent>({ note })} />
+          <TextAreaInput label="Note" value={content.note} onChange={(note) => updateSectionContent<SecurityCardsContent>({ note })} />
         </div>
         <EditableList
           label="Security card"
           addLabel="Add card"
           items={content.cards}
-          createItem={() => ({ title: "New control", description: "Explain this control.", icon: "shield" })}
+          createItem={() => ({ title: "New card", description: "Explain this control.", icon: "shield" })}
           onChange={(cards) => updateSectionContent<SecurityCardsContent>({ cards })}
           renderItem={(card, _index, onItemChange) => (
             <div className="admin-form-grid">
@@ -934,6 +935,54 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
           )}
         />
         <CtaFields title="Section button" value={content.cta} onChange={(cta) => updateSectionContent<SecurityCardsContent>({ cta })} linkOptions={linkOptions} />
+      </>
+    );
+  }
+
+  function renderConversionCardsEditor(content: ConversionCardsContent) {
+    const sectionCta = content.cta ?? { label: "", href: "", enabled: false };
+    return (
+      <>
+        <div className="admin-form-grid">
+          <TextInput label="Small label" value={content.eyebrow} onChange={(eyebrow) => updateSectionContent<ConversionCardsContent>({ eyebrow })} />
+          <TextInput label="Heading" value={content.heading} onChange={(heading) => updateSectionContent<ConversionCardsContent>({ heading })} />
+          <TextAreaInput label="Description" value={content.description} onChange={(description) => updateSectionContent<ConversionCardsContent>({ description })} />
+          <SelectInput
+            label="Visual variant"
+            value={content.variant ?? "default"}
+            options={[
+              { label: "Default", value: "default" },
+              { label: "Soft", value: "soft" },
+              { label: "Pricing", value: "pricing" },
+              { label: "CTA", value: "cta" }
+            ]}
+            onChange={(variant) => updateSectionContent<ConversionCardsContent>({ variant })}
+          />
+          <TextAreaInput label="Optional note" value={content.note ?? ""} onChange={(note) => updateSectionContent<ConversionCardsContent>({ note })} />
+        </div>
+        <EditableList
+          label="Conversion card"
+          addLabel="Add card"
+          items={content.cards}
+          createItem={() => ({ title: "New card", description: "Explain the value.", icon: "check", bullets: [] })}
+          onChange={(cards) => updateSectionContent<ConversionCardsContent>({ cards })}
+          renderItem={(card, _index, onItemChange) => {
+            const cardCta = card.cta ?? { label: "", href: "", enabled: false };
+            return (
+              <>
+                <div className="admin-form-grid">
+                  <TextInput label="Title" value={card.title} onChange={(title) => onItemChange({ ...card, title })} />
+                  <TextInput label="Badge" value={card.badge ?? ""} onChange={(badge) => onItemChange({ ...card, badge })} />
+                  <SelectInput label="Icon" value={card.icon} options={optionsWithCurrent([...iconOptions], card.icon)} onChange={(icon) => onItemChange({ ...card, icon })} />
+                  <TextAreaInput label="Description" value={card.description} onChange={(description) => onItemChange({ ...card, description })} />
+                  <TextAreaInput label="Bullets, one per line" value={linesFromArray(card.bullets ?? [])} onChange={(value) => onItemChange({ ...card, bullets: arraysFromLines(value) })} />
+                </div>
+                <CtaFields title="Optional card button" value={cardCta} onChange={(cta) => onItemChange({ ...card, cta })} linkOptions={linkOptions} />
+              </>
+            );
+          }}
+        />
+        <CtaFields title="Section button" value={sectionCta} onChange={(cta) => updateSectionContent<ConversionCardsContent>({ cta })} linkOptions={linkOptions} />
       </>
     );
   }
@@ -1004,6 +1053,8 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
         return renderReleaseEditor(parseSectionContent("releaseNotes", selectedSection.content));
       case "securityCards":
         return renderSecurityEditor(parseSectionContent("securityCards", selectedSection.content));
+      case "conversionCards":
+        return renderConversionCardsEditor(parseSectionContent("conversionCards", selectedSection.content));
       case "faq":
         return renderFaqEditor(parseSectionContent("faq", selectedSection.content));
       case "floatingDock":

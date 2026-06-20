@@ -6,7 +6,7 @@
     "themeColor": "#C61F26",
     "brand": {
       "name": "AigenLabs",
-      "tagline": "Đưa AI vào vận hành rõ ràng",
+      "tagline": "AI Staff vận hành doanh nghiệp 24/7",
       "logoText": "AigenLabs",
       "logoUrl": "",
       "faviconUrl": "",
@@ -50,18 +50,23 @@
     "navigation": {
       "items": [
         {
+          "label": "Thách thức",
+          "href": "#pain-points",
+          "kind": "link"
+        },
+        {
           "label": "Cách hoạt động",
           "href": "#capabilities",
           "kind": "link"
         },
         {
-          "label": "Nền tảng",
-          "href": "#platform",
+          "label": "Lợi ích",
+          "href": "#business-benefits",
           "kind": "link"
         },
         {
-          "label": "Setup",
-          "href": "#releases",
+          "label": "Gói dịch vụ",
+          "href": "#pricing",
           "kind": "link"
         },
         {
@@ -72,9 +77,9 @@
       ],
       "languageLabel": "Tiếng Việt",
       "secondaryCta": {
-        "enabled": true,
         "label": "Gọi tư vấn",
-        "href": "tel:+84981413456"
+        "href": "tel:+849****3456",
+        "enabled": true
       },
       "signIn": {
         "label": "Đăng nhập",
@@ -82,9 +87,9 @@
         "enabled": false
       },
       "primaryCta": {
-        "enabled": true,
         "label": "Đặt lịch demo",
-        "href": "mailto:edu@aigenlabs.vn?subject=%C4%90%E1%BA%B7t%20l%E1%BB%8Bch%20demo%20AigenLabs%20Business%20OS"
+        "href": "mailto:edu@aigenlabs.vn?subject=%C4%90%E1%BA%B7t%20l%E1%BB%8Bch%20demo%20AigenLabs%20Business%20OS",
+        "enabled": true
       }
     },
     "footer": {
@@ -93,16 +98,20 @@
           "title": "AigenLabs",
           "links": [
             {
+              "label": "Thách thức",
+              "href": "#pain-points"
+            },
+            {
               "label": "Cách hoạt động",
               "href": "#capabilities"
             },
             {
-              "label": "Nền tảng",
-              "href": "#platform"
+              "label": "Lợi ích",
+              "href": "#business-benefits"
             },
             {
-              "label": "Setup",
-              "href": "#releases"
+              "label": "Gói dịch vụ",
+              "href": "#pricing"
             }
           ]
         },
@@ -112,6 +121,10 @@
             {
               "label": "Approval & control",
               "href": "#security"
+            },
+            {
+              "label": "Quy trình setup",
+              "href": "#releases"
             },
             {
               "label": "FAQ",
@@ -128,7 +141,11 @@
             },
             {
               "label": "Điện thoại",
-              "href": "tel:+84981413456"
+              "href": "tel:+849****3456"
+            },
+            {
+              "label": "Đặt lịch demo",
+              "href": "mailto:edu@aigenlabs.vn?subject=%C4%90%E1%BA%B7t%20l%E1%BB%8Bch%20demo%20AigenLabs%20Business%20OS"
             }
           ]
         }
@@ -144,18 +161,23 @@
         "navigation": {
           "items": [
             {
+              "label": "Thách thức",
+              "href": "#pain-points",
+              "kind": "link"
+            },
+            {
               "label": "Cách hoạt động",
               "href": "#capabilities",
               "kind": "link"
             },
             {
-              "label": "Nền tảng",
-              "href": "#platform",
+              "label": "Lợi ích",
+              "href": "#business-benefits",
               "kind": "link"
             },
             {
-              "label": "Setup",
-              "href": "#releases",
+              "label": "Gói dịch vụ",
+              "href": "#pricing",
               "kind": "link"
             },
             {
@@ -166,9 +188,9 @@
           ],
           "languageLabel": "Tiếng Việt",
           "secondaryCta": {
-            "enabled": true,
             "label": "Gọi tư vấn",
-            "href": "tel:+84981413456"
+            "href": "tel:+849****3456",
+            "enabled": true
           },
           "signIn": {
             "label": "Đăng nhập",
@@ -176,9 +198,9 @@
             "enabled": false
           },
           "primaryCta": {
-            "enabled": true,
             "label": "Đặt lịch demo",
-            "href": "mailto:edu@aigenlabs.vn?subject=%C4%90%E1%BA%B7t%20l%E1%BB%8Bch%20demo%20AigenLabs%20Business%20OS"
+            "href": "mailto:edu@aigenlabs.vn?subject=%C4%90%E1%BA%B7t%20l%E1%BB%8Bch%20demo%20AigenLabs%20Business%20OS",
+            "enabled": true
           }
         },
         "footer": {
@@ -187,16 +209,20 @@
               "title": "AigenLabs",
               "links": [
                 {
+                  "label": "Thách thức",
+                  "href": "#pain-points"
+                },
+                {
                   "label": "Cách hoạt động",
                   "href": "#capabilities"
                 },
                 {
-                  "label": "Nền tảng",
-                  "href": "#platform"
+                  "label": "Lợi ích",
+                  "href": "#business-benefits"
                 },
                 {
-                  "label": "Setup",
-                  "href": "#releases"
+                  "label": "Gói dịch vụ",
+                  "href": "#pricing"
                 }
               ]
             },
@@ -206,6 +232,10 @@
                 {
                   "label": "Approval & control",
                   "href": "#security"
+                },
+                {
+                  "label": "Quy trình setup",
+                  "href": "#releases"
                 },
                 {
                   "label": "FAQ",
@@ -222,7 +252,11 @@
                 },
                 {
                   "label": "Điện thoại",
-                  "href": "tel:+84981413456"
+                  "href": "tel:+849****3456"
+                },
+                {
+                  "label": "Đặt lịch demo",
+                  "href": "mailto:edu@aigenlabs.vn?subject=%C4%90%E1%BA%B7t%20l%E1%BB%8Bch%20demo%20AigenLabs%20Business%20OS"
                 }
               ]
             }
@@ -477,13 +511,13 @@
       "status": "published",
       "title": "Trang chủ AigenLabs",
       "seo": {
-        "title": "AigenLabs - AI staff và Business OS cho startup, SME",
-        "description": "Thiết lập AI staff theo vai trò, workflow và approval để hỗ trợ content, báo cáo COO, onboarding, research, sales và vận hành hằng ngày.",
+        "title": "AigenLabs - AI Staff 24/7 và Business OS cho doanh nghiệp",
+        "description": "AigenLabs giúp founder, startup và SME thiết lập AI staff theo vai trò, chuẩn hóa workflow, tự động hóa việc lặp lại và giữ approval trước publish, outreach hoặc spend.",
         "canonicalPath": "/",
         "robotsIndex": true,
         "robotsFollow": true,
-        "ogTitle": "AigenLabs Business OS - AI staff cho workflow doanh nghiệp",
-        "ogDescription": "Từ một mục tiêu kinh doanh, AigenLabs giúp map workflow, giao việc cho AI staff, tạo output và giữ phê duyệt trước hành động bên ngoài.",
+        "ogTitle": "AigenLabs Business OS - AI Staff vận hành doanh nghiệp 24/7",
+        "ogDescription": "Biến mục tiêu kinh doanh thành workflow có owner, output, AI staff và approval gate để doanh nghiệp dùng AI an toàn hơn chatbot thông thường.",
         "ogImage": "/og-aigenlabs.svg",
         "twitterCard": "summary_large_image",
         "keywords": [
@@ -491,6 +525,7 @@
           "Business OS",
           "AI agent cho doanh nghiệp",
           "workflow automation",
+          "AI vận hành doanh nghiệp",
           "AigenLabs"
         ],
         "schemas": {
@@ -510,56 +545,113 @@
           "order": 1,
           "content": {
             "wordmark": "AigenLabs",
-            "headline": "Meet your 24/7 agentic business team",
-            "subheadline": "AigenLabs giúp founder và SME thiết lập AI staff theo vai trò, chạy việc qua workflow, tạo đầu ra để kiểm tra và giữ bước duyệt trước khi đăng, gửi khách hàng hoặc chi ngân sách.",
+            "headline": "AI Staff 24/7 cho doanh nghiệp vận hành rõ ràng",
+            "subheadline": "AigenLabs giúp thiết kế đội ngũ AI staff theo vai trò, chuẩn hóa workflow kinh doanh, tự động hóa việc lặp lại, giảm gánh nặng nhân sự và giữ phê duyệt trước khi công bố, gửi khách hàng hoặc chi ngân sách.",
             "chips": [
               {
-                "label": "Workflow có owner và output",
+                "label": "Quy trình có đầu vào–đầu ra rõ",
                 "enabled": true
               },
               {
-                "label": "AI staff theo từng vai trò",
+                "label": "AI Staff đa vai trò: COO, Sales, Research…",
                 "enabled": true
               },
               {
-                "label": "Approval trước hành động bên ngoài",
+                "label": "An toàn với phê duyệt và audit log",
                 "enabled": true
               }
             ],
             "primaryCta": {
-              "enabled": true,
               "label": "Đặt lịch demo",
-              "href": "mailto:edu@aigenlabs.vn?subject=%C4%90%E1%BA%B7t%20l%E1%BB%8Bch%20demo%20AigenLabs%20Business%20OS"
+              "href": "mailto:edu@aigenlabs.vn?subject=%C4%90%E1%BA%B7t%20l%E1%BB%8Bch%20demo%20AigenLabs%20Business%20OS",
+              "enabled": true
             },
             "secondaryCta": {
-              "enabled": true,
               "label": "Gọi tư vấn",
-              "href": "tel:+84981413456"
+              "href": "tel:+849****3456",
+              "enabled": true
             },
             "preview": {
               "kind": "video",
-              "title": "Demo workflow thật trong AigenLabs",
-              "label": "Real workflow / AI staff / Approval",
-              "alt": "Video demo AigenLabs Business OS xử lý một workflow thật với AI staff, task board và founder approval",
+              "title": "Demo AI Staff vận hành workflow thật",
+              "label": "AI staff / Workflow / Approval",
+              "alt": "Video demo AigenLabs vận hành workflow doanh nghiệp với AI staff, task board và approval gate",
               "url": "/uploads/landing-media/current/hero-business-os-live-workflow-demo.mp4",
               "poster": "/uploads/landing-media/current/hero-business-os-live-workflow-demo-poster.webp"
             }
           }
         },
         {
-          "id": "capabilities",
-          "type": "useCaseTabs",
-          "name": "Use-case tabs",
-          "key": "capabilities",
+          "id": "pain-points",
+          "type": "conversionCards",
+          "name": "Nỗi đau / Thách thức",
+          "key": "pain-points",
           "enabled": true,
           "order": 2,
           "content": {
-            "heading": "Mỗi yêu cầu được tách thành việc, người phụ trách, đầu ra và bước duyệt.",
+            "eyebrow": "Thách thức",
+            "heading": "Doanh nghiệp muốn dùng AI nhưng thiếu hệ thống để AI làm việc thật",
+            "description": "Chat AI có thể trả lời nhanh, nhưng founder và SME cần một hệ thống biết ngữ cảnh công ty, hiểu quy trình, tạo đầu ra kiểm tra được và biết khi nào phải chờ người duyệt.",
+            "variant": "soft",
+            "cards": [
+              {
+                "title": "Tác vụ lặp lại lấy quá nhiều thời gian",
+                "description": "Founder, solopreneur và team nhỏ phải tự làm báo cáo, research, content, follow-up và kiểm tra số liệu mỗi ngày.",
+                "icon": "clock",
+                "bullets": [
+                  "Không có cadence rõ ràng",
+                  "Việc nhỏ dễ bị quên",
+                  "Khó duy trì 24/7"
+                ]
+              },
+              {
+                "title": "Quy trình nằm rải rác trong chat và trí nhớ cá nhân",
+                "description": "AI khó thực thi ổn định nếu không có input, output, owner, tiêu chí hoàn thành và điểm phê duyệt.",
+                "icon": "puzzle",
+                "bullets": [
+                  "Prompt rời rạc",
+                  "Thiếu chuẩn bàn giao",
+                  "Founder phải giải thích lại nhiều lần"
+                ]
+              },
+              {
+                "title": "Chi phí nhân sự tăng trước khi hệ thống vận hành chín",
+                "description": "Doanh nghiệp cần năng lực COO, Marketing, Sales, Research hoặc Reviewer nhưng chưa đủ ngân sách để tuyển đủ vai trò.",
+                "icon": "users",
+                "bullets": [
+                  "Nhu cầu đa vai trò",
+                  "Ngân sách hạn chế",
+                  "Cần triển khai nhanh"
+                ]
+              },
+              {
+                "title": "Rủi ro khi AI tự ý publish, gửi khách hàng hoặc chi tiền",
+                "description": "Không thể đưa AI vào vận hành thật nếu thiếu phân quyền, log, review và approval gate cho hành động bên ngoài.",
+                "icon": "shield",
+                "bullets": [
+                  "Cần kiểm soát quyền",
+                  "Cần audit trail",
+                  "Cần người duyệt trước hành động nhạy cảm"
+                ]
+              }
+            ],
+            "note": "AigenLabs bắt đầu từ workflow nhỏ, dữ liệu an toàn và quyền hạn rõ trước khi mở rộng tự động hóa."
+          }
+        },
+        {
+          "id": "capabilities",
+          "type": "useCaseTabs",
+          "name": "Cách hoạt động",
+          "key": "capabilities",
+          "enabled": true,
+          "order": 3,
+          "content": {
+            "heading": "Chuẩn hóa workflow để AI staff hiểu ngữ cảnh, KPI và điểm phê duyệt.",
             "tabs": [
               {
                 "label": "Workflow Map",
-                "title": "Biến mục tiêu thành quy trình có bước rõ",
-                "description": "COO map yêu cầu thành các stage, owner, input, output và điều kiện hoàn thành để AI staff biết phải làm gì tiếp theo.",
+                "title": "Chuẩn hóa quy trình để AI staff thực thi",
+                "description": "Biến mục tiêu kinh doanh thành quy trình cụ thể với input, output, owner, tiêu chí hoàn thành và điểm phê duyệt để AI staff hiểu ngữ cảnh và KPI trước khi làm.",
                 "mediaTitle": "Workflow Map",
                 "media": {
                   "kind": "image",
@@ -573,7 +665,7 @@
               {
                 "label": "Execution Board",
                 "title": "Theo dõi công việc như một team thật",
-                "description": "Mỗi việc có trạng thái, người phụ trách, kết quả cần nộp và blocker để founder không phải đọc lại toàn bộ chat.",
+                "description": "Mỗi việc có trạng thái, người phụ trách, kết quả cần nộp và blocker để founder không phải đọc lại toàn bộ chat hoặc tự ghép tiến độ thủ công.",
                 "mediaTitle": "Execution Board",
                 "media": {
                   "kind": "image",
@@ -586,8 +678,8 @@
               },
               {
                 "label": "Approval Gate",
-                "title": "Chặn publish, outreach và spend cho đến khi founder duyệt",
-                "description": "Các hành động nhạy cảm như đăng bài, gửi khách hàng, thay đổi giá, dùng PII hoặc chạy ads luôn được giữ ở trạng thái chờ phê duyệt.",
+                "title": "Giữ quyền duyệt trước khi AI hành động ra bên ngoài",
+                "description": "Publish, outreach, thay đổi giá, dùng dữ liệu nhạy cảm, connector production hoặc spend được giữ ở trạng thái chờ duyệt để giảm rủi ro vận hành.",
                 "mediaTitle": "Founder Approval",
                 "media": {
                   "kind": "image",
@@ -600,8 +692,8 @@
               },
               {
                 "label": "Recurring Ops",
-                "title": "Chạy việc định kỳ mà không phải nhắc lại",
-                "description": "Cron/automation có thể chuẩn bị báo cáo COO, kiểm tra content backlog, tổng hợp survey hoặc theo dõi ads theo lịch.",
+                "title": "Tự động hóa việc định kỳ mà không phải nhắc lại",
+                "description": "Cron/automation có thể chuẩn bị báo cáo COO, kiểm tra backlog, tổng hợp survey, theo dõi campaign hoặc nhắc việc theo cadence đã thống nhất.",
                 "mediaTitle": "Automation / Cron",
                 "media": {
                   "kind": "image",
@@ -615,7 +707,7 @@
               {
                 "label": "Outputs",
                 "title": "Tạo tài liệu làm việc, không chỉ trả lời chat",
-                "description": "AI staff có thể tạo brief, report, draft, checklist hoặc bảng kế hoạch để team review và tiếp tục xử lý.",
+                "description": "AI staff tạo brief, report, SOP, checklist, workflow draft, decision packet hoặc bảng kế hoạch để team review và tiếp tục xử lý.",
                 "mediaTitle": "Work Output",
                 "media": {
                   "kind": "image",
@@ -629,7 +721,7 @@
               {
                 "label": "Knowledge",
                 "title": "Dùng ngữ cảnh công ty thay vì prompt rời rạc",
-                "description": "Company profile, workflow, skill và tài liệu nội bộ giúp AI staff làm việc theo cách công ty đã thống nhất.",
+                "description": "Company profile, workflow, skill và tài liệu nội bộ giúp AI staff làm việc theo cách công ty đã thống nhất, giảm việc giải thích lại từ đầu.",
                 "mediaTitle": "Company Knowledge",
                 "media": {
                   "kind": "image",
@@ -642,8 +734,8 @@
               },
               {
                 "label": "Insight",
-                "title": "Nhìn thấy quyết định tiếp theo",
-                "description": "Tổng hợp log, output và trạng thái workflow để founder biết việc nào xong, việc nào cần duyệt và bottleneck nằm ở đâu.",
+                "title": "Nhìn thấy việc nào xong, việc nào kẹt và quyết định tiếp theo",
+                "description": "Log, output và trạng thái workflow được tổng hợp để founder biết bottleneck nằm ở đâu, cần duyệt gì và nên ưu tiên bước nào tiếp theo.",
                 "mediaTitle": "Business Insight",
                 "media": {
                   "kind": "image",
@@ -658,27 +750,104 @@
           }
         },
         {
+          "id": "business-benefits",
+          "type": "conversionCards",
+          "name": "Lợi ích / Kết quả",
+          "key": "business-benefits",
+          "enabled": true,
+          "order": 4,
+          "content": {
+            "eyebrow": "Kết quả",
+            "heading": "Từ AI trả lời câu hỏi thành AI staff tạo đầu ra vận hành",
+            "description": "AigenLabs tập trung vào kết quả thực tế cho founder, startup, agency và SME: tiết kiệm thời gian, giảm việc lặp lại, tăng tốc ra quyết định và kiểm soát rủi ro trước khi mở rộng tự động hóa.",
+            "variant": "default",
+            "cards": [
+              {
+                "title": "Tiết kiệm thời gian điều phối",
+                "description": "COO/Business OS có thể biến mục tiêu thành kế hoạch, task, owner và báo cáo để founder không phải tự điều phối từng đầu việc.",
+                "icon": "clock",
+                "bullets": [
+                  "Weekly operating review",
+                  "Priority list",
+                  "Handoff và decision packet"
+                ]
+              },
+              {
+                "title": "Giảm chi phí cho công việc lặp lại",
+                "description": "Các vai trò AI staff xử lý phần research, content, báo cáo, SOP, follow-up draft và kiểm tra định kỳ trước khi cần tuyển thêm người.",
+                "icon": "bot",
+                "bullets": [
+                  "AI staff theo phòng ban",
+                  "Skill library tái sử dụng",
+                  "Setup theo quy trình ưu tiên"
+                ]
+              },
+              {
+                "title": "Ra quyết định nhanh hơn",
+                "description": "Output được đóng gói thành report, approval request hoặc decision packet với bằng chứng, rủi ro và next action rõ ràng.",
+                "icon": "check",
+                "bullets": [
+                  "Bằng chứng rõ",
+                  "Rủi ro rõ",
+                  "Owner và next action rõ"
+                ]
+              },
+              {
+                "title": "Chuẩn hóa cách vận hành",
+                "description": "Workflow map giúp doanh nghiệp định nghĩa input, output, acceptance criteria và approval gate để công việc ít phụ thuộc vào trí nhớ cá nhân.",
+                "icon": "puzzle",
+                "bullets": [
+                  "Input/output",
+                  "Acceptance criteria",
+                  "Approval gate"
+                ]
+              },
+              {
+                "title": "An toàn hơn chatbot tự do",
+                "description": "Phân biệt việc nội bộ và hành động cần duyệt như publish, outreach, spend, pricing, PII, connector hoặc production change.",
+                "icon": "shield",
+                "bullets": [
+                  "Scope rõ",
+                  "Human approval",
+                  "Audit log"
+                ]
+              },
+              {
+                "title": "Mở rộng theo từng use case",
+                "description": "Bắt đầu bằng một workflow ưu tiên, chạy thử an toàn, sau đó mở rộng sang marketing, sales, research, CS hoặc operations.",
+                "icon": "users",
+                "bullets": [
+                  "Start small",
+                  "Measure",
+                  "Scale"
+                ]
+              }
+            ],
+            "note": "Các con số tiết kiệm thời gian/chi phí nên được đo sau pilot; landing hiện dùng mô tả định tính để tránh cam kết thiếu bằng chứng."
+          }
+        },
+        {
           "id": "platform",
           "type": "platformFeatures",
-          "name": "Platform features",
+          "name": "Nền tảng",
           "key": "platform",
           "enabled": true,
-          "order": 3,
+          "order": 5,
           "content": {
             "eyebrow": "Nền tảng",
-            "heading": "Các lớp nền tảng để AI staff làm việc trong môi trường công ty",
-            "description": "Profile AI staff, skill, connector, browser, tác vụ định kỳ, approval và audit log được gom vào workflow có phạm vi và bước duyệt rõ.",
+            "heading": "Hệ sinh thái để AI Staff làm việc như nhân sự thật",
+            "description": "Từ skill library, kết nối công cụ, browser work, automation định kỳ đến approval và audit log: mọi lớp nền tảng được gom vào workflow có phạm vi rõ.",
             "features": [
               {
                 "title": "AI Staff Hub",
-                "description": "Tạo AI staff theo vai trò như COO, Content, Research, Sales hoặc Reviewer, mỗi vai trò có context và nhiệm vụ riêng.",
+                "description": "Thiết lập AI Staff cho từng bộ phận như COO, Marketing, Sales, Research hoặc Reviewer. Mỗi profile có bối cảnh doanh nghiệp, quyền truy cập và nhiệm vụ riêng để thay thế phần việc lặp lại của con người.",
                 "icon": "bot",
                 "layout": "normal",
                 "badge": "",
                 "slides": [
-                  "Vai trò rõ",
-                  "Context công ty",
-                  "Model linh hoạt"
+                  "Role context",
+                  "Tool scope",
+                  "Task ownership"
                 ],
                 "media": {
                   "kind": "image",
@@ -691,14 +860,14 @@
               },
               {
                 "title": "Automation / Cron",
-                "description": "Lên lịch báo cáo, kiểm tra backlog, tổng hợp survey hoặc monitor ads theo cadence cố định.",
+                "description": "Tự động chuẩn bị báo cáo định kỳ, kiểm tra backlog, tổng hợp survey hoặc theo dõi campaign theo cadence đã thống nhất.",
                 "icon": "clock",
                 "layout": "reverse",
                 "badge": "",
                 "slides": [
-                  "Lịch chạy",
-                  "Run history",
-                  "Output chờ review"
+                  "Weekly review",
+                  "Backlog check",
+                  "Campaign monitor"
                 ],
                 "media": {
                   "kind": "image",
@@ -711,14 +880,14 @@
               },
               {
                 "title": "Browser Work",
-                "description": "Cho AI staff nghiên cứu, kiểm tra website và thu thập bằng chứng trong trình duyệt khi workflow cần.",
+                "description": "Cho AI staff nghiên cứu website, đọc nguồn công khai, kiểm tra landing page và thu thập bằng chứng khi workflow yêu cầu.",
                 "icon": "globe",
                 "layout": "normal",
                 "badge": "",
                 "slides": [
                   "Research",
-                  "Screenshot",
-                  "Approval"
+                  "Evidence",
+                  "QA"
                 ],
                 "media": {
                   "kind": "image",
@@ -731,14 +900,14 @@
               },
               {
                 "title": "Connectors",
-                "description": "Kết nối công cụ làm việc để đọc ngữ cảnh và tạo output ở đúng nơi team đang vận hành.",
+                "description": "Kết nối công cụ làm việc để đọc ngữ cảnh và tạo output ở đúng nơi team vận hành, nhưng connector production cần phạm vi và approval rõ.",
                 "icon": "plug",
                 "layout": "reverse",
                 "badge": "",
                 "slides": [
                   "Google Workspace",
-                  "Messaging",
-                  "Docs / Sheets"
+                  "Docs",
+                  "Approved tools"
                 ],
                 "media": {
                   "kind": "image",
@@ -751,14 +920,14 @@
               },
               {
                 "title": "Skills",
-                "description": "Tái sử dụng quy trình chuyên môn cho content, SEO, sales, research, operations, coding và review.",
+                "description": "Thư viện kỹ năng cho business, SEO, sales, research, operations, coding và review giúp AI staff làm theo quy trình đã kiểm chứng thay vì prompt ngẫu nhiên.",
                 "icon": "puzzle",
                 "layout": "normal",
                 "badge": "",
                 "slides": [
-                  "Skill library",
-                  "Custom skill",
-                  "Team reuse"
+                  "Business skills",
+                  "Review rubrics",
+                  "Reusable playbooks"
                 ],
                 "media": {
                   "kind": "image",
@@ -771,14 +940,14 @@
               },
               {
                 "title": "Work Channels",
-                "description": "Giao việc và nhận báo cáo qua các kênh quen thuộc mà vẫn giữ session, context và approval.",
+                "description": "Giao việc và nhận báo cáo qua các kênh quen thuộc trong khi vẫn giữ session, context, output và approval trace.",
                 "icon": "messages",
                 "layout": "reverse",
                 "badge": "",
                 "slides": [
                   "Chat",
-                  "Notifications",
-                  "Remote work"
+                  "Reports",
+                  "Approval"
                 ],
                 "media": {
                   "kind": "image",
@@ -791,14 +960,14 @@
               },
               {
                 "title": "Session Pairing",
-                "description": "Giữ phiên làm việc và workspace context đồng bộ giữa app, thiết bị và môi trường vận hành.",
+                "description": "Giữ phiên làm việc và workspace context đồng bộ giữa app, thiết bị và môi trường vận hành để team không mất ngữ cảnh.",
                 "icon": "smartphone",
                 "layout": "normal",
                 "badge": "",
                 "slides": [
-                  "Pair device",
-                  "Resume context",
-                  "Workspace sync"
+                  "Session",
+                  "Workspace",
+                  "Continuity"
                 ],
                 "media": {
                   "kind": "image",
@@ -811,14 +980,14 @@
               },
               {
                 "title": "Team Orchestration",
-                "description": "Điều phối nhiều AI staff quanh cùng một mục tiêu để workstream không bị kẹt ở một prompt đơn lẻ.",
+                "description": "Điều phối nhiều AI staff quanh cùng một mục tiêu để workstream có producer, reviewer, handoff và decision gate rõ ràng.",
                 "icon": "users",
                 "layout": "reverse",
                 "badge": "Beta",
                 "slides": [
-                  "Lead role",
-                  "Specialists",
-                  "Shared context"
+                  "Producer",
+                  "Reviewer",
+                  "Decision gate"
                 ],
                 "media": {
                   "kind": "image",
@@ -835,88 +1004,178 @@
         {
           "id": "releases",
           "type": "releaseNotes",
-          "name": "Release notes",
+          "name": "Setup và vận hành",
           "key": "releases",
           "enabled": true,
-          "order": 4,
+          "order": 6,
           "content": {
             "heading": "Từ setup đến vận hành trong từng bước rõ ràng",
-            "viewAllLabel": "Xem cách triển khai",
+            "viewAllLabel": "Xem cách hoạt động",
             "viewAllHref": "#capabilities",
             "items": [
               {
                 "version": "Bước 1",
-                "date": "Map workflow",
+                "date": "Chọn workflow ưu tiên",
                 "bullets": [
-                  "Chọn 1-3 quy trình ưu tiên như content, báo cáo COO, onboarding hoặc ads monitoring.",
-                  "Xác định input, owner, output, approval và rủi ro của từng bước.",
-                  "Tạo bản đồ workflow để founder review trước khi chạy."
+                  "Xác định quy trình có giá trị kinh doanh cao.",
+                  "Định nghĩa input, output, owner, KPI và rủi ro.",
+                  "Chốt hành động nào cần founder approval."
                 ]
               },
               {
                 "version": "Bước 2",
-                "date": "Thiết lập AI staff",
+                "date": "Khởi tạo AI Staff",
                 "bullets": [
-                  "Gán vai trò như COO, Content, Research, Sales, Reviewer.",
-                  "Nạp company context, skill và quy tắc phê duyệt.",
-                  "Định nghĩa output mà mỗi vai trò phải tạo."
+                  "Tạo profile theo vai trò: COO, Marketing, Sales, Research, Reviewer…",
+                  "Nạp bối cảnh công ty, offer, chính sách và skill cần dùng.",
+                  "Giới hạn phạm vi công cụ và dữ liệu được phép truy cập."
                 ]
               },
               {
                 "version": "Bước 3",
                 "date": "Chạy thử an toàn",
                 "bullets": [
-                  "Chạy demo workflow với dữ liệu an toàn hoặc dữ liệu giả lập được gắn nhãn rõ ràng.",
-                  "Kiểm tra task board, cron, output và approval gate.",
-                  "Không publish, gửi, spend hoặc thay đổi production nếu chưa duyệt."
+                  "Dùng dữ liệu mẫu hoặc dữ liệu đã được duyệt.",
+                  "Tạo output thật để review: report, brief, SOP, checklist, handoff.",
+                  "Không publish, gửi khách hàng, chi tiền hoặc dùng production connector khi chưa duyệt."
                 ]
               },
               {
                 "version": "Bước 4",
                 "date": "Báo cáo & cải tiến",
                 "bullets": [
-                  "Nhận COO report về việc đã làm, blocker và quyết định cần founder duyệt.",
-                  "Tinh chỉnh workflow theo bottleneck thật.",
-                  "Mở rộng sang quy trình tiếp theo khi workflow đầu tiên ổn định."
+                  "Nhận báo cáo kết quả, blocker và đề xuất ưu tiên tiếp theo.",
+                  "Cải thiện workflow, prompt, skill và approval gate.",
+                  "Mở rộng sang use case mới sau khi pilot ổn định."
                 ]
               }
             ]
           }
         },
         {
+          "id": "pricing",
+          "type": "conversionCards",
+          "name": "Gói dịch vụ & pricing",
+          "key": "pricing",
+          "enabled": true,
+          "order": 7,
+          "content": {
+            "eyebrow": "Gói dịch vụ",
+            "heading": "Bắt đầu bằng một workflow rõ, rồi mở rộng thành Business OS",
+            "description": "AigenLabs cung cấp ứng dụng Agent kèm setup và vận hành/bảo trì hàng tháng. Giá dưới đây là mức khởi điểm để khách hàng dễ chọn phạm vi tư vấn ban đầu.",
+            "variant": "pricing",
+            "cards": [
+              {
+                "title": "Basic Setup",
+                "badge": "Từ 7.000.000 VND",
+                "description": "Phù hợp khi bạn muốn khởi tạo một workflow ưu tiên và một nhóm AI staff nhỏ để chạy thử an toàn.",
+                "icon": "check",
+                "bullets": [
+                  "Map một quy trình ưu tiên",
+                  "Thiết lập AI staff cơ bản",
+                  "Chạy thử với dữ liệu an toàn",
+                  "Bàn giao hướng dẫn vận hành"
+                ]
+              },
+              {
+                "title": "Full Setup",
+                "badge": "Từ 10.000.000 VND",
+                "description": "Phù hợp khi bạn muốn thiết kế hệ thống vận hành đầy đủ hơn với nhiều vai trò AI staff, workflow và approval gate.",
+                "icon": "users",
+                "bullets": [
+                  "Map nhiều workflow cốt lõi",
+                  "Thiết lập nhiều AI staff theo vai trò",
+                  "Review/handoff/approval rõ",
+                  "Báo cáo cải tiến sau pilot"
+                ]
+              },
+              {
+                "title": "Vận hành hàng tháng",
+                "badge": "Theo mức dùng",
+                "description": "Bao gồm chi phí API, vận hành, bảo trì, cải thiện workflow/skill và hỗ trợ mở rộng use case sau khi chạy thật.",
+                "icon": "clock",
+                "bullets": [
+                  "Theo API usage",
+                  "Theo số workflow/AI staff",
+                  "Bảo trì và tối ưu định kỳ",
+                  "Báo cáo vận hành"
+                ]
+              }
+            ],
+            "cta": {
+              "label": "Đặt lịch tư vấn gói phù hợp",
+              "href": "mailto:edu@aigenlabs.vn?subject=%C4%90%E1%BA%B7t%20l%E1%BB%8Bch%20demo%20AigenLabs%20Business%20OS",
+              "enabled": true
+            },
+            "note": "Giá và phạm vi cuối cùng cần được xác nhận sau buổi discovery; không tự động kết nối tài khoản thật, publish, outreach hoặc chạy ads khi chưa có phê duyệt."
+          }
+        },
+        {
           "id": "security",
           "type": "securityCards",
-          "name": "Security and control",
+          "name": "Approval & Control",
           "key": "security",
           "enabled": true,
-          "order": 5,
+          "order": 8,
           "content": {
             "eyebrow": "Approval & Control",
             "heading": "Kiểm soát trước khi AI hành động ra bên ngoài",
-            "description": "AigenLabs phân tách rõ việc nội bộ, việc cần review và hành động cần founder approval như publish, outreach, spend, connector hoặc production change.",
+            "description": "AigenLabs phân tách rõ công việc nội bộ và hành động cần phê duyệt như gửi email, đăng bài, thay đổi giá, dùng PII, kết nối công cụ production hoặc chi ngân sách.",
             "cards": [
               {
                 "title": "Phạm vi công cụ rõ ràng",
-                "description": "AI staff được cấu hình theo phạm vi công cụ, thư mục, connector và workflow đã được duyệt.",
+                "description": "AI staff được cấu hình theo vai trò, workflow, thư mục, connector và quyền truy cập đã được duyệt; không tự ý mở rộng phạm vi.",
                 "icon": "shield"
               },
               {
                 "title": "Human approval",
-                "description": "Các hành động public, gửi khách hàng, dùng PII, thay đổi giá hoặc spend được giữ lại để người phụ trách duyệt.",
+                "description": "Publish, outreach, spend, pricing, PII, connector và production/source change luôn được giữ lại để người phụ trách duyệt trước.",
                 "icon": "check"
               },
               {
                 "title": "Audit log",
-                "description": "Tool call, output, approval và blocker được ghi lại để founder hoặc reviewer kiểm tra sau.",
+                "description": "Tool call, output, blocker, quyết định và approval được lưu lại để founder hoặc reviewer kiểm tra sau.",
                 "icon": "archive"
               }
             ],
             "cta": {
-              "enabled": false,
               "label": "Xem FAQ về kiểm soát",
-              "href": "#faq"
+              "href": "#faq",
+              "enabled": true
             },
-            "note": "Bắt đầu từ một workflow có phạm vi nhỏ, chạy thử bằng dữ liệu an toàn, rồi mới mở rộng quyền tự động hóa."
+            "note": "Điểm khác biệt so với chatbot thông thường: AI staff làm trong workflow có owner, output, quyền hạn và điểm duyệt rõ ràng."
+          }
+        },
+        {
+          "id": "final-cta",
+          "type": "conversionCards",
+          "name": "CTA cuối trang",
+          "key": "final-cta",
+          "enabled": true,
+          "order": 9,
+          "content": {
+            "eyebrow": "Bắt đầu",
+            "heading": "Mang một quy trình thật của bạn vào demo AigenLabs",
+            "description": "Trong buổi demo, AigenLabs sẽ chọn một workflow ưu tiên, map input/output/approval, chạy thử bằng dữ liệu an toàn và đề xuất gói setup phù hợp.",
+            "variant": "cta",
+            "cards": [
+              {
+                "title": "Không cần chuẩn bị hệ thống phức tạp",
+                "description": "Bạn chỉ cần chọn một mục tiêu kinh doanh hoặc một việc đang tốn thời gian. AigenLabs sẽ giúp chuyển nó thành workflow, AI staff và output có thể review.",
+                "icon": "bot",
+                "bullets": [
+                  "Chọn một workflow ưu tiên",
+                  "Chạy thử bằng dữ liệu an toàn",
+                  "Chốt next step và approval gate"
+                ]
+              }
+            ],
+            "cta": {
+              "label": "Đặt lịch demo AigenLabs",
+              "href": "mailto:edu@aigenlabs.vn?subject=%C4%90%E1%BA%B7t%20l%E1%BB%8Bch%20demo%20AigenLabs%20Business%20OS",
+              "enabled": true
+            },
+            "note": "Draft/spec/research trước; mọi hành động public, khách hàng, spend, pricing, PII, connector hoặc production đều cần phê duyệt rõ."
           }
         },
         {
@@ -925,51 +1184,51 @@
           "name": "FAQ",
           "key": "faq",
           "enabled": true,
-          "order": 6,
+          "order": 10,
           "content": {
             "heading": "Câu hỏi thường gặp",
             "items": [
               {
                 "question": "AigenLabs khác gì một công cụ chat AI thông thường?",
-                "answer": "Chat AI thường dừng ở câu trả lời. AigenLabs được thiết kế như một Business OS: bạn giao mục tiêu, hệ thống map thành workflow, phân việc cho AI staff, tạo output và giữ approval trước các hành động nhạy cảm.",
+                "answer": "Chat AI thường dừng ở câu trả lời. AigenLabs được thiết kế như Business OS/AI Staff platform: bạn giao mục tiêu, hệ thống map thành workflow, phân việc cho AI staff, tạo output, ghi log và giữ approval trước hành động nhạy cảm.",
                 "linkLabel": "Xem nền tảng",
                 "linkHref": "#platform"
               },
               {
                 "question": "AigenLabs phù hợp với ai?",
-                "answer": "Phù hợp nhất với startup founder và SME muốn đưa AI vào vận hành thật: content, báo cáo COO, customer onboarding, research, sales support, ads monitoring hoặc quy trình nội bộ lặp lại.",
+                "answer": "Phù hợp với founder, solopreneur, agency, startup và SME muốn tối ưu vận hành, giảm việc lặp lại và đưa AI vào các quy trình như content, báo cáo COO, customer onboarding, research, sales support hoặc ads monitoring.",
                 "linkLabel": "",
                 "linkHref": ""
               },
               {
                 "question": "Tôi có cần tự biết cách thiết kế workflow không?",
-                "answer": "Không bắt buộc. Offer của AigenLabs gồm app và setup support: cùng bạn chọn quy trình ưu tiên, định nghĩa input/output, approval gate và cách AI staff phối hợp với team.",
-                "linkLabel": "",
-                "linkHref": ""
+                "answer": "Không bắt buộc. Dịch vụ setup của AigenLabs sẽ cùng bạn chọn quy trình ưu tiên, định nghĩa input/output, owner, KPI, approval gate và cách AI staff phối hợp với team.",
+                "linkLabel": "Xem quy trình setup",
+                "linkHref": "#releases"
               },
               {
                 "question": "Có thể chạy tác vụ định kỳ không?",
-                "answer": "Có. Cron/automation có thể chuẩn bị báo cáo, kiểm tra backlog, tổng hợp survey hoặc theo dõi chỉ số theo lịch. Các hành động bên ngoài như gửi, publish hoặc spend vẫn cần approval nếu được cấu hình như vậy.",
+                "answer": "Có. Cron/automation có thể chuẩn bị báo cáo, kiểm tra backlog, tổng hợp survey hoặc theo dõi chỉ số theo lịch. Các hành động bên ngoài như gửi, publish hoặc spend vẫn cần approval nếu workflow yêu cầu.",
                 "linkLabel": "",
                 "linkHref": ""
               },
               {
                 "question": "AI staff có thể cộng tác như một team không?",
-                "answer": "Có. Bạn có thể gán vai trò như COO, Content, Research, Sales, Operations hoặc Reviewer. Mỗi vai trò xử lý một phần workflow và trả về output để founder hoặc reviewer kiểm tra.",
+                "answer": "Có. Bạn có thể gán các vai trò như COO, Content, Research, Sales, Operations hoặc Reviewer. Mỗi vai trò xử lý một phần workflow và trả về output để founder hoặc reviewer kiểm tra.",
                 "linkLabel": "",
                 "linkHref": ""
               },
               {
                 "question": "AigenLabs xử lý quyền truy cập và dữ liệu như thế nào?",
-                "answer": "Mỗi workflow nên bắt đầu bằng phạm vi rõ: AI được đọc gì, được dùng công cụ nào, output cần lưu ở đâu và hành động nào phải chờ người duyệt. Không nên dùng dữ liệu khách hàng nhạy cảm hoặc connector production khi chưa có approval và cấu hình phù hợp.",
-                "linkLabel": "",
-                "linkHref": ""
+                "answer": "Mỗi workflow bắt đầu bằng phạm vi rõ: AI được đọc gì, được dùng công cụ nào, output lưu ở đâu và hành động nào phải chờ người duyệt. Không dùng dữ liệu khách hàng nhạy cảm, connector production hoặc tài khoản thật nếu chưa có approval và cấu hình phù hợp.",
+                "linkLabel": "Xem kiểm soát",
+                "linkHref": "#security"
               },
               {
                 "question": "Demo AigenLabs sẽ diễn ra như thế nào?",
-                "answer": "Trong demo, mình sẽ chọn một workflow ưu tiên của công ty bạn, map input/output/approval, chạy thử một luồng AI staff an toàn và chốt bước setup tiếp theo. Chưa kết nối tài khoản, publish, gửi khách hàng hoặc chi ngân sách nếu chưa được duyệt.",
-                "linkLabel": "",
-                "linkHref": ""
+                "answer": "Trong demo, AigenLabs sẽ chọn một workflow ưu tiên của công ty bạn, map input/output/approval, chạy thử một luồng AI staff an toàn và chốt bước setup tiếp theo. Chưa kết nối tài khoản thật, publish, gửi khách hàng hoặc chi ngân sách nếu chưa được duyệt.",
+                "linkLabel": "Đặt lịch demo",
+                "linkHref": "mailto:edu@aigenlabs.vn?subject=%C4%90%E1%BA%B7t%20l%E1%BB%8Bch%20demo%20AigenLabs%20Business%20OS"
               }
             ]
           }
@@ -980,7 +1239,7 @@
           "name": "Floating dock",
           "key": "floating-dock",
           "enabled": true,
-          "order": 7,
+          "order": 11,
           "content": {
             "showBackToTop": true,
             "contacts": [
@@ -1007,7 +1266,7 @@
         }
       ],
       "createdAt": "2026-06-15T00:00:00.000Z",
-      "updatedAt": "2026-06-18T14:21:23.184Z",
+      "updatedAt": "2026-06-20T03:52:53Z",
       "publishedAt": "2026-06-15T00:00:00.000Z"
     }
   ],

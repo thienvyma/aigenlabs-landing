@@ -252,6 +252,23 @@ export interface SecurityCardsContent {
   note: string;
 }
 
+export interface ConversionCardsContent {
+  eyebrow: string;
+  heading: string;
+  description: string;
+  variant?: "default" | "soft" | "pricing" | "cta";
+  cards: Array<{
+    title: string;
+    description: string;
+    icon: string;
+    badge?: string;
+    bullets?: string[];
+    cta?: CtaLink;
+  }>;
+  cta?: CtaLink;
+  note?: string;
+}
+
 export interface FaqContent {
   heading: string;
   items: Array<{
