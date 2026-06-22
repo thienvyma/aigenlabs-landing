@@ -16,7 +16,7 @@ function SmartLink({
   href,
   className,
   children,
-  ariaLabel
+  ariaLabel,
 }: {
   href: string;
   className?: string;
@@ -28,8 +28,20 @@ function SmartLink({
       href={href}
       className={className}
       aria-label={ariaLabel}
-      target={isExternalUrl(href) && !href.startsWith("mailto:") && !href.startsWith("tel:") ? "_blank" : undefined}
-      rel={isExternalUrl(href) && !href.startsWith("mailto:") && !href.startsWith("tel:") ? "noreferrer noopener" : undefined}
+      target={
+        isExternalUrl(href) &&
+        !href.startsWith("mailto:") &&
+        !href.startsWith("tel:")
+          ? "_blank"
+          : undefined
+      }
+      rel={
+        isExternalUrl(href) &&
+        !href.startsWith("mailto:") &&
+        !href.startsWith("tel:")
+          ? "noreferrer noopener"
+          : undefined
+      }
     >
       {children}
     </a>
@@ -38,12 +50,23 @@ function SmartLink({
 
 function Logo({ settings }: { settings: SiteSettings }) {
   if (settings.brand.logoUrl) {
-    return <img src={settings.brand.logoUrl} alt={settings.brand.name} className="site-logo-image" />;
+    return (
+      <img
+        src={settings.brand.logoUrl}
+        alt={settings.brand.name}
+        className="site-logo-image"
+      />
+    );
   }
 
   return (
     <span className="site-logo-text">
-      <span className="site-logo-mark">A</span>
+      <img
+        className="site-logo-mark-image"
+        src="/brand/aigenlabs-icon-primary.svg"
+        alt=""
+        aria-hidden="true"
+      />
       {settings.brand.logoText.replace(/^A/i, "")}
     </span>
   );
@@ -54,7 +77,11 @@ function ContactIcon({ href, size }: { href: string; size: number }) {
   return <Mail size={size} aria-hidden="true" />;
 }
 
-export function SiteNav({ settings, currentLocale, currentPath }: SiteNavProps) {
+export function SiteNav({
+  settings,
+  currentLocale,
+  currentPath,
+}: SiteNavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const locales = getSupportedLocales(settings);
@@ -70,7 +97,11 @@ export function SiteNav({ settings, currentLocale, currentPath }: SiteNavProps) 
   return (
     <header className={cx("site-nav", scrolled && "site-nav-scrolled")}>
       <div className="site-nav-inner">
-        <SmartLink href={homePath} className="site-logo" ariaLabel={settings.brand.name}>
+        <SmartLink
+          href={homePath}
+          className="site-logo"
+          ariaLabel={settings.brand.name}
+        >
           <Logo settings={settings} />
         </SmartLink>
 
@@ -79,13 +110,21 @@ export function SiteNav({ settings, currentLocale, currentPath }: SiteNavProps) 
             <div key={item.label} className="nav-item-wrap">
               <SmartLink href={item.href} className="nav-link">
                 <span>{item.label}</span>
-                {item.badge ? <span className="nav-badge">{item.badge}</span> : null}
-                {item.kind === "dropdown" ? <ChevronDown size={16} aria-hidden="true" /> : null}
+                {item.badge ? (
+                  <span className="nav-badge">{item.badge}</span>
+                ) : null}
+                {item.kind === "dropdown" ? (
+                  <ChevronDown size={16} aria-hidden="true" />
+                ) : null}
               </SmartLink>
               {item.kind === "dropdown" && item.children?.length ? (
                 <div className="nav-dropdown">
                   {item.children.map((child) => (
-                    <SmartLink key={child.href} href={child.href} className="nav-dropdown-link">
+                    <SmartLink
+                      key={child.href}
+                      href={child.href}
+                      className="nav-dropdown-link"
+                    >
                       {child.label}
                     </SmartLink>
                   ))}
@@ -104,7 +143,10 @@ export function SiteNav({ settings, currentLocale, currentPath }: SiteNavProps) 
                 <SmartLink
                   key={locale.code}
                   href={getLocalizedPath(currentPath, locale.code, settings)}
-                  className={cx("nav-language-option", locale.code === currentLocale && "active")}
+                  className={cx(
+                    "nav-language-option",
+                    locale.code === currentLocale && "active",
+                  )}
                   ariaLabel={`View ${locale.nativeLabel}`}
                 >
                   {locale.code.toUpperCase()}
@@ -113,18 +155,30 @@ export function SiteNav({ settings, currentLocale, currentPath }: SiteNavProps) 
             </span>
           </div>
           {settings.navigation.secondaryCta.enabled ? (
-            <SmartLink href={settings.navigation.secondaryCta.href} className="nav-outline">
+            <SmartLink
+              href={settings.navigation.secondaryCta.href}
+              className="nav-outline"
+            >
               {settings.navigation.secondaryCta.label}
             </SmartLink>
           ) : null}
           {settings.navigation.signIn.enabled ? (
-            <SmartLink href={settings.navigation.signIn.href} className="nav-signin">
+            <SmartLink
+              href={settings.navigation.signIn.href}
+              className="nav-signin"
+            >
               {settings.navigation.signIn.label}
             </SmartLink>
           ) : null}
           {settings.navigation.primaryCta.enabled ? (
-            <SmartLink href={settings.navigation.primaryCta.href} className="nav-primary">
-              <ContactIcon href={settings.navigation.primaryCta.href} size={16} />
+            <SmartLink
+              href={settings.navigation.primaryCta.href}
+              className="nav-primary"
+            >
+              <ContactIcon
+                href={settings.navigation.primaryCta.href}
+                size={16}
+              />
               {settings.navigation.primaryCta.label}
             </SmartLink>
           ) : null}
@@ -135,7 +189,11 @@ export function SiteNav({ settings, currentLocale, currentPath }: SiteNavProps) 
             aria-expanded={open}
             onClick={() => setOpen((value) => !value)}
           >
-            {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+            {open ? (
+              <X size={24} aria-hidden="true" />
+            ) : (
+              <Menu size={24} aria-hidden="true" />
+            )}
           </button>
         </div>
       </div>
@@ -143,7 +201,11 @@ export function SiteNav({ settings, currentLocale, currentPath }: SiteNavProps) 
       {open ? (
         <div className="mobile-menu">
           {settings.navigation.items.map((item) => (
-            <SmartLink key={item.label} href={item.href} className="mobile-menu-link">
+            <SmartLink
+              key={item.label}
+              href={item.href}
+              className="mobile-menu-link"
+            >
               {item.label}
             </SmartLink>
           ))}
@@ -152,21 +214,36 @@ export function SiteNav({ settings, currentLocale, currentPath }: SiteNavProps) 
               <SmartLink
                 key={locale.code}
                 href={getLocalizedPath(currentPath, locale.code, settings)}
-                className={cx("mobile-language-link", locale.code === currentLocale && "active")}
+                className={cx(
+                  "mobile-language-link",
+                  locale.code === currentLocale && "active",
+                )}
               >
                 {locale.nativeLabel}
               </SmartLink>
             ))}
           </div>
           {settings.navigation.secondaryCta.enabled ? (
-            <SmartLink href={settings.navigation.secondaryCta.href} className="btn btn-outline mobile-menu-cta">
-              <ContactIcon href={settings.navigation.secondaryCta.href} size={18} />
+            <SmartLink
+              href={settings.navigation.secondaryCta.href}
+              className="btn btn-outline mobile-menu-cta"
+            >
+              <ContactIcon
+                href={settings.navigation.secondaryCta.href}
+                size={18}
+              />
               {settings.navigation.secondaryCta.label}
             </SmartLink>
           ) : null}
           {settings.navigation.primaryCta.enabled ? (
-            <SmartLink href={settings.navigation.primaryCta.href} className="btn btn-dark mobile-menu-cta">
-              <ContactIcon href={settings.navigation.primaryCta.href} size={18} />
+            <SmartLink
+              href={settings.navigation.primaryCta.href}
+              className="btn btn-dark mobile-menu-cta"
+            >
+              <ContactIcon
+                href={settings.navigation.primaryCta.href}
+                size={18}
+              />
               {settings.navigation.primaryCta.label}
             </SmartLink>
           ) : null}

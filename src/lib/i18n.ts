@@ -2,16 +2,11 @@ import type { FooterSettings, LocaleSettings, NavigationSettings, SiteSettings }
 
 export const fallbackDefaultLocale = "vi";
 export const builtInLocales = [
-  { code: "vi", label: "Vietnamese", nativeLabel: "Tiếng Việt", pathPrefix: "" },
-  { code: "en", label: "English", nativeLabel: "English", pathPrefix: "/en" }
+  { code: "vi", label: "Vietnamese", nativeLabel: "Tiếng Việt", pathPrefix: "" }
 ] as const;
 
-function fallbackNavigation(locale: string, navigation: NavigationSettings): NavigationSettings {
-  if (locale !== "vi") return navigation;
-  return {
-    ...navigation,
-    languageLabel: "Tiếng Việt"
-  };
+function fallbackNavigation(_locale: string, navigation: NavigationSettings): NavigationSettings {
+  return navigation;
 }
 
 function fallbackFooter(_locale: string, footer: FooterSettings): FooterSettings {

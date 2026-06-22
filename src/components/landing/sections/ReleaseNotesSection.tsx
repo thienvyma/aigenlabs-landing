@@ -1,4 +1,5 @@
 import type { ReleaseNotesContent } from "@/lib/types";
+import { AccentText } from "@/components/landing/AccentText";
 
 interface ReleaseNotesSectionProps {
   id: string;
@@ -10,7 +11,9 @@ export function ReleaseNotesSection({ id, content }: ReleaseNotesSectionProps) {
     <section id={id} className="release-notes section-anchor section-pad">
       <div className="container-wide release-container">
         <div className="section-intro">
-          <h2 className="section-heading">{content.heading}</h2>
+          <h2 className="section-heading">
+            <AccentText text={content.heading} accents={["Setup đầu tiên", "diễn ra", "workflow"]} />
+          </h2>
           <a href={content.viewAllHref} className="release-link">
             {content.viewAllLabel} →
           </a>

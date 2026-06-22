@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { UseCaseTabsContent } from "@/lib/types";
+import { AccentText } from "@/components/landing/AccentText";
 import { CmsMediaFrame } from "@/components/landing/CmsMediaFrame";
 import { cx } from "@/lib/utils";
 
@@ -12,40 +13,45 @@ interface UseCaseTabsSectionProps {
 
 export function UseCaseTabsSection({ id, content }: UseCaseTabsSectionProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeTab = content.tabs[activeIndex] ?? content.tabs[0];
+  const loopSteps = content.tabs.slice(0, 5);
+  const activeStep = loopSteps[activeIndex] ?? loopSteps[0];
 
-  if (!activeTab) return null;
+  if (!activeStep) return null;
 
   return (
     <section id={id} className="use-cases section-anchor section-pad">
       <div className="container-wide">
-        <h2 className="section-heading use-cases-title">{content.heading}</h2>
-        <div className="tab-rail-scroll" role="tablist" aria-label={content.heading}>
-          <div className="tab-rail">
-            {content.tabs.map((tab, index) => (
+        <div className="use-cases-head">
+          <h2 className="section-heading use-cases-title">
+            <AccentText text={content.heading} accents={["vòng vận hành", "mục tiêu", "workflow"]} />
+          </h2>
+          <p className="section-copy">
+            AigenLabs biến yêu cầu kinh doanh thành quy trình có người phụ trách, đầu ra và bằng chứng để theo dõi.
+          </p>
+        </div>
+        <div className="operating-loop">
+          <div className="operating-steps" role="tablist" aria-label={content.heading}>
+            {loopSteps.map((step, index) => (
               <button
-                key={tab.label}
+                key={step.label}
                 type="button"
                 role="tab"
                 aria-selected={activeIndex === index}
-                className={cx("tab-pill", activeIndex === index && "tab-pill-active")}
+                className={cx("operating-step", activeIndex === index && "operating-step-active")}
                 onClick={() => setActiveIndex(index)}
               >
-                {tab.label}
+                <span className="operating-step-index">{String(index + 1).padStart(2, "0")}</span>
+                <span className="operating-step-copy">
+                  <strong>{step.title}</strong>
+                  <span>{step.description}</span>
+                </span>
               </button>
             ))}
           </div>
+          <div className="operating-media" role="tabpanel" aria-label={activeStep.title}>
+            <CmsMediaFrame media={activeStep.media} fallbackTitle={activeStep.mediaTitle} fallbackLabel={activeStep.label} compact />
+          </div>
         </div>
-        <article className="use-case-card">
-          <div className="use-case-copy">
-            <span className="eyebrow">{activeTab.label}</span>
-            <h3>{activeTab.title}</h3>
-            <p>{activeTab.description}</p>
-          </div>
-          <div className="use-case-media">
-            <CmsMediaFrame media={activeTab.media} fallbackTitle={activeTab.mediaTitle} fallbackLabel={activeTab.label} compact />
-          </div>
-        </article>
       </div>
     </section>
   );

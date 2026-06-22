@@ -286,7 +286,20 @@ export interface FloatingDockContact {
   enabled?: boolean;
 }
 
+export type FloatingDockWebhookTrigger = "helper_open" | "contact_click" | "both";
+
+export interface FloatingDockWebhook {
+  enabled: boolean;
+  url: string;
+  eventName: string;
+  trigger: FloatingDockWebhookTrigger;
+}
+
 export interface FloatingDockContent {
   showBackToTop: boolean;
+  helperLabel: string;
+  helperTooltip: string;
+  helperIcon: string;
   contacts: FloatingDockContact[];
+  webhook: FloatingDockWebhook;
 }

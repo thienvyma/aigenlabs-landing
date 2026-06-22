@@ -64,9 +64,17 @@ const floatingDockIconOptions = [
   { label: "Email", value: "email" },
   { label: "Phone", value: "phone" },
   { label: "Messenger", value: "messenger" },
+  { label: "Facebook", value: "facebook" },
   { label: "Zalo", value: "zalo" },
   { label: "Website", value: "website" },
+  { label: "Chatbot", value: "chatbot" },
   { label: "Support", value: "support" }
+] as const;
+
+const floatingDockWebhookTriggerOptions = [
+  { label: "When helper opens", value: "helper_open" },
+  { label: "When a channel is clicked", value: "contact_click" },
+  { label: "Both", value: "both" }
 ] as const;
 
 const websiteUrlOptions = [
@@ -747,7 +755,7 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
             </label>
             <label>
               Language
-              <input value="Tiếng Việt (vi)" readOnly />
+              <input value="English (en)" readOnly />
             </label>
           </div>
         </section>
@@ -1013,8 +1021,19 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
   function renderFloatingDockEditor(content: FloatingDockContent) {
     return (
       <>
-        <div className="admin-form-grid">
-          <ToggleInput label="Show back-to-top button" checked={content.showBackToTop} onChange={(showBackToTop) => updateSectionContent<FloatingDockContent>({ showBackToTop })} />
+        <div className="nested-editor">
+          <h4>Helper button</h4>
+          <div className="admin-form-grid">
+            <ToggleInput label="Show floating helper" checked={content.showBackToTop} onChange={(showBackToTop) => updateSectionContent<FloatingDockContent>({ showBackToTop })} />
+            <TextInput label="Helper label" value={content.helperLabel} onChange={(helperLabel) => updateSectionContent<FloatingDockContent>({ helperLabel })} />
+            <TextInput label="Helper tooltip" value={content.helperTooltip} onChange={(helperTooltip) => updateSectionContent<FloatingDockContent>({ helperTooltip })} />
+            <SelectInput
+              label="Helper icon"
+              value={content.helperIcon}
+              options={optionsWithCurrent([...floatingDockIconOptions], content.helperIcon)}
+              onChange={(helperIcon) => updateSectionContent<FloatingDockContent>({ helperIcon })}
+            />
+          </div>
         </div>
         <EditableList<FloatingDockContact>
           label="Contact channel"
@@ -1026,7 +1045,7 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
             <div className="admin-form-grid">
               <TextInput label="Tooltip label" value={contact.label} onChange={(label) => onItemChange({ ...contact, label })} />
               <SelectInput
-                label="Icon"
+                label="Platform logo"
                 value={contact.icon}
                 options={optionsWithCurrent([...floatingDockIconOptions], contact.icon)}
                 onChange={(icon) => onItemChange({ ...contact, icon })}
@@ -1036,6 +1055,34 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
             </div>
           )}
         />
+        <div className="nested-editor">
+          <h4>Webhook for future chatbot</h4>
+          <div className="admin-form-grid">
+            <ToggleInput
+              label="Enable helper webhook"
+              checked={content.webhook.enabled}
+              onChange={(enabled) => updateSectionContent<FloatingDockContent>({ webhook: { ...content.webhook, enabled } })}
+              help="Keep disabled until a reviewed chatbot/webhook endpoint is ready."
+            />
+            <TextInput
+              label="Webhook URL"
+              value={content.webhook.url}
+              onChange={(url) => updateSectionContent<FloatingDockContent>({ webhook: { ...content.webhook, url } })}
+              help="Can be a same-origin API route or an external webhook endpoint."
+            />
+            <SelectInput
+              label="Webhook trigger"
+              value={content.webhook.trigger}
+              options={[...floatingDockWebhookTriggerOptions]}
+              onChange={(trigger) => updateSectionContent<FloatingDockContent>({ webhook: { ...content.webhook, trigger } })}
+            />
+            <TextInput
+              label="Event name"
+              value={content.webhook.eventName}
+              onChange={(eventName) => updateSectionContent<FloatingDockContent>({ webhook: { ...content.webhook, eventName } })}
+            />
+          </div>
+        </div>
       </>
     );
   }
@@ -1244,8 +1291,8 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
           <WebsiteUrlInput label="Website URL" value={settings.siteUrl} onChange={(siteUrl) => updateSettings({ ...settings, siteUrl })} />
           <label>
             Default language
-            <input value="Tiếng Việt (vi)" readOnly />
-            <span className="field-help">Vietnamese homepage is the only public route in this scope.</span>
+            <input value="English (en)" readOnly />
+            <span className="field-help">English homepage is the only public route in this scope.</span>
           </label>
           <ColorInput label="Browser theme color" value={settings.themeColor} onChange={(themeColor) => updateSettings({ ...settings, themeColor })} />
           <TextInput label="Brand name" value={brand.name} onChange={(name) => updateSettings({ ...settings, brand: { ...brand, name } })} />
@@ -1310,7 +1357,7 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
             <p className="panel-note">Manage the top menu, dropdown links, language label, and header buttons for each public language.</p>
           </div>
         </div>
-        {renderLocaleScopePicker("Navigation labels and links are saved separately for Vietnamese and English.")}
+        {renderLocaleScopePicker("Navigation labels and links are saved for the English public route.")}
         <div className="admin-form-grid">
           <TextInput label="Language label" value={navigation.languageLabel} onChange={(languageLabel) => updateLocaleNavigation({ ...navigation, languageLabel })} />
         </div>
@@ -1364,7 +1411,7 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
             <p className="panel-note">Edit footer columns, links, and copyright text for each public language.</p>
           </div>
         </div>
-        {renderLocaleScopePicker("Footer labels and links are saved separately for Vietnamese and English.")}
+        {renderLocaleScopePicker("Footer labels and links are saved for the English public route.")}
         <EditableList
           label="Footer column"
           addLabel="Add column"

@@ -42,8 +42,8 @@ export function createSectionTemplate(type: SectionType, order: number): CmsSect
           headline: "Build, run, and manage AI agents for real work",
           subheadline: "Describe the page promise in one or two clear sentences.",
           chips: [{ label: "Fast setup", enabled: true }],
-          primaryCta: { label: "Liên hệ email", href: "mailto:edu@aigenlabs.vn", enabled: true },
-          secondaryCta: { label: "Gọi điện", href: "tel:+84981413456", enabled: true },
+          primaryCta: { label: "Email us", href: "mailto:edu@aigenlabs.vn", enabled: true },
+          secondaryCta: { label: "Call", href: "tel:+84981413456", enabled: true },
           preview: createEditableMedia(
             "AigenLabs workspace",
             "AigenLabs preview",
@@ -147,10 +147,19 @@ export function createSectionTemplate(type: SectionType, order: number): CmsSect
         ...base,
         content: {
           showBackToTop: true,
+          helperLabel: "Hỗ trợ",
+          helperTooltip: "Mở kênh hỗ trợ",
+          helperIcon: "support",
           contacts: [
             { label: "Email", href: "mailto:edu@aigenlabs.vn", icon: "email", enabled: true },
-            { label: "Điện thoại", href: "tel:+84981413456", icon: "phone", enabled: true }
-          ]
+            { label: "Điện thoại", href: "tel:+849****3456", icon: "phone", enabled: true }
+          ],
+          webhook: {
+            enabled: false,
+            url: "",
+            eventName: "floating_helper",
+            trigger: "helper_open"
+          }
         }
       };
   }

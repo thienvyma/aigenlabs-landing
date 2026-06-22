@@ -1,4 +1,5 @@
 import type { EditableMedia } from "@/lib/types";
+import { CmsVideo } from "@/components/landing/CmsVideo";
 import { MediaPreview } from "@/components/landing/MediaPreview";
 
 interface CmsMediaFrameProps {
@@ -7,9 +8,17 @@ interface CmsMediaFrameProps {
   fallbackLabel: string;
   compact?: boolean;
   autoPlayVideo?: boolean;
+  videoPlaybackRate?: number;
 }
 
-export function CmsMediaFrame({ media, fallbackTitle, fallbackLabel, compact = false, autoPlayVideo = false }: CmsMediaFrameProps) {
+export function CmsMediaFrame({
+  media,
+  fallbackTitle,
+  fallbackLabel,
+  compact = false,
+  autoPlayVideo = false,
+  videoPlaybackRate = 1,
+}: CmsMediaFrameProps) {
   if (media?.kind === "image" && media.url) {
     return (
       <div className="cms-media-window">
@@ -18,7 +27,7 @@ export function CmsMediaFrame({ media, fallbackTitle, fallbackLabel, compact = f
           <span className="cms-media-dot yellow" />
           <span className="cms-media-dot cyan" />
         </div>
-        <img src={media.url} alt={media.alt || media.title} />
+        <img src={media.url} alt={media.alt || media.title} loading="lazy" decoding="async" />
       </div>
     );
   }
@@ -31,17 +40,7 @@ export function CmsMediaFrame({ media, fallbackTitle, fallbackLabel, compact = f
           <span className="cms-media-dot yellow" />
           <span className="cms-media-dot cyan" />
         </div>
-        <video
-          autoPlay={autoPlayVideo}
-          controls={!autoPlayVideo}
-          loop={autoPlayVideo}
-          muted={autoPlayVideo}
-          playsInline
-          poster={media.poster || undefined}
-          preload={autoPlayVideo ? "auto" : "metadata"}
-        >
-          <source src={media.url} />
-        </video>
+        <CmsVideo media={media} autoPlayVideo={autoPlayVideo} playbackRate={videoPlaybackRate} />
       </div>
     );
   }

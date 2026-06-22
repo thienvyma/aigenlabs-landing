@@ -59,7 +59,7 @@ const footerSchema = z.object({
 });
 
 const localeSchema = z.object({
-  code: z.enum(["vi", "en"]),
+  code: z.enum(["vi"]),
   label: z.string(),
   nativeLabel: z.string(),
   pathPrefix: z.string(),
@@ -90,7 +90,7 @@ const pageSchema = z.object({
   id: z.string(),
   slug: z.string(),
   path: z.string().regex(/^\//),
-  locale: z.enum(["vi", "en"]),
+  locale: z.enum(["vi"]),
   status: z.enum(["draft", "published", "archived"]),
   title: z.string(),
   seo: seoSchema,
@@ -149,18 +149,15 @@ const cmsSchema = z.object({
     if (page.seo.canonicalPath !== page.path) {
       ctx.addIssue({ code: "custom", path: ["pages", page.id, "seo", "canonicalPath"], message: `Canonical path must match page path: ${page.path}` });
     }
-    if (page.locale === "vi" && (page.path === "/en" || page.path.startsWith("/en/"))) {
-      ctx.addIssue({ code: "custom", path: ["pages", page.id, "path"], message: "Vietnamese pages must not live under /en." });
-    }
-    if (page.locale === "en" && page.path !== "/en" && !page.path.startsWith("/en/")) {
-      ctx.addIssue({ code: "custom", path: ["pages", page.id, "path"], message: "English pages must live under /en." });
+    if (page.locale === "vi" && page.path !== "/") {
+      ctx.addIssue({ code: "custom", path: ["pages", page.id, "path"], message: "Vietnamese homepage must live at /." });
     }
   }
 
   const locales = data.settings.supportedLocales ?? [];
   if (locales.length) {
     const localeCodes = new Set(locales.map((locale) => locale.code));
-    if (!localeCodes.has(data.settings.defaultLocale as "vi" | "en")) {
+    if (!localeCodes.has(data.settings.defaultLocale as "vi")) {
       ctx.addIssue({ code: "custom", path: ["settings", "defaultLocale"], message: "Default locale must exist in supportedLocales." });
     }
   }

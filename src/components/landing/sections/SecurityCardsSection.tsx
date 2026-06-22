@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import type { SecurityCardsContent } from "@/lib/types";
+import { AccentText } from "@/components/landing/AccentText";
 import { IconGlyph } from "@/components/landing/IconGlyph";
 
 interface SecurityCardsSectionProps {
@@ -13,7 +14,9 @@ export function SecurityCardsSection({ id, content }: SecurityCardsSectionProps)
       <div className="container-feature">
         <div className="section-intro">
           <span className="eyebrow">{content.eyebrow}</span>
-          <h2 className="section-heading">{content.heading}</h2>
+          <h2 className="section-heading">
+            <AccentText text={content.heading} accents={["founder vẫn kiểm soát", "AI tăng tốc", "workflow"]} />
+          </h2>
           <p className="section-copy">{content.description}</p>
         </div>
         <div className="security-grid">

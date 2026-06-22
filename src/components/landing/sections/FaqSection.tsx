@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import type { FaqContent } from "@/lib/types";
+import { AccentText } from "@/components/landing/AccentText";
 import { cx } from "@/lib/utils";
 
 interface FaqSectionProps {
@@ -15,7 +16,9 @@ export function FaqSection({ id, content }: FaqSectionProps) {
   return (
     <section id={id} className="faq section-anchor section-pad">
       <div className="container-faq">
-        <h2 className="section-heading">{content.heading}</h2>
+        <h2 className="section-heading">
+          <AccentText text={content.heading} accents={["Business OS", "Founder", "SME", "AigenLabs"]} />
+        </h2>
         <div className="faq-list">
           {content.items.map((item, index) => {
             const open = openIndex === index;

@@ -162,19 +162,50 @@ const floatingDockContactSchema = z.object({
   enabled: z.boolean().optional()
 });
 
+const floatingDockWebhookTriggerOptions = ["helper_open", "contact_click", "both"] as const;
+const floatingDockWebhookTriggerSet = new Set<string>(floatingDockWebhookTriggerOptions);
+
+const floatingDockWebhookSchema = z.object({
+  enabled: z.boolean(),
+  url: z.string(),
+  eventName: z.string(),
+  trigger: z.enum(floatingDockWebhookTriggerOptions)
+});
+
 const floatingDockContentSchema = z.preprocess((value) => {
   if (!value || typeof value !== "object" || Array.isArray(value)) return value;
   const content = value as Record<string, unknown>;
-  if (Array.isArray(content.contacts)) return value;
   const supportHref = typeof content.supportHref === "string" ? content.supportHref : "";
-  const supportLabel = typeof content.supportLabel === "string" ? content.supportLabel : "Liên hệ";
+  const supportLabel = typeof content.supportLabel === "string" ? content.supportLabel : "Contact";
+  const contacts = Array.isArray(content.contacts)
+    ? content.contacts
+    : supportHref
+      ? [{ label: supportLabel, href: supportHref, icon: "support", enabled: true }]
+      : [];
+  const webhook = content.webhook && typeof content.webhook === "object" && !Array.isArray(content.webhook)
+    ? content.webhook as Record<string, unknown>
+    : {};
+  const rawTrigger = typeof webhook.trigger === "string" ? webhook.trigger : "helper_open";
   return {
     showBackToTop: typeof content.showBackToTop === "boolean" ? content.showBackToTop : true,
-    contacts: supportHref ? [{ label: supportLabel, href: supportHref, icon: "support", enabled: true }] : []
+    helperLabel: typeof content.helperLabel === "string" ? content.helperLabel : "Trợ lý",
+    helperTooltip: typeof content.helperTooltip === "string" ? content.helperTooltip : "Mở kênh hỗ trợ",
+    helperIcon: typeof content.helperIcon === "string" ? content.helperIcon : "support",
+    contacts,
+    webhook: {
+      enabled: typeof webhook.enabled === "boolean" ? webhook.enabled : false,
+      url: typeof webhook.url === "string" ? webhook.url : "",
+      eventName: typeof webhook.eventName === "string" ? webhook.eventName : "floating_helper",
+      trigger: floatingDockWebhookTriggerSet.has(rawTrigger) ? rawTrigger : "helper_open"
+    }
   };
 }, z.object({
   showBackToTop: z.boolean(),
-  contacts: z.array(floatingDockContactSchema)
+  helperLabel: z.string(),
+  helperTooltip: z.string(),
+  helperIcon: z.string(),
+  contacts: z.array(floatingDockContactSchema),
+  webhook: floatingDockWebhookSchema
 })) satisfies z.ZodType<FloatingDockContent>;
 
 export const sectionContentSchemas = {

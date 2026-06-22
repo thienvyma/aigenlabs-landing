@@ -7,12 +7,23 @@ interface SiteFooterProps {
 
 function FooterLogo({ settings }: SiteFooterProps) {
   if (settings.brand.logoUrl) {
-    return <img src={settings.brand.logoUrl} alt={settings.brand.name} className="footer-logo-image" />;
+    return (
+      <img
+        src={settings.brand.logoUrl}
+        alt={settings.brand.name}
+        className="footer-logo-image"
+      />
+    );
   }
 
   return (
     <span className="site-logo-text footer-logo-text">
-      <span className="site-logo-mark">A</span>
+      <img
+        className="site-logo-mark-image"
+        src="/brand/aigenlabs-icon-primary.svg"
+        alt=""
+        aria-hidden="true"
+      />
       {settings.brand.logoText.replace(/^A/i, "")}
     </span>
   );
@@ -30,8 +41,20 @@ export function SiteFooter({ settings }: SiteFooterProps) {
                 <li key={`${column.title}-${link.href}`}>
                   <a
                     href={link.href}
-                    target={isExternalUrl(link.href) && !link.href.startsWith("mailto:") && !link.href.startsWith("tel:") ? "_blank" : undefined}
-                    rel={isExternalUrl(link.href) && !link.href.startsWith("mailto:") && !link.href.startsWith("tel:") ? "noreferrer noopener" : undefined}
+                    target={
+                      isExternalUrl(link.href) &&
+                      !link.href.startsWith("mailto:") &&
+                      !link.href.startsWith("tel:")
+                        ? "_blank"
+                        : undefined
+                    }
+                    rel={
+                      isExternalUrl(link.href) &&
+                      !link.href.startsWith("mailto:") &&
+                      !link.href.startsWith("tel:")
+                        ? "noreferrer noopener"
+                        : undefined
+                    }
                   >
                     {link.label}
                   </a>
