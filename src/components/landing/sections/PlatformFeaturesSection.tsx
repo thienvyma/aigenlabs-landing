@@ -37,7 +37,7 @@ function ProofCard({ feature, muted }: { feature: PlatformFeature; muted?: boole
           <span className="feature-icon proof-icon">
             <IconGlyph name={feature.icon} size={18} />
           </span>
-          <span>{feature.badge || "Product proof"}</span>
+          <span>{feature.badge || "Proof sản phẩm"}</span>
         </div>
         <h3>{feature.title}</h3>
         <p>{feature.description}</p>

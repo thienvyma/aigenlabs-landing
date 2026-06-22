@@ -448,13 +448,13 @@ video {
   background: rgba(15, 23, 42, 0.08);
 }
 .hero .container-wide {
-  width: min(100% - 32px, 1380px);
+  width: min(100% - 16px, 1440px);
 }
 .hero-inner {
   display: grid;
-  grid-template-columns: minmax(440px, 0.78fr) minmax(700px, 1.22fr);
+  grid-template-columns: minmax(440px, 0.72fr) minmax(760px, 1.28fr);
   align-items: center;
-  gap: clamp(24px, 2.8vw, 40px);
+  gap: clamp(18px, 1.8vw, 28px);
 }
 .hero-copy {
   min-width: 0;
