@@ -58,7 +58,7 @@ Media fields are available for the hero, each use-case tab, and each platform fe
 
 ## Page Visibility
 
-Only pages with status `published` are public and included in the sitemap. The seed currently publishes only the homepage.
+Only CMS pages with status `published` are public CMS routes. The seed currently publishes only the homepage. The static `/policy` route is also public and included in the sitemap for privacy, terms, and data deletion requirements.
 
 Draft and archived pages are hidden from public routing. The homepage uses `path: "/"`.
 

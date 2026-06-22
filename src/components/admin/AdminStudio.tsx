@@ -1303,8 +1303,8 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
           <WebsiteUrlInput label="Website URL" value={settings.siteUrl} onChange={(siteUrl) => updateSettings({ ...settings, siteUrl })} />
           <label>
             Default language
-            <input value="English (en)" readOnly />
-            <span className="field-help">English homepage is the only public route in this scope.</span>
+            <input value="Vietnamese (vi)" readOnly />
+            <span className="field-help">The CMS manages the Vietnamese homepage; /policy is a static public route.</span>
           </label>
           <ColorInput label="Browser theme color" value={settings.themeColor} onChange={(themeColor) => updateSettings({ ...settings, themeColor })} />
           <TextInput label="Brand name" value={brand.name} onChange={(name) => updateSettings({ ...settings, brand: { ...brand, name } })} />

@@ -16,6 +16,7 @@
 ## Main paths
 
 - `src/app/page.tsx`: homepage route.
+- `src/app/policy/page.tsx`: public privacy, terms, and data deletion route for users and Meta app verification.
 - `src/app/admin/page.tsx`: admin studio.
 - `src/app/api/admin/*`: admin data, auth, upload APIs.
 - `src/components/landing`: public landing components.
@@ -31,7 +32,7 @@
 
 Public pages render from CMS data server-side. Components do not hard-code landing content. Section data comes from `CmsPage.sections[]`, sorted by `order` and filtered by `enabled`. Section content is validated by type through `src/cms/sections/schema.ts` before save and render, so the admin and public renderer share one contract.
 
-The current public scope is deliberately home-only: only `/` exists. There is no catch-all page route and no custom 404 route in the app tree. Additional public pages should be built deliberately when their content and route requirements are known.
+The CMS content scope is deliberately home-only: `CmsData.pages` contains exactly one published page at `/`. The public app also exposes the static `/policy` route for privacy, terms, and user data deletion requirements. There is no catch-all page route and no custom 404 route in the app tree. Additional public pages should be built deliberately when their content and route requirements are known.
 
 Admin edits the homepage CMS data model through `/api/admin/data`. Saving writes the same `CmsData` shape to the active storage driver. The backend validates that the CMS document contains exactly one published Vietnamese page at `/`.
 

@@ -4,7 +4,8 @@ import path from "node:path";
 const root = process.cwd();
 const packageJson = JSON.parse(readFileSync(path.join(root, "package.json"), "utf8"));
 const cms = JSON.parse(readFileSync(path.join(root, "data", "cms.json"), "utf8"));
-const requiredPaths = ["/"];
+const requiredCmsPaths = ["/"];
+const requiredRuntimePaths = ["/", "/policy"];
 const requiredSectionTypes = new Set(["hero", "useCaseTabs", "platformFeatures", "releaseNotes", "securityCards", "conversionCards", "faq", "floatingDock"]);
 const bannedPattern = /\b(mock|placeholder|lorem|todo|Raw JSON|raw-json|MediaMockup)\b/i;
 const checks = [];
@@ -54,7 +55,7 @@ function hasEditableFloatingContacts(content) {
 
 function auditCmsShape() {
   assert("Landing project folder", packageJson.name === "aigenlabs-landing" && statSync(path.join(root, "src")).isDirectory(), root);
-  assert("Required public pages exist", requiredPaths.every((publicPath) => getPage(publicPath)), requiredPaths.join(", "));
+  assert("Required CMS pages exist", requiredCmsPaths.every((publicPath) => getPage(publicPath)), requiredCmsPaths.join(", "));
   assert("Only homepage exists in the current launch scope", cms.pages.length === 1 && cms.pages[0]?.path === "/" && cms.pages[0]?.status === "published", "No temporary supporting pages should exist in the CMS seed.");
   assert("Vietnamese is default locale", cms.settings.defaultLocale === "vi", cms.settings.defaultLocale);
   assert("Home-first locale scope", JSON.stringify((cms.settings.supportedLocales || []).map((locale) => locale.code).sort()) === JSON.stringify(["vi"]), "settings.supportedLocales");
@@ -142,7 +143,7 @@ function auditBannedWords() {
 }
 
 function auditDynamicRenderingConfig() {
-  const files = ["src/app/layout.tsx", "src/app/page.tsx", "src/app/sitemap.ts", "src/app/robots.ts"];
+  const files = ["src/app/layout.tsx", "src/app/page.tsx", "src/app/policy/page.tsx", "src/app/sitemap.ts", "src/app/robots.ts"];
   for (const file of files) {
     const source = readFileSync(path.join(root, file), "utf8");
     assert(`Dynamic CMS route: ${file}`, source.includes('dynamic = "force-dynamic"') && source.includes("revalidate = 0"), "CMS-backed routes must not be stale SSG output.");
@@ -170,7 +171,7 @@ async function auditRuntime() {
     return;
   }
 
-  for (const publicPath of [...requiredPaths, "/admin/login", "/robots.txt", "/sitemap.xml"]) {
+  for (const publicPath of [...requiredRuntimePaths, "/admin/login", "/robots.txt", "/sitemap.xml"]) {
     const response = await fetch(`${baseUrl}${publicPath}`);
     assert(`HTTP 200: ${publicPath}`, response.status === 200, String(response.status));
     const body = await response.text();

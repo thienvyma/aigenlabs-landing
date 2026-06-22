@@ -1,6 +1,6 @@
 # AigenLabs Landing
 
-Next.js home-only landing website with an admin CMS for managing homepage sections, assets, SEO metadata, navigation, footer, and brand tokens. The public scope intentionally exposes only `/`.
+Next.js landing website with an admin CMS for managing homepage sections, assets, SEO metadata, navigation, footer, and brand tokens. The CMS scope intentionally manages only `/`; the public app also exposes `/policy` for privacy, terms, and user data deletion requirements.
 
 ## Run locally
 
@@ -12,6 +12,7 @@ npm run dev
 Open:
 
 - Public site: `http://localhost:3000`
+- Policy page: `http://localhost:3000/policy`
 - Admin: `http://localhost:3000/admin`
 
 Default local development admin credentials:
@@ -76,6 +77,6 @@ Set the Vercel Root Directory to `landing/aigenlabs-landing`.
 
 ## Production audit
 
-`npm run audit:production` checks the home-first public scope, CMS-driven section/media coverage, SEO fields, brand tokens, navigation/footer data, dynamic route configuration, unfinished wording, and live route health when `AUDIT_BASE_URL` is set.
+`npm run audit:production` checks the home-first CMS scope, public policy route, CMS-driven section/media coverage, SEO fields, brand tokens, navigation/footer data, dynamic route configuration, unfinished wording, and live route health when `AUDIT_BASE_URL` is set.
 
 `npm run audit:sync` logs into the admin API, writes a temporary homepage marker, verifies the public homepage renders it, then restores the original CMS data.

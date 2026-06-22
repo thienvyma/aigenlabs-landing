@@ -134,7 +134,7 @@ const cmsSchema = z.object({
   }))
 }).superRefine((data, ctx) => {
   if (data.pages.length !== 1 || data.pages[0]?.path !== "/") {
-    ctx.addIssue({ code: "custom", path: ["pages"], message: "This app is home-only: CMS data must contain exactly one page at /." });
+    ctx.addIssue({ code: "custom", path: ["pages"], message: "The CMS scope is home-only: CMS data must contain exactly one page at /." });
   }
   if (data.pages[0]?.status !== "published" || data.pages[0]?.locale !== "vi") {
     ctx.addIssue({ code: "custom", path: ["pages", 0], message: "The homepage must stay published in Vietnamese." });

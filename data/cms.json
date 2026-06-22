@@ -51,27 +51,32 @@
       "items": [
         {
           "label": "Vấn đề",
-          "href": "#pain-points",
+          "href": "/#pain-points",
           "kind": "link"
         },
         {
           "label": "Cách hoạt động",
-          "href": "#capabilities",
+          "href": "/#capabilities",
           "kind": "link"
         },
         {
           "label": "Proof sản phẩm",
-          "href": "#platform",
+          "href": "/#platform",
           "kind": "link"
         },
         {
           "label": "Gói setup",
-          "href": "#pricing",
+          "href": "/#pricing",
           "kind": "link"
         },
         {
           "label": "FAQ",
-          "href": "#faq",
+          "href": "/#faq",
+          "kind": "link"
+        },
+        {
+          "label": "Policy",
+          "href": "/policy",
           "kind": "link"
         }
       ],
@@ -99,15 +104,15 @@
           "links": [
             {
               "label": "Cách hoạt động",
-              "href": "#capabilities"
+              "href": "/#capabilities"
             },
             {
               "label": "Proof sản phẩm",
-              "href": "#platform"
+              "href": "/#platform"
             },
             {
               "label": "Gói setup",
-              "href": "#pricing"
+              "href": "/#pricing"
             }
           ]
         },
@@ -116,15 +121,19 @@
           "links": [
             {
               "label": "Điểm duyệt & control",
-              "href": "#security"
+              "href": "/#security"
             },
             {
               "label": "Quy trình setup",
-              "href": "#releases"
+              "href": "/#releases"
             },
             {
               "label": "FAQ",
-              "href": "#faq"
+              "href": "/#faq"
+            },
+            {
+              "label": "Policy & data deletion",
+              "href": "/policy#data-deletion"
             }
           ]
         },
@@ -158,27 +167,32 @@
           "items": [
             {
               "label": "Vấn đề",
-              "href": "#pain-points",
+              "href": "/#pain-points",
               "kind": "link"
             },
             {
               "label": "Cách hoạt động",
-              "href": "#capabilities",
+              "href": "/#capabilities",
               "kind": "link"
             },
             {
               "label": "Proof sản phẩm",
-              "href": "#platform",
+              "href": "/#platform",
               "kind": "link"
             },
             {
               "label": "Gói setup",
-              "href": "#pricing",
+              "href": "/#pricing",
               "kind": "link"
             },
             {
               "label": "FAQ",
-              "href": "#faq",
+              "href": "/#faq",
+              "kind": "link"
+            },
+            {
+              "label": "Policy",
+              "href": "/policy",
               "kind": "link"
             }
           ],
@@ -206,15 +220,15 @@
               "links": [
                 {
                   "label": "Cách hoạt động",
-                  "href": "#capabilities"
+                  "href": "/#capabilities"
                 },
                 {
                   "label": "Proof sản phẩm",
-                  "href": "#platform"
+                  "href": "/#platform"
                 },
                 {
                   "label": "Gói setup",
-                  "href": "#pricing"
+                  "href": "/#pricing"
                 }
               ]
             },
@@ -223,15 +237,19 @@
               "links": [
                 {
                   "label": "Điểm duyệt & control",
-                  "href": "#security"
+                  "href": "/#security"
                 },
                 {
                   "label": "Quy trình setup",
-                  "href": "#releases"
+                  "href": "/#releases"
                 },
                 {
                   "label": "FAQ",
-                  "href": "#faq"
+                  "href": "/#faq"
+                },
+                {
+                  "label": "Policy & data deletion",
+                  "href": "/policy#data-deletion"
                 }
               ]
             },
