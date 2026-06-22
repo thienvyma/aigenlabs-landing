@@ -256,16 +256,17 @@ video {
   box-shadow: 0 12px 32px rgba(16, 19, 24, 0.07);
 }
 .site-nav-inner {
-  width: min(100% - 32px, 1240px);
+  width: min(100% - 48px, 1400px);
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
   align-items: center;
-  gap: 26px;
+  justify-content: space-between;
+  gap: clamp(18px, 2.4vw, 38px);
 }
 .site-logo {
   display: inline-flex;
   align-items: center;
+  flex: 0 0 auto;
   flex-shrink: 0;
   min-width: 0;
 }
@@ -286,20 +287,20 @@ video {
   border-radius: 8px;
   object-fit: contain;
 }
-.site-logo-image {
+.site-logo-image,
+.footer-logo-image {
   width: clamp(148px, 12vw, 172px);
   height: auto;
   max-height: 48px;
   object-fit: contain;
 }
-.footer-logo-image {
-  width: auto;
-  height: 32px;
-}
 .site-nav-links {
   display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
+  white-space: nowrap;
 }
 .nav-item-wrap {
   position: relative;
@@ -356,8 +357,10 @@ video {
 .site-nav-actions {
   display: flex;
   align-items: center;
+  flex: 0 0 auto;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 8px;
+  white-space: nowrap;
 }
 .nav-language {
   display: inline-flex;
@@ -1592,7 +1595,7 @@ video {
     display: inline-flex;
   }
   .site-nav-inner {
-    grid-template-columns: auto 1fr auto;
+    gap: 14px;
   }
   .mobile-menu {
     display: flex;
@@ -1756,7 +1759,8 @@ video {
   .site-logo-text {
     font-size: 25px;
   }
-  .site-logo-image {
+  .site-logo-image,
+  .footer-logo-image {
     width: 146px;
     max-height: 42px;
   }
