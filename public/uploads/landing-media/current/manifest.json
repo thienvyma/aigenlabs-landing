@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-18T17:09:45Z",
+  "generatedAt": "2026-06-22T14:07:18Z",
   "source": "/home/huynhvy/.aigenlabs/workspace/company/media/landing-app-screenshots-2026-06-18",
   "rawDir": "/uploads/landing-media/raw/2026-06-18/",
   "processedDir": "/uploads/landing-media/current/",
@@ -132,7 +132,7 @@
       "original_size": "2323x1328",
       "cropped_size": "2323x1306",
       "processed_size": "1600x900",
-      "processed_bytes": 1311354,
+      "processed_bytes": 1311986,
       "animation": {
         "kind": "animated-webp",
         "frames": 42,
@@ -316,7 +316,7 @@
     }
   ],
   "platformZoomMedia": {
-    "generatedAt": "2026-06-18T17:09:45Z",
+    "generatedAt": "2026-06-22T14:07:18Z",
     "method": "real app screenshots rendered as animated WebP pan/zoom; no mock UI drawn into frames",
     "items": [
       {
@@ -331,7 +331,7 @@
         ],
         "zoom_start": 1.05,
         "zoom_end": 2.06,
-        "bytes": 1311354
+        "bytes": 1311986
       },
       {
         "output": "platform-automation-cron.webp",
