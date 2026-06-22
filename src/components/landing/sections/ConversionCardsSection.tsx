@@ -20,31 +20,35 @@ export function ConversionCardsSection({ id, content }: ConversionCardsSectionPr
           <p className="section-copy">{content.description}</p>
         </div>
         <div className="conversion-grid">
-          {content.cards.map((card) => (
-            <article key={card.title} className="conversion-card">
-              <div className="conversion-card-topline">
-                <span className="conversion-icon">
-                  <IconGlyph name={card.icon} />
-                </span>
-                {card.badge ? <span className="conversion-badge">{card.badge}</span> : null}
-              </div>
-              <h3>{card.title}</h3>
-              <p>{card.description}</p>
-              {card.bullets?.length ? (
-                <ul>
-                  {card.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-              ) : null}
-              {card.cta?.enabled !== false && card.cta ? (
-                <a className="conversion-card-link" href={card.cta.href}>
-                  {card.cta.label}
-                  <ArrowRight size={16} aria-hidden="true" />
-                </a>
-              ) : null}
-            </article>
-          ))}
+          {content.cards.map((card) => {
+            const badgeLabel = card.price || card.badge;
+
+            return (
+              <article key={card.title} className="conversion-card">
+                <div className="conversion-card-topline">
+                  <span className="conversion-icon">
+                    <IconGlyph name={card.icon} />
+                  </span>
+                  {badgeLabel ? <span className="conversion-badge">{badgeLabel}</span> : null}
+                </div>
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
+                {card.bullets?.length ? (
+                  <ul>
+                    {card.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                ) : null}
+                {card.cta?.enabled !== false && card.cta ? (
+                  <a className="conversion-card-link" href={card.cta.href}>
+                    {card.cta.label}
+                    <ArrowRight size={16} aria-hidden="true" />
+                  </a>
+                ) : null}
+              </article>
+            );
+          })}
         </div>
         {(content.cta?.enabled !== false && content.cta) || content.note ? (
           <div className="conversion-footer-row">

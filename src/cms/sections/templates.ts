@@ -98,10 +98,10 @@ export function createSectionTemplate(type: SectionType, order: number): CmsSect
       return {
         ...base,
         content: {
-          heading: "Improved fast and constantly",
-          viewAllLabel: "View all release notes",
+          heading: "Từ setup đến vận hành trong từng bước rõ ràng",
+          viewAllLabel: "Xem cách hoạt động",
           viewAllHref: "#releases",
-          items: [{ version: "v1.0.0", date: "2026.06.15", bullets: ["Describe the release."] }]
+          items: [{ version: "Bước 1", date: "Tên bước", bullets: ["Mô tả việc cần làm."] }]
         }
       };
     case "securityCards":

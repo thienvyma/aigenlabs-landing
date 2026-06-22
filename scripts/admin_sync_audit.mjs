@@ -1,3 +1,7 @@
+import { loadLocalEnv } from "./load_env.mjs";
+
+loadLocalEnv();
+
 const baseUrl = (process.env.AUDIT_BASE_URL || "http://127.0.0.1:3000").replace(/\/$/, "");
 const email = process.env.ADMIN_EMAIL || "admin@aigenlabs.local";
 const password = process.env.ADMIN_PASSWORD || "admin1234";

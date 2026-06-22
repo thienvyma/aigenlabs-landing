@@ -902,16 +902,16 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
           <LinkInput label="View all link" value={content.viewAllHref} onChange={(viewAllHref) => updateSectionContent<ReleaseNotesContent>({ viewAllHref })} options={linkOptions} />
         </div>
         <EditableList
-          label="Release"
-          addLabel="Add release"
+          label="Setup step"
+          addLabel="Add step"
           items={content.items}
-          createItem={() => ({ version: "v1.0.0", date: "2026.06.15", bullets: ["Describe this update."] })}
+          createItem={() => ({ version: "Bước 1", date: "Tên bước", bullets: ["Mô tả việc cần làm."] })}
           onChange={(items) => updateSectionContent<ReleaseNotesContent>({ items })}
           renderItem={(item, _index, onItemChange) => (
             <div className="admin-form-grid">
-              <TextInput label="Version" value={item.version} onChange={(version) => onItemChange({ ...item, version })} />
-              <DateInput label="Date" value={item.date} onChange={(date) => onItemChange({ ...item, date })} />
-              <TextAreaInput label="Release bullets" value={linesFromArray(item.bullets)} onChange={(value) => onItemChange({ ...item, bullets: arraysFromLines(value) })} />
+              <TextInput label="Step label" value={item.version} onChange={(version) => onItemChange({ ...item, version })} />
+              <TextInput label="Step title" value={item.date} onChange={(date) => onItemChange({ ...item, date })} />
+              <TextAreaInput label="Step bullets" value={linesFromArray(item.bullets)} onChange={(value) => onItemChange({ ...item, bullets: arraysFromLines(value) })} />
             </div>
           )}
         />
@@ -949,6 +949,7 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
 
   function renderConversionCardsEditor(content: ConversionCardsContent) {
     const sectionCta = content.cta ?? { label: "", href: "", enabled: false };
+    const isPricingVariant = (content.variant ?? "default") === "pricing";
     return (
       <>
         <div className="admin-form-grid">
@@ -972,7 +973,14 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
           label="Conversion card"
           addLabel="Add card"
           items={content.cards}
-          createItem={() => ({ title: "New card", description: "Explain the value.", icon: "check", bullets: [] })}
+          createItem={() => ({
+            title: "New card",
+            description: "Explain the value.",
+            icon: "check",
+            price: isPricingVariant ? "Liên hệ" : undefined,
+            badge: isPricingVariant ? "" : "",
+            bullets: []
+          })}
           onChange={(cards) => updateSectionContent<ConversionCardsContent>({ cards })}
           renderItem={(card, _index, onItemChange) => {
             const cardCta = card.cta ?? { label: "", href: "", enabled: false };
@@ -980,7 +988,11 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
               <>
                 <div className="admin-form-grid">
                   <TextInput label="Title" value={card.title} onChange={(title) => onItemChange({ ...card, title })} />
-                  <TextInput label="Badge" value={card.badge ?? ""} onChange={(badge) => onItemChange({ ...card, badge })} />
+                  {isPricingVariant ? (
+                    <TextInput label="Price" value={card.price ?? card.badge ?? ""} onChange={(price) => onItemChange({ ...card, price, badge: "" })} />
+                  ) : (
+                    <TextInput label="Badge" value={card.badge ?? ""} onChange={(badge) => onItemChange({ ...card, badge })} />
+                  )}
                   <SelectInput label="Icon" value={card.icon} options={optionsWithCurrent([...iconOptions], card.icon)} onChange={(icon) => onItemChange({ ...card, icon })} />
                   <TextAreaInput label="Description" value={card.description} onChange={(description) => onItemChange({ ...card, description })} />
                   <TextAreaInput label="Bullets, one per line" value={linesFromArray(card.bullets ?? [])} onChange={(value) => onItemChange({ ...card, bullets: arraysFromLines(value) })} />

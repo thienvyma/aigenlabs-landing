@@ -3,7 +3,7 @@
     "siteName": "AigenLabs",
     "siteUrl": "https://www.aigenlabs.vn",
     "defaultLocale": "vi",
-    "themeColor": "#E56A4A",
+    "themeColor": "#E11925",
     "brand": {
       "name": "AigenLabs",
       "tagline": "AI Staff vận hành doanh nghiệp 24/7",
@@ -20,12 +20,12 @@
           "text": "#101828",
           "textMuted": "#667085",
           "textLight": "#9AA3AF",
-          "brand": "#E56A4A",
-          "brandDark": "#CC5236",
-          "brandLight": "#FFE0D2",
-          "brandSoft": "#FFF4EF",
-          "darkCta": "#E56A4A",
-          "darkCtaHover": "#CC5236",
+          "brand": "#E11925",
+          "brandDark": "#C70F1B",
+          "brandLight": "#FFE1E4",
+          "brandSoft": "#FFF1F2",
+          "darkCta": "#E11925",
+          "darkCtaHover": "#C70F1B",
           "warning": "#FDB022",
           "danger": "#B42318"
         },
@@ -1158,12 +1158,13 @@
           "content": {
             "eyebrow": "Gói dịch vụ",
             "heading": "Bắt đầu bằng một workflow rõ, rồi mở rộng thành Business OS",
-            "description": "AigenLabs cung cấp ứng dụng Agent kèm setup và vận hành/bảo trì hàng tháng. Giá dưới đây là mức khởi điểm để khách hàng dễ chọn phạm vi tư vấn ban đầu.",
+            "description": "AigenLabs cung cấp ứng dụng Agent kèm setup và vận hành/bảo trì hàng tháng. Mỗi gói sẽ được tư vấn phạm vi theo workflow thực tế của bạn.",
             "variant": "pricing",
             "cards": [
               {
                 "title": "Basic Setup",
-                "badge": "Từ 7.000.000 VND",
+                "price": "Liên hệ",
+                "badge": "",
                 "description": "Phù hợp khi bạn muốn khởi tạo một workflow ưu tiên và một nhóm AI staff nhỏ để chạy thử an toàn.",
                 "icon": "check",
                 "bullets": [
@@ -1175,7 +1176,8 @@
               },
               {
                 "title": "Full Setup",
-                "badge": "Từ 10.000.000 VND",
+                "price": "Liên hệ",
+                "badge": "",
                 "description": "Phù hợp khi bạn muốn thiết kế hệ thống vận hành đầy đủ hơn với nhiều vai trò AI staff, workflow và điểm duyệt.",
                 "icon": "users",
                 "bullets": [
@@ -1187,7 +1189,8 @@
               },
               {
                 "title": "Vận hành hàng tháng",
-                "badge": "Theo mức dùng",
+                "price": "Liên hệ",
+                "badge": "",
                 "description": "Bao gồm chi phí API, vận hành, bảo trì, cải thiện workflow/skill và hỗ trợ mở rộng use case sau khi chạy thật.",
                 "icon": "clock",
                 "bullets": [
@@ -1203,7 +1206,7 @@
               "href": "mailto:edu@aigenlabs.vn?subject=%C4%90%E1%BA%B7t%20l%E1%BB%8Bch%20demo%20AigenLabs%20Business%20OS",
               "enabled": true
             },
-            "note": "Giá và phạm vi cuối cùng được xác nhận sau buổi discovery; demo không tự động kết nối tài khoản thật, đăng bài, gửi khách hàng hoặc chạy ads nếu chưa có phê duyệt."
+            "note": ""
           }
         },
         {
@@ -1271,7 +1274,7 @@
               "href": "mailto:edu@aigenlabs.vn?subject=%C4%90%E1%BA%B7t%20l%E1%BB%8Bch%20demo%20AigenLabs%20Business%20OS",
               "enabled": true
             },
-            "note": "Demo chỉ xử lý bản nháp/spec/research trước; mọi hành động public, khách hàng, ngân sách, dữ liệu nhạy cảm hoặc kết nối tài khoản thật đều cần phê duyệt rõ."
+            "note": ""
           }
         },
         {

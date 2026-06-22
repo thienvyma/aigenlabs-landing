@@ -67,7 +67,7 @@ Draft and archived pages are hidden from public routing. The homepage uses `path
 - Hero
 - Use-case tabs
 - Platform features
-- Release notes
+- Setup steps
 - Security cards
 - FAQ
 - Final CTA

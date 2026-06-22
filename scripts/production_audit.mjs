@@ -84,6 +84,10 @@ function auditAdminCoverage() {
       if (section.type === "hero") assert("Hero media editable", hasEditableMedia(content.preview), section.id);
       if (section.type === "useCaseTabs") assert("Use-case tab media editable", (content.tabs || []).every((tab) => hasEditableMedia(tab.media)), section.id);
       if (section.type === "platformFeatures") assert("Platform feature media editable", (content.features || []).every((feature) => hasEditableMedia(feature.media)), section.id);
+      if (section.type === "conversionCards" && content.variant === "pricing") {
+        assert("Pricing cards expose CMS price field", (content.cards || []).every((card) => nonEmpty(card.price)), section.id);
+        assert("Pricing seed avoids fixed VND amounts", (content.cards || []).every((card) => !/\b\d[\d.\s]*VND\b/i.test(card.price || card.badge || "")), section.id);
+      }
       if (section.type === "floatingDock") assert("Floating dock contacts editable", hasEditableFloatingContacts(content) && !("supportHref" in content) && !("supportLabel" in content), section.id);
     }
   }

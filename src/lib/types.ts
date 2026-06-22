@@ -261,6 +261,7 @@ export interface ConversionCardsContent {
     title: string;
     description: string;
     icon: string;
+    price?: string;
     badge?: string;
     bullets?: string[];
     cta?: CtaLink;

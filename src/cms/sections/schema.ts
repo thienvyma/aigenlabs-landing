@@ -28,7 +28,7 @@ export const sectionLabels: Record<SectionType, string> = {
   hero: "Hero",
   useCaseTabs: "Use-case tabs",
   platformFeatures: "Platform features",
-  releaseNotes: "Release notes",
+  releaseNotes: "Setup steps",
   securityCards: "Security cards",
   conversionCards: "Conversion cards",
   faq: "FAQ",
@@ -137,6 +137,7 @@ const conversionCardsContentSchema = z.object({
     title: z.string(),
     description: z.string(),
     icon: z.string(),
+    price: z.string().optional(),
     badge: z.string().optional(),
     bullets: z.array(z.string()).optional(),
     cta: ctaSchema.optional()

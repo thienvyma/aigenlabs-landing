@@ -2,10 +2,36 @@ import { readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { createClient } from "@supabase/supabase-js";
+import { loadLocalEnv } from "./load_env.mjs";
+
+loadLocalEnv();
 
 const command = process.argv[2] || "status";
 const documentId = process.env.CMS_DOCUMENT_ID?.trim() || "default";
 const supabaseBin = path.join(process.cwd(), "node_modules", ".bin", "supabase");
+const supabaseUrl = process.env.SUPABASE_URL?.trim() || process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+const supabaseServerKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() || process.env.SUPABASE_SECRET_KEY?.trim();
+const cmsTableName = "landing_cms_documents";
+
+let supabaseAdminClient = null;
+
+function hasSupabaseRestConfig() {
+  return Boolean(supabaseUrl && supabaseServerKey);
+}
+
+function getSupabaseAdminClient() {
+  if (!hasSupabaseRestConfig()) return null;
+  if (!supabaseAdminClient) {
+    supabaseAdminClient = createClient(supabaseUrl, supabaseServerKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false
+      }
+    });
+  }
+  return supabaseAdminClient;
+}
 
 function runSupabase(args) {
   const result = spawnSync(supabaseBin, args, {
@@ -50,7 +76,39 @@ function dollarQuoteJson(json) {
   return `${tag}${json}${tag}`;
 }
 
-function printStatus() {
+async function printStatusRest() {
+  const supabase = getSupabaseAdminClient();
+  if (!supabase) return false;
+
+  const { data, error } = await supabase
+    .from(cmsTableName)
+    .select("id, version, updated_at, data")
+    .eq("id", documentId)
+    .maybeSingle();
+
+  if (error) throw new Error(`Failed to read Supabase CMS document: ${error.message}`);
+  if (!data) {
+    console.log(`No Supabase CMS document found for id "${documentId}".`);
+    return true;
+  }
+
+  const pages = Array.isArray(data.data?.pages) ? data.data.pages : [];
+  const assets = Array.isArray(data.data?.assets) ? data.data.assets : [];
+
+  console.log(`CMS document: ${data.id}`);
+  console.log(`Version: ${data.version}`);
+  console.log(`Updated: ${data.updated_at}`);
+  console.log(`Pages: ${pages.length}`);
+  console.log(`Assets: ${assets.length}`);
+  console.log(`Default locale: ${data.data?.settings?.defaultLocale ?? ""}`);
+
+  for (const page of [...pages].sort((a, b) => String(a.path).localeCompare(String(b.path)))) {
+    console.log(`- ${page.path} [${page.locale}] ${page.status}`);
+  }
+  return true;
+}
+
+function printStatusSql() {
   const escapedId = documentId.replace(/'/g, "''");
   const result = queryJson(`
     select
@@ -86,7 +144,26 @@ function printStatus() {
   }
 }
 
-function pushLocalDocument() {
+async function pushLocalDocumentRest() {
+  const supabase = getSupabaseAdminClient();
+  if (!supabase) return false;
+
+  const cmsJson = readFileSync(path.join(process.cwd(), "data", "cms.json"), "utf8");
+  const parsed = JSON.parse(cmsJson);
+  if (!parsed || typeof parsed !== "object" || !Array.isArray(parsed.pages)) {
+    throw new Error("data/cms.json is not a valid CMS document.");
+  }
+
+  const { error } = await supabase
+    .from(cmsTableName)
+    .upsert({ id: documentId, data: parsed }, { onConflict: "id" });
+
+  if (error) throw new Error(`Failed to push CMS document to Supabase: ${error.message}`);
+  console.log(`Pushed data/cms.json to Supabase CMS document "${documentId}".`);
+  return true;
+}
+
+function pushLocalDocumentSql() {
   const cmsJson = readFileSync(path.join(process.cwd(), "data", "cms.json"), "utf8");
   const parsed = JSON.parse(cmsJson);
   if (!parsed || typeof parsed !== "object" || !Array.isArray(parsed.pages)) {
@@ -103,8 +180,11 @@ function pushLocalDocument() {
 }
 
 try {
-  if (command === "status") printStatus();
-  else if (command === "push-local") pushLocalDocument();
+  if (command === "status") {
+    if (!(await printStatusRest())) printStatusSql();
+  } else if (command === "push-local") {
+    if (!(await pushLocalDocumentRest())) pushLocalDocumentSql();
+  }
   else {
     console.error("Usage: node scripts/supabase_cms.mjs [status|push-local]");
     process.exit(2);

@@ -19,19 +19,28 @@ export function ReleaseNotesSection({ id, content }: ReleaseNotesSectionProps) {
           </a>
         </div>
         <div className="release-grid">
-          {content.items.map((item) => (
-            <article key={`${item.version}-${item.date}`} className="release-card">
-              <header>
-                <span>{item.version}</span>
-                <time>{item.date}</time>
-              </header>
-              <ol>
-                {item.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ol>
-            </article>
-          ))}
+          {content.items.map((item, index) => {
+            const stepNumber = item.version.match(/\d+/)?.[0] ?? `${index + 1}`;
+
+            return (
+              <article key={`${item.version}-${item.date}`} className="release-card">
+                <header className="release-card-header">
+                  <span className="release-step-index" aria-hidden="true">
+                    {stepNumber.padStart(2, "0")}
+                  </span>
+                  <div className="release-card-title-group">
+                    <span className="release-step-label">{item.version}</span>
+                    <h3>{item.date}</h3>
+                  </div>
+                </header>
+                <ul className="release-card-list">
+                  {item.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
