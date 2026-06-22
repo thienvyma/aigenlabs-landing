@@ -6,7 +6,7 @@
     "themeColor": "#E11925",
     "brand": {
       "name": "AigenLabs",
-      "tagline": "AI Staff vận hành doanh nghiệp 24/7",
+      "tagline": "AI Agent vận hành doanh nghiệp 24/7",
       "logoText": "AigenLabs",
       "logoUrl": "/brand/aigenlabs-logo-horizontal-light.svg",
       "faviconUrl": "/favicon.ico",
@@ -390,9 +390,9 @@
       "updatedAt": "2026-06-18T09:35:46Z"
     },
     {
-      "id": "landing-media-09-platform-agent-hub-ai-staff",
-      "fileName": "platform-agent-hub-ai-staff.webp",
-      "url": "/uploads/landing-media/current/platform-agent-hub-ai-staff.webp",
+      "id": "landing-media-09-platform-agent-hub-ai-agent",
+      "fileName": "platform-agent-hub-ai-agent.webp",
+      "url": "/uploads/landing-media/current/platform-agent-hub-ai-agent.webp",
       "mimeType": "image/webp",
       "kind": "image",
       "alt": "AigenLabs landing media - Agent Hub",
@@ -481,9 +481,9 @@
       "updatedAt": "2026-06-18T09:35:46Z"
     },
     {
-      "id": "landing-media-16-platform-team-ai-staff",
-      "fileName": "platform-team-ai-staff.webp",
-      "url": "/uploads/landing-media/current/platform-team-ai-staff.webp",
+      "id": "landing-media-16-platform-team-ai-agent",
+      "fileName": "platform-team-ai-agent.webp",
+      "url": "/uploads/landing-media/current/platform-team-ai-agent.webp",
       "mimeType": "image/webp",
       "kind": "image",
       "alt": "AigenLabs landing media - Đội ngũ",
@@ -525,7 +525,7 @@
       "url": "/uploads/landing-media/current/hero-business-os-operating-loop.webp",
       "mimeType": "image/webp",
       "kind": "image",
-      "alt": "AigenLabs proof board showing Workflow Map, AI Staff Hub, điểm duyệt và vòng vận hành từ mục tiêu đến COO report",
+      "alt": "AigenLabs proof board showing Workflow Map, AI Agent Hub, điểm duyệt và vòng vận hành từ mục tiêu đến COO report",
       "width": 1920,
       "height": 1080,
       "caption": "Hero operating loop proof board",
@@ -538,7 +538,7 @@
       "url": "/uploads/landing-media/current/hero-business-os-product-proof-composite.webp",
       "mimeType": "image/webp",
       "kind": "image",
-      "alt": "Composite screenshot showing Workflow Map, AI Staff Hub và Execution Board trong AigenLabs Business OS",
+      "alt": "Composite screenshot showing Workflow Map, AI Agent Hub và Execution Board trong AigenLabs Business OS",
       "width": 1920,
       "height": 1080,
       "caption": "Hero product proof composite",
@@ -551,7 +551,7 @@
       "url": "/uploads/landing-media/current/hero-business-os-product-proof-loop.mp4",
       "mimeType": "video/mp4",
       "kind": "video",
-      "alt": "Video loop ngắn từ composite sản phẩm AigenLabs với Workflow Map, AI Staff Hub và Execution Board",
+      "alt": "Video loop ngắn từ composite sản phẩm AigenLabs với Workflow Map, AI Agent Hub và Execution Board",
       "width": 1920,
       "height": 1080,
       "caption": "Hero product proof loop",
@@ -607,17 +607,17 @@
       "status": "published",
       "title": "AigenLabs Business OS",
       "seo": {
-        "title": "AigenLabs - Thiết lập AI staff theo workflow công ty",
-        "description": "AigenLabs giúp founder và SME chọn workflow ưu tiên, map AI staff theo vai trò, chạy thử có điểm duyệt và nhận báo cáo vận hành.",
+        "title": "AigenLabs - Thiết lập AI Agent theo workflow công ty",
+        "description": "AigenLabs giúp founder và SME chọn workflow ưu tiên, map AI Agent theo vai trò, chạy thử có điểm duyệt và nhận báo cáo vận hành.",
         "canonicalPath": "/",
         "robotsIndex": true,
         "robotsFollow": true,
-        "ogTitle": "AigenLabs - Thiết lập đội AI staff theo workflow công ty",
-        "ogDescription": "Chọn một workflow ưu tiên, map AI staff, chạy thử an toàn và nhận COO report để vận hành lặp lại rõ ràng.",
+        "ogTitle": "AigenLabs - Thiết lập đội AI Agent theo workflow công ty",
+        "ogDescription": "Chọn một workflow ưu tiên, map AI Agent, chạy thử an toàn và nhận COO report để vận hành lặp lại rõ ràng.",
         "ogImage": "/uploads/landing-media/current/hero-business-os-workflow-connectors-results-loop-poster.webp",
         "twitterCard": "summary_large_image",
         "keywords": [
-          "AI staff",
+          "AI Agent",
           "Business OS",
           "AI agent cho doanh nghiệp",
           "workflow automation",
@@ -641,7 +641,7 @@
           "order": 1,
           "content": {
             "wordmark": "Business OS cho founder & SME",
-            "headline": "Thiết lập AI staff cho công ty bạn",
+            "headline": "Thiết lập AI Agent cho công ty bạn",
             "subheadline": "Vẽ workflow, giao vai trò AI và giữ điểm duyệt trước các bước quan trọng.",
             "chips": [
               {
@@ -649,7 +649,7 @@
                 "enabled": true
               },
               {
-                "label": "AI Staff đa vai trò: COO, Sales, Research…",
+                "label": "AI Agent đa vai trò: COO, Sales, Research…",
                 "enabled": true
               },
               {
@@ -742,11 +742,11 @@
           "enabled": true,
           "order": 3,
           "content": {
-            "heading": "Chuẩn hóa workflow để AI staff hiểu việc cần làm",
+            "heading": "Chuẩn hóa workflow để AI Agent hiểu việc cần làm",
             "tabs": [
               {
                 "label": "Workflow Map",
-                "title": "Chuẩn hóa quy trình để AI staff thực thi",
+                "title": "Chuẩn hóa quy trình để AI Agent thực thi",
                 "description": "Biến mục tiêu kinh doanh thành quy trình cụ thể với đầu vào, đầu ra, người phụ trách, tiêu chí hoàn thành và điểm duyệt.",
                 "mediaTitle": "Workflow Map",
                 "media": {
@@ -803,7 +803,7 @@
               {
                 "label": "Đầu ra",
                 "title": "Tạo tài liệu làm việc, không chỉ trả lời chat",
-                "description": "AI staff tạo brief, report, SOP, checklist, bản nháp workflow hoặc bảng kế hoạch để team kiểm tra và tiếp tục xử lý.",
+                "description": "AI Agent tạo brief, report, SOP, checklist, bản nháp workflow hoặc bảng kế hoạch để team kiểm tra và tiếp tục xử lý.",
                 "mediaTitle": "Work Output",
                 "media": {
                   "kind": "image",
@@ -817,7 +817,7 @@
               {
                 "label": "Tri thức công ty",
                 "title": "Dùng ngữ cảnh công ty thay vì hướng dẫn rời rạc",
-                "description": "Company profile, workflow, skill và tài liệu nội bộ giúp AI staff làm theo cách công ty đã thống nhất.",
+                "description": "Company profile, workflow, skill và tài liệu nội bộ giúp AI Agent làm theo cách công ty đã thống nhất.",
                 "mediaTitle": "Tri thức công ty",
                 "media": {
                   "kind": "image",
@@ -870,10 +870,10 @@
               },
               {
                 "title": "Giảm chi phí cho công việc lặp lại",
-                "description": "Các vai trò AI staff xử lý phần research, content, báo cáo, SOP, follow-up draft và kiểm tra định kỳ trước khi cần tuyển thêm người.",
+                "description": "Các vai trò AI Agent xử lý phần research, content, báo cáo, SOP, follow-up draft và kiểm tra định kỳ trước khi cần tuyển thêm người.",
                 "icon": "bot",
                 "bullets": [
-                  "AI staff theo phòng ban",
+                  "AI Agent theo phòng ban",
                   "Thư viện skill tái sử dụng",
                   "Setup theo quy trình ưu tiên"
                 ]
@@ -932,11 +932,11 @@
           "content": {
             "eyebrow": "Proof sản phẩm",
             "heading": "Proof sản phẩm, workflow thật và đầu ra rõ",
-            "description": "Các phần chính của Business OS được trình bày bằng card có ảnh thật: workflow, AI staff, automation, kênh làm việc và điểm duyệt.",
+            "description": "Các phần chính của Business OS được trình bày bằng card có ảnh thật: workflow, AI Agent, automation, kênh làm việc và điểm duyệt.",
             "features": [
               {
-                "title": "AI Staff Hub",
-                "description": "Thiết lập AI staff theo vai trò như COO, Marketing, Sales hoặc Research. Mỗi profile có bối cảnh công ty, phạm vi công cụ và nhiệm vụ rõ ràng.",
+                "title": "AI Agent Hub",
+                "description": "Thiết lập AI Agent theo vai trò như COO, Marketing, Sales hoặc Research. Mỗi profile có bối cảnh công ty, phạm vi công cụ và nhiệm vụ rõ ràng.",
                 "icon": "bot",
                 "layout": "normal",
                 "badge": "",
@@ -947,10 +947,10 @@
                 ],
                 "media": {
                   "kind": "image",
-                  "title": "AI Staff Hub",
+                  "title": "AI Agent Hub",
                   "label": "Xem trước tính năng",
                   "alt": "Bản xem trước tính năng Agent Hub",
-                  "url": "/uploads/landing-media/current/platform-agent-hub-ai-staff.webp",
+                  "url": "/uploads/landing-media/current/platform-agent-hub-ai-agent.webp",
                   "poster": ""
                 }
               },
@@ -976,7 +976,7 @@
               },
               {
                 "title": "Làm việc với trình duyệt",
-                "description": "AI staff có thể đọc nguồn công khai, kiểm tra website, rà landing page và thu thập bằng chứng khi workflow yêu cầu.",
+                "description": "AI Agent có thể đọc nguồn công khai, kiểm tra website, rà landing page và thu thập bằng chứng khi workflow yêu cầu.",
                 "icon": "globe",
                 "layout": "normal",
                 "badge": "",
@@ -1016,7 +1016,7 @@
               },
               {
                 "title": "Thư viện skill",
-                "description": "Thư viện kỹ năng cho business, SEO, sales, research, operations và review giúp AI staff làm theo quy trình đã kiểm chứng.",
+                "description": "Thư viện kỹ năng cho business, SEO, sales, research, operations và review giúp AI Agent làm theo quy trình đã kiểm chứng.",
                 "icon": "puzzle",
                 "layout": "normal",
                 "badge": "",
@@ -1075,8 +1075,8 @@
                 }
               },
               {
-                "title": "Điều phối AI staff",
-                "description": "Điều phối nhiều AI staff quanh cùng một mục tiêu để workstream có người tạo, người kiểm tra, bàn giao và điểm quyết định rõ ràng.",
+                "title": "Điều phối AI Agent",
+                "description": "Điều phối nhiều AI Agent quanh cùng một mục tiêu để workstream có người tạo, người kiểm tra, bàn giao và điểm quyết định rõ ràng.",
                 "icon": "users",
                 "layout": "reverse",
                 "badge": "Đang hoàn thiện",
@@ -1090,7 +1090,7 @@
                   "title": "Team Orchestration",
                   "label": "Xem trước tính năng",
                   "alt": "Bản xem trước tính năng đội ngũ",
-                  "url": "/uploads/landing-media/current/platform-team-ai-staff.webp",
+                  "url": "/uploads/landing-media/current/platform-team-ai-agent.webp",
                   "poster": ""
                 }
               }
@@ -1120,7 +1120,7 @@
               },
               {
                 "version": "Bước 2",
-                "date": "Khởi tạo AI Staff",
+                "date": "Khởi tạo AI Agent",
                 "bullets": [
                   "Tạo profile theo vai trò: COO, Marketing, Sales, Research, kiểm tra chất lượng.",
                   "Nạp bối cảnh công ty, offer, chính sách và skill cần dùng.",
@@ -1165,11 +1165,11 @@
                 "title": "Basic Setup",
                 "price": "Liên hệ",
                 "badge": "",
-                "description": "Phù hợp khi bạn muốn khởi tạo một workflow ưu tiên và một nhóm AI staff nhỏ để chạy thử an toàn.",
+                "description": "Phù hợp khi bạn muốn khởi tạo một workflow ưu tiên và một nhóm AI Agent nhỏ để chạy thử an toàn.",
                 "icon": "check",
                 "bullets": [
                   "Map một quy trình ưu tiên",
-                  "Thiết lập AI staff cơ bản",
+                  "Thiết lập AI Agent cơ bản",
                   "Chạy thử với dữ liệu an toàn",
                   "Bàn giao hướng dẫn vận hành"
                 ]
@@ -1178,11 +1178,11 @@
                 "title": "Full Setup",
                 "price": "Liên hệ",
                 "badge": "",
-                "description": "Phù hợp khi bạn muốn thiết kế hệ thống vận hành đầy đủ hơn với nhiều vai trò AI staff, workflow và điểm duyệt.",
+                "description": "Phù hợp khi bạn muốn thiết kế hệ thống vận hành đầy đủ hơn với nhiều vai trò AI Agent, workflow và điểm duyệt.",
                 "icon": "users",
                 "bullets": [
                   "Map nhiều workflow cốt lõi",
-                  "Thiết lập nhiều AI staff theo vai trò",
+                  "Thiết lập nhiều AI Agent theo vai trò",
                   "Review/handoff/điểm duyệt rõ",
                   "Báo cáo cải tiến sau pilot"
                 ]
@@ -1195,7 +1195,7 @@
                 "icon": "clock",
                 "bullets": [
                   "Theo API usage",
-                  "Theo số workflow/AI staff",
+                  "Theo số workflow/AI Agent",
                   "Bảo trì và tối ưu định kỳ",
                   "Báo cáo vận hành"
                 ]
@@ -1223,7 +1223,7 @@
             "cards": [
               {
                 "title": "Phạm vi công cụ rõ ràng",
-                "description": "AI staff được cấu hình theo vai trò, workflow, thư mục, công cụ và quyền truy cập đã duyệt; không tự mở rộng phạm vi.",
+                "description": "AI Agent được cấu hình theo vai trò, workflow, thư mục, công cụ và quyền truy cập đã duyệt; không tự mở rộng phạm vi.",
                 "icon": "shield"
               },
               {
@@ -1242,7 +1242,7 @@
               "href": "#faq",
               "enabled": true
             },
-            "note": "Điểm khác biệt so với chatbot thông thường: AI staff làm trong workflow có người phụ trách, đầu ra, quyền hạn và điểm duyệt rõ ràng."
+            "note": "Điểm khác biệt so với chatbot thông thường: AI Agent làm trong workflow có người phụ trách, đầu ra, quyền hạn và điểm duyệt rõ ràng."
           }
         },
         {
@@ -1260,7 +1260,7 @@
             "cards": [
               {
                 "title": "Không cần chuẩn bị hệ thống phức tạp",
-                "description": "Bạn chỉ cần chọn một mục tiêu kinh doanh hoặc một việc đang tốn thời gian. AigenLabs sẽ giúp chuyển nó thành workflow, AI staff và đầu ra có thể kiểm tra.",
+                "description": "Bạn chỉ cần chọn một mục tiêu kinh doanh hoặc một việc đang tốn thời gian. AigenLabs sẽ giúp chuyển nó thành workflow, AI Agent và đầu ra có thể kiểm tra.",
                 "icon": "bot",
                 "bullets": [
                   "Chọn một workflow ưu tiên",
@@ -1289,7 +1289,7 @@
             "items": [
               {
                 "question": "AigenLabs khác gì một công cụ chat AI thông thường?",
-                "answer": "Chat AI thường dừng ở câu trả lời. AigenLabs được thiết kế như Business OS cho AI staff: bạn giao mục tiêu, hệ thống map thành workflow, phân việc cho từng vai trò, tạo đầu ra, ghi log và giữ điểm duyệt trước bước nhạy cảm.",
+                "answer": "Chat AI thường dừng ở câu trả lời. AigenLabs được thiết kế như Business OS cho AI Agent: bạn giao mục tiêu, hệ thống map thành workflow, phân việc cho từng vai trò, tạo đầu ra, ghi log và giữ điểm duyệt trước bước nhạy cảm.",
                 "linkLabel": "Xem nền tảng",
                 "linkHref": "#platform"
               },
@@ -1301,7 +1301,7 @@
               },
               {
                 "question": "Tôi có cần tự biết cách thiết kế workflow không?",
-                "answer": "Không bắt buộc. Dịch vụ setup của AigenLabs sẽ cùng bạn chọn quy trình ưu tiên, định nghĩa đầu vào/đầu ra, người phụ trách, KPI, điểm duyệt và cách AI staff phối hợp với team.",
+                "answer": "Không bắt buộc. Dịch vụ setup của AigenLabs sẽ cùng bạn chọn quy trình ưu tiên, định nghĩa đầu vào/đầu ra, người phụ trách, KPI, điểm duyệt và cách AI Agent phối hợp với team.",
                 "linkLabel": "Xem quy trình setup",
                 "linkHref": "#releases"
               },
@@ -1312,7 +1312,7 @@
                 "linkHref": ""
               },
               {
-                "question": "AI staff có thể cộng tác như một team không?",
+                "question": "AI Agent có thể cộng tác như một team không?",
                 "answer": "Có. Bạn có thể gán các vai trò như COO, Content, Research, Sales, Operations hoặc người kiểm tra chất lượng. Mỗi vai trò xử lý một phần workflow và trả về đầu ra để founder kiểm tra.",
                 "linkLabel": "",
                 "linkHref": ""
@@ -1325,7 +1325,7 @@
               },
               {
                 "question": "Demo AigenLabs sẽ diễn ra như thế nào?",
-                "answer": "Trong demo, AigenLabs chọn một workflow ưu tiên của công ty bạn, map đầu vào/đầu ra/điểm duyệt, chạy thử một luồng AI staff an toàn và chốt bước setup tiếp theo. Chưa kết nối tài khoản thật, đăng bài, gửi khách hàng hoặc chi ngân sách nếu chưa được duyệt.",
+                "answer": "Trong demo, AigenLabs chọn một workflow ưu tiên của công ty bạn, map đầu vào/đầu ra/điểm duyệt, chạy thử một luồng AI Agent an toàn và chốt bước setup tiếp theo. Chưa kết nối tài khoản thật, đăng bài, gửi khách hàng hoặc chi ngân sách nếu chưa được duyệt.",
                 "linkLabel": "Đặt lịch demo",
                 "linkHref": "mailto:edu@aigenlabs.vn?subject=%C4%90%E1%BA%B7t%20l%E1%BB%8Bch%20demo%20AigenLabs%20Business%20OS"
               }

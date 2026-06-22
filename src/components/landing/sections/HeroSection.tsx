@@ -46,7 +46,7 @@ export function HeroSection({ id, content, settings }: HeroSectionProps) {
             {content.wordmark}
           </div>
           <h1>
-            <AccentText text={content.headline} accents={["AI staff", "Business OS", "workflow", "công ty bạn"]} />
+            <AccentText text={content.headline} accents={["AI Agent", "Business OS", "workflow", "công ty bạn"]} />
           </h1>
           <p>{content.subheadline}</p>
           <div className="hero-actions">

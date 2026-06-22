@@ -50,9 +50,9 @@ SCENES = [
         badge="Business OS workspace",
     ),
     Scene(
-        image="platform-agent-hub-ai-staff.webp",
+        image="platform-agent-hub-ai-agent.webp",
         seconds=4.8,
-        title="COO chọn đúng AI staff",
+        title="COO chọn đúng AI Agent",
         subtitle="Marketing, Reviewer và Operator được gắn vào đúng vai trò.",
         focus=(0.50, 0.54),
         zoom_start=1.04,

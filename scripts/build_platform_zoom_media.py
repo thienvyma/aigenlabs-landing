@@ -31,8 +31,8 @@ class ZoomMedia:
 
 MEDIA: list[ZoomMedia] = [
     ZoomMedia(
-        output="platform-agent-hub-ai-staff.webp",
-        source=SOURCE_DIR / "agent-hub-ai-staff.png",
+        output="platform-agent-hub-ai-agent.webp",
+        source=SOURCE_DIR / "agent-hub-ai-agent.png",
         focus=(0.49, 0.40),
         zoom_start=1.05,
         zoom_end=2.06,
@@ -83,7 +83,7 @@ MEDIA: list[ZoomMedia] = [
         zoom_end=1.92,
     ),
     ZoomMedia(
-        output="platform-team-ai-staff.webp",
+        output="platform-team-ai-agent.webp",
         source=SOURCE_DIR / "team-orchestration-workflow-map.png",
         focus=(0.58, 0.34),
         zoom_start=1.0,

@@ -121,14 +121,14 @@
       "processed_bytes": 24844
     },
     {
-      "source": "09-platform-agent-hub-ai-staff.png",
-      "processed": "platform-agent-hub-ai-staff.webp",
+      "source": "09-platform-agent-hub-ai-agent.png",
+      "processed": "platform-agent-hub-ai-agent.webp",
       "kind": "platform",
       "section": "Platform features",
       "label": "Agent Hub",
       "cms_path": "pages[home].sections[platform].content.features[0].media.url",
-      "raw_public_url": "/uploads/landing-media/raw/2026-06-18/09-platform-agent-hub-ai-staff.png",
-      "processed_public_url": "/uploads/landing-media/current/platform-agent-hub-ai-staff.webp",
+      "raw_public_url": "/uploads/landing-media/raw/2026-06-18/09-platform-agent-hub-ai-agent.png",
+      "processed_public_url": "/uploads/landing-media/current/platform-agent-hub-ai-agent.webp",
       "original_size": "2323x1328",
       "cropped_size": "2323x1306",
       "processed_size": "1600x900",
@@ -137,7 +137,7 @@
         "kind": "animated-webp",
         "frames": 42,
         "duration_ms": 2436,
-        "source": "media-sources/platform-zoom-2026-06-18/agent-hub-ai-staff.png",
+        "source": "media-sources/platform-zoom-2026-06-18/agent-hub-ai-agent.png",
         "zoom_start": 1.05,
         "zoom_end": 2.06
       }
@@ -275,14 +275,14 @@
       }
     },
     {
-      "source": "16-platform-team-ai-staff.png",
-      "processed": "platform-team-ai-staff.webp",
+      "source": "16-platform-team-ai-agent.png",
+      "processed": "platform-team-ai-agent.webp",
       "kind": "platform",
       "section": "Platform features",
       "label": "Đội ngũ",
       "cms_path": "pages[home].sections[platform].content.features[7].media.url",
-      "raw_public_url": "/uploads/landing-media/raw/2026-06-18/16-platform-team-ai-staff.png",
-      "processed_public_url": "/uploads/landing-media/current/platform-team-ai-staff.webp",
+      "raw_public_url": "/uploads/landing-media/raw/2026-06-18/16-platform-team-ai-agent.png",
+      "processed_public_url": "/uploads/landing-media/current/platform-team-ai-agent.webp",
       "original_size": "2323x1328",
       "cropped_size": "2323x1306",
       "processed_size": "1600x900",
@@ -320,8 +320,8 @@
     "method": "real app screenshots rendered as animated WebP pan/zoom; no mock UI drawn into frames",
     "items": [
       {
-        "output": "platform-agent-hub-ai-staff.webp",
-        "source": "media-sources/platform-zoom-2026-06-18/agent-hub-ai-staff.png",
+        "output": "platform-agent-hub-ai-agent.webp",
+        "source": "media-sources/platform-zoom-2026-06-18/agent-hub-ai-agent.png",
         "size": "1600x900",
         "frames": 42,
         "duration_ms": 2436,
@@ -418,7 +418,7 @@
         "bytes": 887782
       },
       {
-        "output": "platform-team-ai-staff.webp",
+        "output": "platform-team-ai-agent.webp",
         "source": "media-sources/platform-zoom-2026-06-18/team-orchestration-workflow-map.png",
         "size": "1600x900",
         "frames": 42,

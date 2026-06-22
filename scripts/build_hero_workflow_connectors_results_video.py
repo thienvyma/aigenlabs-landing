@@ -218,7 +218,7 @@ def draw_result_card(progress: float) -> Image.Image:
 
     # Three concise output chips.
     chip_y = 530
-    chips = ["4 đầu ra", "3 AI staff", "1 nơi kiểm tra"]
+    chips = ["4 đầu ra", "3 AI Agent", "1 nơi kiểm tra"]
     x = 42
     for chip in chips:
         w = int(cd.textlength(chip, font=FONT_CHIP)) + 40

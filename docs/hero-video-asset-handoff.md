@@ -21,9 +21,9 @@ Not done:
 
 ## Scenario
 
-**Founder launch request → AI staff workflow → approval → COO report**
+**Founder launch request → AI Agent workflow → approval → COO report**
 
-A startup founder asks AigenLabs Business OS to prepare go-to-market content safely. AigenLabs maps the goal into a workflow, shows AI staff/capabilities, tracks execution on a board, shows founder approval before publish, and ends with report readiness.
+A startup founder asks AigenLabs Business OS to prepare go-to-market content safely. AigenLabs maps the goal into a workflow, shows AI Agent/capabilities, tracks execution on a board, shows founder approval before publish, and ends with report readiness.
 
 ## Video beats
 
@@ -31,7 +31,7 @@ A startup founder asks AigenLabs Business OS to prepare go-to-market content saf
 |---:|---|---|
 | 0–2.5s | Business OS Command Center | `Từ một mục tiêu kinh doanh` |
 | 2.5–5.0s | Workflow Map | `thành workflow rõ ràng` |
-| 5.0–7.3s | AI staff/capabilities | `AI staff nhận vai trò` |
+| 5.0–7.3s | AI Agent/capabilities | `AI Agent nhận vai trò` |
 | 7.3–9.8s | Execution Board | `tiến độ được theo dõi` |
 | 9.8–12.3s | Founder Approval | `Founder giữ quyền phê duyệt` |
 | 12.3–15.0s | COO report/end state | `Báo cáo sẵn sàng mỗi ngày` |
@@ -122,8 +122,8 @@ When the founder wants to preview this video inside the hero slot, update only t
 {
   "kind": "video",
   "title": "AigenLabs Business OS demo",
-  "label": "AI staff workflow with approval",
-  "alt": "Hero video showing AigenLabs Business OS workflow, AI staff and approval gate",
+  "label": "AI Agent workflow with approval",
+  "alt": "Hero video showing AigenLabs Business OS workflow, AI Agent and approval gate",
   "url": "/uploads/landing-media/video/draft/hero-business-os-demo-draft.mp4",
   "poster": "/uploads/landing-media/video/draft/hero-business-os-demo-poster.webp"
 }
@@ -138,9 +138,9 @@ Before using this as final public hero media, review:
 - Is the message clear within 3 seconds?
 - Is the approval gate obvious enough?
 - Are overlays readable on desktop and mobile crop?
-- Does the AI staff scene feel like staff/capabilities rather than only a settings page?
+- Does the AI Agent scene feel like role/capabilities rather than only a settings page?
 - Is the execution board scene acceptable with demo task-card overlays?
-- Should the final copy say `AI staff` or `Nhân sự AI`?
+- Should the final copy say `AI Agent` or `Nhân sự AI`?
 - Confirm no customer/prospect/secret data is visible.
 
 ## Git/tracking note

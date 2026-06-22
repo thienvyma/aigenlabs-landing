@@ -4,7 +4,7 @@ import { sectionLabels, type SectionType } from "@/cms/sections/schema";
 export const landingMediaPlaceholders = {
   heroCommandCenter: "/uploads/landing-media/current/hero-business-os-command-center.webp",
   useCasePrecision: "/uploads/landing-media/current/usecase-precision-workflow-map.webp",
-  platformAgentHub: "/uploads/landing-media/current/platform-agent-hub-ai-staff.webp"
+  platformAgentHub: "/uploads/landing-media/current/platform-agent-hub-ai-agent.webp"
 } as const;
 
 export function newCmsId(prefix: string) {
