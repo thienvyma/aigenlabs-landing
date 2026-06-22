@@ -25,6 +25,7 @@ export async function PUT(request: Request) {
   const current = await getCmsData();
   const now = new Date().toISOString();
   const currentPages = new Map(current.pages.map((page) => [page.id, page]));
+  const currentBlogPosts = new Map((current.blogPosts ?? []).map((post) => [post.id, post]));
   const submittedAssetIds = new Set(data.assets.map((asset) => asset.id));
   const mergedAssets = [
     ...data.assets,
@@ -42,6 +43,15 @@ export async function PUT(request: Request) {
           ...page,
           updatedAt: pageChanged ? now : currentPage.updatedAt,
           publishedAt: page.status === "published" ? page.publishedAt || currentPage?.publishedAt || now : page.publishedAt
+        };
+      }),
+      blogPosts: (data.blogPosts ?? []).map((post) => {
+        const currentPost = currentBlogPosts.get(post.id);
+        const postChanged = !currentPost || JSON.stringify({ ...post, updatedAt: "", publishedAt: "" }) !== JSON.stringify({ ...currentPost, updatedAt: "", publishedAt: "" });
+        return {
+          ...post,
+          updatedAt: postChanged ? now : currentPost.updatedAt,
+          publishedAt: post.status === "published" ? post.publishedAt || currentPost?.publishedAt || now : post.publishedAt
         };
       })
     });

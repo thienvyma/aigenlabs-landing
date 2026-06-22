@@ -29,7 +29,7 @@ export function LoginForm() {
     <form className="login-card" onSubmit={submit}>
       <span className="eyebrow">Admin</span>
       <h1>AigenLabs CMS</h1>
-      <p>Manage landing content, assets, SEO, navigation, footer, and design tokens.</p>
+      <p>Manage landing content, blog posts, assets, SEO, navigation, footer, and design tokens.</p>
       <label>
         Email
         <input value={email} onChange={(event) => setEmail(event.target.value)} type="email" required />

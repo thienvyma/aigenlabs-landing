@@ -170,6 +170,37 @@ export interface CmsPage {
   publishedAt?: string;
 }
 
+export interface BlogPostSeo {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  robotsIndex: boolean;
+  robotsFollow: boolean;
+  ogTitle: string;
+  ogDescription: string;
+  ogImage: string;
+  twitterCard: "summary" | "summary_large_image";
+  keywords: string[];
+}
+
+export interface BlogPost {
+  id: string;
+  slug: string;
+  locale: "vi";
+  status: "draft" | "published" | "archived";
+  title: string;
+  excerpt: string;
+  category: string;
+  authorName: string;
+  coverImage: string;
+  coverAlt: string;
+  body: string;
+  seo: BlogPostSeo;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt?: string;
+}
+
 export interface RedirectRule {
   source: string;
   destination: string;
@@ -180,6 +211,7 @@ export interface CmsData {
   settings: SiteSettings;
   assets: AssetItem[];
   pages: CmsPage[];
+  blogPosts: BlogPost[];
   redirects: RedirectRule[];
 }
 

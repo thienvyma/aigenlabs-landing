@@ -94,12 +94,14 @@ async function printStatusRest() {
 
   const pages = Array.isArray(data.data?.pages) ? data.data.pages : [];
   const assets = Array.isArray(data.data?.assets) ? data.data.assets : [];
+  const blogPosts = Array.isArray(data.data?.blogPosts) ? data.data.blogPosts : [];
 
   console.log(`CMS document: ${data.id}`);
   console.log(`Version: ${data.version}`);
   console.log(`Updated: ${data.updated_at}`);
   console.log(`Pages: ${pages.length}`);
   console.log(`Assets: ${assets.length}`);
+  console.log(`Blog posts: ${blogPosts.length}`);
   console.log(`Default locale: ${data.data?.settings?.defaultLocale ?? ""}`);
 
   for (const page of [...pages].sort((a, b) => String(a.path).localeCompare(String(b.path)))) {
@@ -117,6 +119,7 @@ function printStatusSql() {
       updated_at,
       jsonb_array_length(data->'pages') as page_count,
       jsonb_array_length(data->'assets') as asset_count,
+      coalesce(jsonb_array_length(data->'blogPosts'), 0) as blog_post_count,
       data->'settings'->>'defaultLocale' as default_locale
     from public.landing_cms_documents
     where id = '${escapedId}';
@@ -131,6 +134,7 @@ function printStatusSql() {
   console.log(`Updated: ${row.updated_at}`);
   console.log(`Pages: ${row.page_count}`);
   console.log(`Assets: ${row.asset_count}`);
+  console.log(`Blog posts: ${row.blog_post_count}`);
   console.log(`Default locale: ${row.default_locale}`);
 
   const paths = queryJson(`

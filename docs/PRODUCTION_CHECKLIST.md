@@ -40,6 +40,7 @@ All commands must pass before calling the work complete.
 - FAQ controls heading, questions, answers, and optional links.
 - Final CTA controls heading, description, and CTAs.
 - Floating dock controls support label/link and back-to-top visibility.
+- Blog tab controls post title, slug, status, body, cover image, social image, robots, keywords, and publish/delete flow.
 - Generic content pages and catch-all public routes are not part of the current scope.
 - SEO tab controls title, description, canonical path, keywords, social fields, robots, and schema toggles.
 - Brand tab controls identity, logo fields, favicon, colors, layout tokens, and radius tokens.
@@ -49,11 +50,11 @@ All commands must pass before calling the work complete.
 
 ## Runtime Checklist
 
-- Public routes return 200: `/`. Supporting pages should remain absent/draft until real content is ready.
+- Public routes return 200: `/`, `/blog`, and `/policy`. Supporting pages should remain absent/draft until real content is ready.
 - `/admin/login`, `/robots.txt`, and `/sitemap.xml` return 200.
 - No public HTML contains unfinished wording: `mock`, `placeholder`, `lorem`, or `todo`.
 - Every public page has title, meta description, and canonical URL.
-- Sitemap includes every published page and excludes admin/API routes.
+- Sitemap includes the homepage, policy page, blog index, every indexable published blog post, and excludes admin/API routes.
 - Robots allows the public site and blocks `/admin` plus `/api/admin`.
 - CMS-backed public pages, sitemap, and robots are dynamic, not stale static output.
 - Admin API updates render on the public homepage without rebuild; `npm run audit:sync` proves write -> render -> restore.

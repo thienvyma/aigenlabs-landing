@@ -7,6 +7,7 @@ Root CMS object:
 - `settings`
 - `assets`
 - `pages`
+- `blogPosts`
 - `redirects`
 
 ## Site settings
@@ -63,6 +64,28 @@ Supported section types:
 The current app does not include a generic content-page section or catch-all public page route. New pages should be added later as explicit product work.
 
 `floatingDock` uses a CMS-managed `contacts` array. Each contact has `label`, `href`, `icon`, and optional `enabled`, so admin users can add email, phone, Messenger, Zalo, website, or support links without code changes.
+
+## Blog Post
+
+Blog posts live in `CmsData.blogPosts`, separate from `CmsData.pages` so the homepage route contract stays stable.
+
+Each blog post contains:
+
+- `id`
+- `slug`
+- `locale`
+- `status`: `draft`, `published`, or `archived`
+- `title`
+- `excerpt`
+- `category`
+- `authorName`
+- `coverImage`
+- `coverAlt`
+- `body`
+- `seo`
+- timestamps
+
+Only `published` posts render at `/blog/[slug]` and enter the sitemap when `seo.robotsIndex` is true. The body supports a small editor-safe syntax: `##` headings, `###` subheadings, `-` bullet lines, and blank-line paragraph breaks.
 
 ## Editable Media
 

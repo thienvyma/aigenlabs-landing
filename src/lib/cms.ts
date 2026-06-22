@@ -5,7 +5,8 @@ import path from "node:path";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import { cmsSectionSchema } from "@/cms/sections/schema";
-import type { AssetItem, CmsData, CmsPage } from "@/lib/types";
+import { blogPostPath } from "@/lib/blog";
+import type { AssetItem, BlogPost, CmsData, CmsPage } from "@/lib/types";
 
 const cmsPath = path.join(process.cwd(), "data", "cms.json");
 const cmsTableName = "landing_cms_documents";
@@ -86,6 +87,19 @@ const seoSchema = z.object({
   })
 });
 
+const blogSeoSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  canonicalPath: z.string().regex(/^\//),
+  robotsIndex: z.boolean(),
+  robotsFollow: z.boolean(),
+  ogTitle: z.string(),
+  ogDescription: z.string(),
+  ogImage: z.string(),
+  twitterCard: z.enum(["summary", "summary_large_image"]),
+  keywords: z.array(z.string())
+});
+
 const pageSchema = z.object({
   id: z.string(),
   slug: z.string(),
@@ -114,6 +128,24 @@ const assetSchema = z.object({
   updatedAt: z.string()
 });
 
+const blogPostSchema = z.object({
+  id: z.string(),
+  slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+  locale: z.enum(["vi"]),
+  status: z.enum(["draft", "published", "archived"]),
+  title: z.string(),
+  excerpt: z.string(),
+  category: z.string(),
+  authorName: z.string(),
+  coverImage: z.string(),
+  coverAlt: z.string(),
+  body: z.string(),
+  seo: blogSeoSchema,
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  publishedAt: z.string().optional()
+});
+
 const cmsSchema = z.object({
   settings: z.object({
     siteName: z.string(),
@@ -127,6 +159,7 @@ const cmsSchema = z.object({
   }),
   assets: z.array(assetSchema),
   pages: z.array(pageSchema),
+  blogPosts: z.array(blogPostSchema).default([]),
   redirects: z.array(z.object({
     source: z.string(),
     destination: z.string(),
@@ -161,7 +194,23 @@ const cmsSchema = z.object({
       ctx.addIssue({ code: "custom", path: ["settings", "defaultLocale"], message: "Default locale must exist in supportedLocales." });
     }
   }
+
+  const blogSlugs = new Set<string>();
+  for (const [index, post] of data.blogPosts.entries()) {
+    if (blogSlugs.has(post.slug)) {
+      ctx.addIssue({ code: "custom", path: ["blogPosts", index, "slug"], message: `Duplicate blog slug: ${post.slug}` });
+    }
+    blogSlugs.add(post.slug);
+    const expectedCanonical = blogPostPath(post.slug);
+    if (post.seo.canonicalPath !== expectedCanonical) {
+      ctx.addIssue({ code: "custom", path: ["blogPosts", index, "seo", "canonicalPath"], message: `Canonical path must be ${expectedCanonical}.` });
+    }
+  }
 });
+
+function parseCmsData(raw: unknown): CmsData {
+  return cmsSchema.parse(raw) as unknown as CmsData;
+}
 
 function getCmsStorageDriver(): CmsStorageDriver {
   const explicitDriver = process.env.CMS_STORAGE_DRIVER?.trim().toLowerCase();
@@ -195,9 +244,7 @@ function getSupabaseAdminClient(): SupabaseClient {
 
 async function readLocalCmsData(): Promise<CmsData> {
   const raw = await fs.readFile(cmsPath, "utf8");
-  const parsed = JSON.parse(raw) as CmsData;
-  cmsSchema.parse(parsed);
-  return parsed;
+  return parseCmsData(JSON.parse(raw));
 }
 
 async function writeLocalCmsData(data: CmsData): Promise<CmsData> {
@@ -207,6 +254,10 @@ async function writeLocalCmsData(data: CmsData): Promise<CmsData> {
     pages: data.pages.map((page) => ({
       ...page,
       updatedAt: page.updatedAt || now
+    })),
+    blogPosts: (data.blogPosts ?? []).map((post) => ({
+      ...post,
+      updatedAt: post.updatedAt || now
     }))
   };
   const tmpPath = `${cmsPath}.tmp`;
@@ -228,9 +279,7 @@ async function readSupabaseCmsData(): Promise<CmsData> {
   }
 
   if (data?.data) {
-    const parsed = data.data as CmsData;
-    cmsSchema.parse(parsed);
-    return parsed;
+    return parseCmsData(data.data);
   }
 
   const seed = await readLocalCmsData();
@@ -256,12 +305,16 @@ export async function getCmsData(): Promise<CmsData> {
 }
 
 export async function saveCmsData(data: CmsData): Promise<CmsData> {
-  cmsSchema.parse(data);
+  const parsed = parseCmsData(data);
   const next = {
-    ...data,
-    pages: data.pages.map((page) => ({
+    ...parsed,
+    pages: parsed.pages.map((page) => ({
       ...page,
       updatedAt: page.updatedAt || new Date().toISOString()
+    })),
+    blogPosts: (parsed.blogPosts ?? []).map((post) => ({
+      ...post,
+      updatedAt: post.updatedAt || new Date().toISOString()
     }))
   };
 
@@ -282,6 +335,21 @@ export async function getPageByPath(publicPath: string): Promise<CmsPage | null>
 export async function getPageBySlug(slug: string): Promise<CmsPage | null> {
   const data = await getCmsData();
   return data.pages.find((page) => page.status === "published" && page.slug === slug) ?? null;
+}
+
+export async function getBlogPosts(): Promise<BlogPost[]> {
+  const data = await getCmsData();
+  return data.blogPosts ?? [];
+}
+
+export async function getPublishedBlogPosts(): Promise<BlogPost[]> {
+  const data = await getCmsData();
+  return (data.blogPosts ?? []).filter((post) => post.status === "published");
+}
+
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  const data = await getCmsData();
+  return (data.blogPosts ?? []).find((post) => post.status === "published" && post.slug === slug) ?? null;
 }
 
 export async function addAsset(asset: AssetItem): Promise<CmsData> {

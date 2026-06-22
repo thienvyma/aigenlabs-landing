@@ -75,6 +75,11 @@
           "kind": "link"
         },
         {
+          "label": "Blog",
+          "href": "/blog",
+          "kind": "link"
+        },
+        {
           "label": "Policy",
           "href": "/policy",
           "kind": "link"
@@ -113,6 +118,10 @@
             {
               "label": "Gói setup",
               "href": "/#pricing"
+            },
+            {
+              "label": "Blog",
+              "href": "/blog"
             }
           ]
         },
@@ -191,6 +200,11 @@
               "kind": "link"
             },
             {
+              "label": "Blog",
+              "href": "/blog",
+              "kind": "link"
+            },
+            {
               "label": "Policy",
               "href": "/policy",
               "kind": "link"
@@ -229,6 +243,10 @@
                 {
                   "label": "Gói setup",
                   "href": "/#pricing"
+                },
+                {
+                  "label": "Blog",
+                  "href": "/blog"
                 }
               ]
             },
@@ -1387,5 +1405,6 @@
       "publishedAt": "2026-06-15T00:00:00.000Z"
     }
   ],
+  "blogPosts": [],
   "redirects": []
 }

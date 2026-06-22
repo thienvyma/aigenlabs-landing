@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import type { CmsPage, SiteSettings } from "@/lib/types";
+import type { BlogPost, CmsPage, SiteSettings } from "@/lib/types";
 import { parseSectionContent } from "@/cms/sections/schema";
+import { blogPostPath } from "@/lib/blog";
 import { getLocalizedPath, getSupportedLocales } from "@/lib/i18n";
 
 export function absoluteUrl(settings: SiteSettings, urlOrPath: string): string {
@@ -105,4 +106,68 @@ export function jsonLdForPage(settings: SiteSettings, page: CmsPage): Array<Reco
   }
 
   return schemas;
+}
+
+export function blogPostMetadata(settings: SiteSettings, post: BlogPost): Metadata {
+  const canonicalPath = post.seo.canonicalPath || blogPostPath(post);
+  const canonical = absoluteUrl(settings, canonicalPath);
+  const ogImage = post.seo.ogImage || post.coverImage || settings.brand.faviconUrl || "";
+
+  return {
+    title: post.seo.title || post.title,
+    description: post.seo.description || post.excerpt,
+    keywords: post.seo.keywords,
+    alternates: { canonical },
+    robots: {
+      index: post.seo.robotsIndex,
+      follow: post.seo.robotsFollow
+    },
+    openGraph: {
+      type: "article",
+      url: canonical,
+      siteName: settings.siteName,
+      title: post.seo.ogTitle || post.seo.title || post.title,
+      description: post.seo.ogDescription || post.seo.description || post.excerpt,
+      images: ogImage ? [{ url: absoluteUrl(settings, ogImage) }] : [],
+      publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt,
+      authors: post.authorName ? [post.authorName] : undefined,
+      section: post.category || undefined
+    },
+    twitter: {
+      card: post.seo.twitterCard,
+      title: post.seo.ogTitle || post.seo.title || post.title,
+      description: post.seo.ogDescription || post.seo.description || post.excerpt,
+      images: ogImage ? [absoluteUrl(settings, ogImage)] : []
+    }
+  };
+}
+
+export function jsonLdForBlogPost(settings: SiteSettings, post: BlogPost): Record<string, unknown> {
+  const url = absoluteUrl(settings, blogPostPath(post));
+  const image = post.coverImage || post.seo.ogImage || settings.brand.faviconUrl;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: image ? absoluteUrl(settings, image) : undefined,
+    datePublished: post.publishedAt || post.createdAt,
+    dateModified: post.updatedAt,
+    author: {
+      "@type": "Organization",
+      name: post.authorName || settings.brand.name
+    },
+    publisher: {
+      "@type": "Organization",
+      name: settings.brand.name,
+      logo: settings.brand.logoUrl ? absoluteUrl(settings, settings.brand.logoUrl) : undefined
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url
+    },
+    articleSection: post.category || undefined
+  };
 }

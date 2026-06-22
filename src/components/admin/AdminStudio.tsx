@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState, type ChangeEvent, type ReactNode } from "react";
 import type {
   AssetItem,
+  BlogPost,
   BrandColorTokens,
   BrandLayoutTokens,
   BrandRadiusTokens,
@@ -30,6 +31,7 @@ import {
   createSectionTemplate,
   landingMediaPlaceholders
 } from "@/cms/sections/templates";
+import { blogPostPath, dateInputValue, estimateReadingMinutes, formatBlogDate, normalizeBlogSlug, sortBlogPosts } from "@/lib/blog";
 import { fallbackDefaultLocale, getSupportedLocales } from "@/lib/i18n";
 import { sortByOrder } from "@/lib/utils";
 
@@ -38,7 +40,7 @@ interface AdminStudioProps {
   userEmail: string;
 }
 
-const tabs = ["Pages", "Content", "SEO", "Brand", "Navigation", "Footer", "Assets"] as const;
+const tabs = ["Pages", "Content", "Blog", "SEO", "Brand", "Navigation", "Footer", "Assets"] as const;
 type AdminTab = (typeof tabs)[number];
 
 interface SelectOption {
@@ -390,6 +392,65 @@ function DateInput({ label, value, onChange }: { label: string; value: string; o
   );
 }
 
+function IsoDateInput({ label, value, onChange, help }: { label: string; value?: string; onChange: (value: string) => void; help?: string }) {
+  return (
+    <label>
+      {label}
+      <input
+        type="date"
+        value={dateInputValue(value)}
+        onChange={(event) => onChange(event.target.value ? new Date(`${event.target.value}T00:00:00.000Z`).toISOString() : "")}
+      />
+      {help ? <span className="field-help">{help}</span> : null}
+    </label>
+  );
+}
+
+function createBlogPostTemplate(): BlogPost {
+  const now = nowIso();
+  const id = `blog-${Date.now()}`;
+  const slug = `bai-viet-moi-${Date.now()}`;
+  const title = "Bài viết mới";
+  const excerpt = "Tóm tắt ngắn gọn vấn đề, góc nhìn và giá trị chính của bài viết.";
+  return {
+    id,
+    slug,
+    locale: "vi",
+    status: "draft",
+    title,
+    excerpt,
+    category: "AI Agent",
+    authorName: "AigenLabs",
+    coverImage: "",
+    coverAlt: "",
+    body: [
+      "## Vấn đề",
+      "Viết bối cảnh, đối tượng đọc và vấn đề cụ thể.",
+      "",
+      "## Cách tiếp cận",
+      "- Ý chính thứ nhất.",
+      "- Ý chính thứ hai.",
+      "",
+      "## Kết luận",
+      "Tóm tắt insight và bước tiếp theo."
+    ].join("\n"),
+    seo: {
+      title,
+      description: excerpt,
+      canonicalPath: blogPostPath(slug),
+      robotsIndex: true,
+      robotsFollow: true,
+      ogTitle: title,
+      ogDescription: excerpt,
+      ogImage: "",
+      twitterCard: "summary_large_image",
+      keywords: ["AI Agent", "workflow", "AigenLabs"]
+    },
+    createdAt: now,
+    updatedAt: now
+  };
+}
+
 function CtaFields({ title, value, onChange, linkOptions }: { title: string; value: CtaLink; onChange: (value: CtaLink) => void; linkOptions: SelectOption[] }) {
   const cta = { enabled: true, ...value };
   return (
@@ -504,6 +565,7 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
   const [data, setData] = useState<CmsData>(initialData);
   const [activeTab, setActiveTab] = useState<AdminTab>("Pages");
   const [selectedSectionId, setSelectedSectionId] = useState(initialData.pages[0]?.sections[0]?.id ?? "");
+  const [selectedBlogPostId, setSelectedBlogPostId] = useState(initialData.blogPosts?.[0]?.id ?? "");
   const [selectedSettingsLocale, setSelectedSettingsLocale] = useState(initialData.settings.defaultLocale || fallbackDefaultLocale);
   const [pendingSectionType, setPendingSectionType] = useState<SectionType>("hero");
   const [status, setStatus] = useState("");
@@ -511,11 +573,15 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
   const [replacingAssetId, setReplacingAssetId] = useState("");
 
   const selectedPage = data.pages[0];
+  const blogPosts = data.blogPosts ?? [];
   const supportedLocales = useMemo(() => getSupportedLocales(data.settings), [data.settings]);
   const selectedLocaleSettings = supportedLocales.find((locale) => locale.code === selectedSettingsLocale) ?? supportedLocales[0];
   const linkOptions = useMemo(() => {
     const options: SelectOption[] = [
       { label: "Admin login", value: "/admin" },
+      { label: "Blog index", value: "/blog" },
+      { label: "Policy page", value: "/policy" },
+      { label: "Policy data deletion", value: "/policy#data-deletion" },
       { label: "Email AigenLabs", value: "mailto:edu@aigenlabs.vn" },
       { label: "Phone AigenLabs", value: "tel:+84981413456" },
       { label: "Zalo AigenLabs", value: "https://zalo.me/84981413456" }
@@ -530,8 +596,12 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
       }
     }
 
+    for (const post of blogPosts) {
+      options.push({ label: `Blog: ${post.title} (${post.status})`, value: blogPostPath(post) });
+    }
+
     return Array.from(new Map(options.map((option) => [option.value, option])).values());
-  }, [data.pages]);
+  }, [blogPosts, data.pages]);
   const mediaAssetOptions = useMemo(
     () => data.assets
       .filter((asset) => asset.kind === "image" || asset.kind === "video")
@@ -546,6 +616,8 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
   );
   const orderedSections = selectedPage ? sortByOrder(selectedPage.sections) : [];
   const selectedSection = orderedSections.find((section) => section.id === selectedSectionId) ?? orderedSections[0];
+  const orderedBlogPosts = useMemo(() => sortBlogPosts(blogPosts), [blogPosts]);
+  const selectedBlogPost = orderedBlogPosts.find((post) => post.id === selectedBlogPostId) ?? orderedBlogPosts[0];
 
   function syncData(next: CmsData, message = "Unsaved changes. Click Save changes when ready.") {
     setData(next);
@@ -575,6 +647,43 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
     updateSelectedSection((section) => ({
       ...section,
       content: { ...(section.content as TContent), ...patch } as Record<string, unknown>
+    }));
+  }
+
+  function updateBlogPost(postId: string, updater: (post: BlogPost) => BlogPost, message = "Blog changes are unsaved. Click Save changes when ready.") {
+    const now = nowIso();
+    syncData({
+      ...data,
+      blogPosts: blogPosts.map((post) => (post.id === postId ? { ...updater(post), updatedAt: now } : post))
+    }, message);
+  }
+
+  function addBlogPost() {
+    const post = createBlogPostTemplate();
+    syncData({ ...data, blogPosts: [post, ...blogPosts] }, "New draft blog post created. Edit it and click Save changes.");
+    setSelectedBlogPostId(post.id);
+    setActiveTab("Blog");
+  }
+
+  function deleteBlogPost(postId: string) {
+    const post = blogPosts.find((entry) => entry.id === postId);
+    if (!post) return;
+    const confirmed = window.confirm(`Delete blog post "${post.title}"? This is saved only after you click Save changes.`);
+    if (!confirmed) return;
+    const nextPosts = blogPosts.filter((entry) => entry.id !== postId);
+    syncData({ ...data, blogPosts: nextPosts }, "Blog post removed from draft CMS data. Click Save changes to delete it from the live CMS.");
+    setSelectedBlogPostId(nextPosts[0]?.id ?? "");
+  }
+
+  function updateBlogSlug(post: BlogPost, value: string) {
+    const slug = normalizeBlogSlug(value);
+    updateBlogPost(post.id, (current) => ({
+      ...current,
+      slug,
+      seo: {
+        ...current.seo,
+        canonicalPath: blogPostPath(slug)
+      }
     }));
   }
 
@@ -1196,6 +1305,190 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
     );
   }
 
+  function renderBlogTab() {
+    return (
+      <div className="admin-grid-two">
+        <aside className="admin-panel">
+          <div className="admin-panel-head">
+            <div>
+              <h2>Blog posts</h2>
+              <p className="panel-note">Create, publish, draft, archive, or delete SEO articles.</p>
+            </div>
+            <button type="button" className="admin-secondary" onClick={addBlogPost}>
+              New post
+            </button>
+          </div>
+          <div className="admin-list">
+            {orderedBlogPosts.length > 0 ? orderedBlogPosts.map((post) => (
+              <button
+                key={post.id}
+                type="button"
+                className={selectedBlogPost?.id === post.id ? "active" : ""}
+                onClick={() => setSelectedBlogPostId(post.id)}
+              >
+                <strong>{post.title}</strong>
+                <span>{post.status} - {blogPostPath(post)}</span>
+              </button>
+            )) : (
+              <button type="button" onClick={addBlogPost}>
+                <strong>Create the first blog post</strong>
+                <span>No posts yet</span>
+              </button>
+            )}
+          </div>
+        </aside>
+
+        <section className="admin-panel">
+          {selectedBlogPost ? (
+            <>
+              <div className="admin-panel-head">
+                <div>
+                  <h2>{selectedBlogPost.title}</h2>
+                  <p className="panel-note">
+                    {selectedBlogPost.status} - {estimateReadingMinutes(selectedBlogPost.body)} min read
+                    {selectedBlogPost.publishedAt ? ` - published ${formatBlogDate(selectedBlogPost.publishedAt)}` : ""}
+                  </p>
+                </div>
+                <div className="admin-actions-inline blog-post-actions">
+                  <a className="admin-secondary" href={blogPostPath(selectedBlogPost)} target="_blank" rel="noreferrer">
+                    Open
+                  </a>
+                  <button
+                    type="button"
+                    className="admin-secondary"
+                    onClick={() => updateBlogPost(selectedBlogPost.id, (post) => ({
+                      ...post,
+                      status: post.status === "published" ? "draft" : "published",
+                      publishedAt: post.status === "published" ? post.publishedAt : post.publishedAt ?? nowIso(),
+                      seo: { ...post.seo, robotsIndex: post.status !== "published" }
+                    }), selectedBlogPost.status === "published" ? "Post moved to draft. Click Save changes." : "Post marked published. Click Save changes.")}
+                  >
+                    {selectedBlogPost.status === "published" ? "Move to draft" : "Publish"}
+                  </button>
+                  <button type="button" className="admin-secondary danger" onClick={() => deleteBlogPost(selectedBlogPost.id)}>
+                    Delete
+                  </button>
+                </div>
+              </div>
+
+              <div className="nested-editor">
+                <h4>Publishing</h4>
+                <div className="admin-form-grid">
+                  <SelectInput<BlogPost["status"]>
+                    label="Status"
+                    value={selectedBlogPost.status}
+                    options={[
+                      { label: "Draft - hidden from public site", value: "draft" },
+                      { label: "Published - visible and indexable if robots allow", value: "published" },
+                      { label: "Archived - hidden from public site", value: "archived" }
+                    ]}
+                    onChange={(status) => updateBlogPost(selectedBlogPost.id, (post) => ({
+                      ...post,
+                      status,
+                      publishedAt: status === "published" ? post.publishedAt ?? nowIso() : post.publishedAt
+                    }))}
+                  />
+                  <IsoDateInput
+                    label="Published date"
+                    value={selectedBlogPost.publishedAt}
+                    onChange={(publishedAt) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, publishedAt: publishedAt || undefined }))}
+                    help="Used for article schema and public date."
+                  />
+                  <label>
+                    Public URL
+                    <input value={blogPostPath(selectedBlogPost)} readOnly />
+                    <span className="field-help">Only published posts are public.</span>
+                  </label>
+                </div>
+              </div>
+
+              <div className="nested-editor">
+                <h4>Article content</h4>
+                <div className="admin-form-grid">
+                  <TextInput
+                    label="Title"
+                    value={selectedBlogPost.title}
+                    onChange={(title) => updateBlogPost(selectedBlogPost.id, (post) => ({
+                      ...post,
+                      title,
+                      seo: {
+                        ...post.seo,
+                        title: post.seo.title === post.title ? title : post.seo.title,
+                        ogTitle: post.seo.ogTitle === post.title ? title : post.seo.ogTitle
+                      }
+                    }))}
+                  />
+                  <TextInput label="Slug" value={selectedBlogPost.slug} onChange={(slug) => updateBlogSlug(selectedBlogPost, slug)} />
+                  <TextInput label="Category" value={selectedBlogPost.category} onChange={(category) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, category }))} />
+                  <TextInput label="Author" value={selectedBlogPost.authorName} onChange={(authorName) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, authorName }))} />
+                  <TextAreaInput
+                    label="Excerpt"
+                    value={selectedBlogPost.excerpt}
+                    rows={3}
+                    onChange={(excerpt) => updateBlogPost(selectedBlogPost.id, (post) => ({
+                      ...post,
+                      excerpt,
+                      seo: {
+                        ...post.seo,
+                        description: post.seo.description === post.excerpt ? excerpt : post.seo.description,
+                        ogDescription: post.seo.ogDescription === post.excerpt ? excerpt : post.seo.ogDescription
+                      }
+                    }))}
+                  />
+                  <AssetUrlInput label="Cover image" value={selectedBlogPost.coverImage} onChange={(coverImage) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, coverImage }))} options={imageAssetOptions} />
+                  <TextInput label="Cover alt text" value={selectedBlogPost.coverAlt} onChange={(coverAlt) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, coverAlt }))} />
+                </div>
+                <TextAreaInput
+                  label="Body"
+                  value={selectedBlogPost.body}
+                  rows={18}
+                  onChange={(body) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, body }))}
+                  help="Use ## for section headings, ### for subheadings, and - for bullet lines. Blank lines split paragraphs."
+                />
+              </div>
+
+              <div className="nested-editor">
+                <h4>SEO and social</h4>
+                <div className="admin-form-grid">
+                  <TextInput label="SEO title" value={selectedBlogPost.seo.title} onChange={(title) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, title } }))} />
+                  <label>
+                    Canonical path
+                    <input value={selectedBlogPost.seo.canonicalPath} readOnly />
+                    <span className="field-help">Canonical follows the blog slug.</span>
+                  </label>
+                  <TextAreaInput label="Meta description" value={selectedBlogPost.seo.description} rows={3} onChange={(description) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, description } }))} />
+                  <TextAreaInput label="Keywords, one per line" value={linesFromArray(selectedBlogPost.seo.keywords)} rows={3} onChange={(value) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, keywords: arraysFromLines(value) } }))} />
+                  <TextInput label="Social title" value={selectedBlogPost.seo.ogTitle} onChange={(ogTitle) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, ogTitle } }))} />
+                  <AssetUrlInput label="Social image" value={selectedBlogPost.seo.ogImage} onChange={(ogImage) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, ogImage } }))} options={imageAssetOptions} />
+                  <TextAreaInput label="Social description" value={selectedBlogPost.seo.ogDescription} rows={3} onChange={(ogDescription) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, ogDescription } }))} />
+                  <SelectInput
+                    label="Twitter card"
+                    value={selectedBlogPost.seo.twitterCard}
+                    options={[
+                      { label: "Large image card", value: "summary_large_image" },
+                      { label: "Compact summary", value: "summary" }
+                    ]}
+                    onChange={(twitterCard) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, twitterCard } }))}
+                  />
+                  <ToggleInput label="Allow this post in search results" checked={selectedBlogPost.seo.robotsIndex} onChange={(robotsIndex) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, robotsIndex } }))} />
+                  <ToggleInput label="Allow search engines to follow links" checked={selectedBlogPost.seo.robotsFollow} onChange={(robotsFollow) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, robotsFollow } }))} />
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="blog-admin-empty">
+              <h2>No blog posts yet</h2>
+              <p className="panel-note">Create a post to start publishing SEO content from the CMS.</p>
+              <button type="button" className="admin-save" onClick={addBlogPost}>
+                Create first post
+              </button>
+            </div>
+          )}
+        </section>
+      </div>
+    );
+  }
+
   function renderSeoTab() {
     if (!selectedPage) return null;
     const seo = selectedPage.seo;
@@ -1516,7 +1809,7 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
         <div>
           <span className="eyebrow">AigenLabs CMS</span>
           <h1>Content Studio</h1>
-          <p className="panel-note">Edit pages, SEO, branding, navigation, footer, and media from one visual workspace.</p>
+          <p className="panel-note">Edit landing content, blog posts, SEO, branding, navigation, footer, and media from one visual workspace.</p>
         </div>
         <div className="admin-user">
           <span>{userEmail}</span>
@@ -1535,6 +1828,7 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
       {status ? <div className="admin-status">{status}</div> : null}
       {activeTab === "Pages" ? renderPagesTab() : null}
       {activeTab === "Content" ? renderContentTab() : null}
+      {activeTab === "Blog" ? renderBlogTab() : null}
       {activeTab === "SEO" ? renderSeoTab() : null}
       {activeTab === "Brand" ? renderBrandTab() : null}
       {activeTab === "Navigation" ? renderNavigationTab() : null}

@@ -25,6 +25,7 @@ Tabs:
 
 - Pages: manage the homepage route only.
 - Content: edit each page section, reorder sections, hide/show sections, add supported section types.
+- Blog: create, edit, publish, draft, archive, or delete SEO blog posts.
 - SEO: edit search title, meta description, canonical path, social share fields, robots rules, and schema toggles.
 - Brand: edit site identity, logo fields, favicon, color tokens, layout tokens, and radius tokens.
 - Navigation: edit top menu items, dropdowns, badges, and header buttons.
@@ -35,7 +36,7 @@ Tabs:
 
 Fields that are easy to mistype use selectors first and custom input second:
 
-- Links: choose from live pages, page sections, admin login, or email presets. Use custom only for external links or a new email address.
+- Links: choose from live pages, blog posts, page sections, admin login, or email presets. Use custom only for external links or a new email address.
 - Public URL and canonical path: choose an existing page path or type a new path. The admin adds the leading slash automatically.
 - Website URL: choose a production/root/local preset or type your domain. The admin adds `https://` when needed.
 - Media: choose uploaded image/video assets for section media. Poster, logo, favicon, and social image fields only suggest uploaded images.
@@ -58,9 +59,9 @@ Media fields are available for the hero, each use-case tab, and each platform fe
 
 ## Page Visibility
 
-Only CMS pages with status `published` are public CMS routes. The seed currently publishes only the homepage. The static `/policy` route is also public and included in the sitemap for privacy, terms, and data deletion requirements.
+Only CMS pages with status `published` are public CMS routes. The seed currently publishes only the homepage. Blog posts are public at `/blog/[slug]` only when the post status is `published`; draft and archived posts stay hidden. The static `/policy` route is also public and included in the sitemap for privacy, terms, and data deletion requirements.
 
-Draft and archived pages are hidden from public routing. The homepage uses `path: "/"`.
+Draft and archived pages or blog posts are hidden from public routing. The homepage uses `path: "/"`.
 
 ## Supported Section Types
 
@@ -72,13 +73,12 @@ Draft and archived pages are hidden from public routing. The homepage uses `path
 - FAQ
 - Final CTA
 - Floating dock
-- Content page
 
 ## Publishing Flow
 
 1. Pick a page.
 2. Update page details, content, SEO, and media.
-3. Open the live page for review when the page is published.
+3. For blog posts, set status to Published only after title, slug, excerpt, body, cover alt text, and SEO fields are ready.
 4. Click `Save changes`.
 5. Recheck `/sitemap.xml` and key public routes before launch.
 

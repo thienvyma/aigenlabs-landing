@@ -16,6 +16,8 @@
 ## Main paths
 
 - `src/app/page.tsx`: homepage route.
+- `src/app/blog/page.tsx`: public blog index route.
+- `src/app/blog/[slug]/page.tsx`: public blog article route backed by `CmsData.blogPosts`.
 - `src/app/policy/page.tsx`: public privacy, terms, and data deletion route for users and Meta app verification.
 - `src/app/admin/page.tsx`: admin studio.
 - `src/app/api/admin/*`: admin data, auth, upload APIs.
@@ -32,9 +34,9 @@
 
 Public pages render from CMS data server-side. Components do not hard-code landing content. Section data comes from `CmsPage.sections[]`, sorted by `order` and filtered by `enabled`. Section content is validated by type through `src/cms/sections/schema.ts` before save and render, so the admin and public renderer share one contract.
 
-The CMS content scope is deliberately home-only: `CmsData.pages` contains exactly one published page at `/`. The public app also exposes the static `/policy` route for privacy, terms, and user data deletion requirements. There is no catch-all page route and no custom 404 route in the app tree. Additional public pages should be built deliberately when their content and route requirements are known.
+The CMS page scope is deliberately home-only: `CmsData.pages` contains exactly one published page at `/`. Blog content lives in `CmsData.blogPosts` and renders through explicit `/blog` and `/blog/[slug]` routes. The public app also exposes the static `/policy` route for privacy, terms, and user data deletion requirements. There is no catch-all page route and no custom 404 route in the app tree. Additional public pages should be built deliberately when their content and route requirements are known.
 
-Admin edits the homepage CMS data model through `/api/admin/data`. Saving writes the same `CmsData` shape to the active storage driver. The backend validates that the CMS document contains exactly one published Vietnamese page at `/`.
+Admin edits the homepage and blog CMS data model through `/api/admin/data`. Saving writes the same `CmsData` shape to the active storage driver. The backend validates that the CMS document contains exactly one published Vietnamese page at `/`, while blog posts are independently draft/published/archived by slug.
 
 - `CMS_STORAGE_DRIVER=local`: saves to `data/cms.json` atomically through a temp file and rename.
 - `CMS_STORAGE_DRIVER=supabase`: upserts one JSON document into `public.landing_cms_documents`.

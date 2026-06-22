@@ -5,7 +5,7 @@ const root = process.cwd();
 const packageJson = JSON.parse(readFileSync(path.join(root, "package.json"), "utf8"));
 const cms = JSON.parse(readFileSync(path.join(root, "data", "cms.json"), "utf8"));
 const requiredCmsPaths = ["/"];
-const requiredRuntimePaths = ["/", "/policy"];
+const requiredRuntimePaths = ["/", "/policy", "/blog"];
 const requiredSectionTypes = new Set(["hero", "useCaseTabs", "platformFeatures", "releaseNotes", "securityCards", "conversionCards", "faq", "floatingDock"]);
 const bannedPattern = /\b(mock|placeholder|lorem|todo|Raw JSON|raw-json|MediaMockup)\b/i;
 const checks = [];
@@ -59,6 +59,7 @@ function auditCmsShape() {
   assert("Only homepage exists in the current launch scope", cms.pages.length === 1 && cms.pages[0]?.path === "/" && cms.pages[0]?.status === "published", "No temporary supporting pages should exist in the CMS seed.");
   assert("Vietnamese is default locale", cms.settings.defaultLocale === "vi", cms.settings.defaultLocale);
   assert("Home-first locale scope", JSON.stringify((cms.settings.supportedLocales || []).map((locale) => locale.code).sort()) === JSON.stringify(["vi"]), "settings.supportedLocales");
+  assert("Blog posts collection exists", Array.isArray(cms.blogPosts), "Blog posts live in the CMS root document.");
 
   for (const page of cms.pages) {
     assert(`SEO title: ${page.path}`, nonEmpty(page.seo?.title), page.seo?.title || "");
@@ -68,6 +69,15 @@ function auditCmsShape() {
     assert(`SEO robots fields: ${page.path}`, typeof page.seo?.robotsIndex === "boolean" && typeof page.seo?.robotsFollow === "boolean", "Robots fields are booleans.");
     assert(`SEO schema toggles: ${page.path}`, !!page.seo?.schemas && Object.values(page.seo.schemas).every((value) => typeof value === "boolean"), "Schema toggles are booleans.");
     assert(`Renderable sections: ${page.path}`, page.sections.every((section) => requiredSectionTypes.has(section.type)), page.sections.map((section) => section.type).join(", "));
+  }
+
+  const blogSlugs = new Set();
+  for (const post of cms.blogPosts || []) {
+    assert(`Blog slug: ${post.slug}`, nonEmpty(post.slug) && !blogSlugs.has(post.slug), post.slug);
+    blogSlugs.add(post.slug);
+    assert(`Blog SEO: ${post.slug}`, nonEmpty(post.seo?.title) && nonEmpty(post.seo?.description) && post.seo?.canonicalPath === `/blog/${post.slug}`, "Title, description, and canonical path are required.");
+    assert(`Blog status: ${post.slug}`, ["draft", "published", "archived"].includes(post.status), post.status);
+    assert(`Blog body: ${post.slug}`, nonEmpty(post.body), "Posts need body content before publishing.");
   }
 }
 
@@ -97,18 +107,20 @@ function auditAdminCoverage() {
   assert("Navigation editable data", Array.isArray(nav.items) && nav.items.length > 0 && nav.items.every((item) => nonEmpty(item.label) && nonEmpty(item.href)), "Header nav comes from CMS.");
   assert("Header CTAs editable data", [nav.secondaryCta, nav.signIn, nav.primaryCta].every((cta) => nonEmpty(cta.label) && nonEmpty(cta.href)), "Header CTAs come from CMS.");
   assert("Footer editable data", cms.settings.footer.columns.every((column) => nonEmpty(column.title) && column.links.every((link) => nonEmpty(link.label) && nonEmpty(link.href))), "Footer comes from CMS.");
+  assert("Blog navigation link", JSON.stringify(cms.settings.navigation).includes("/blog"), "Header nav should expose the blog index.");
   assert("Brand tokens present", Object.keys(cms.settings.brand.tokens.color).length >= 16 && Object.keys(cms.settings.brand.tokens.layout).length >= 6 && Object.keys(cms.settings.brand.tokens.radius).length >= 6, "Color, layout, and radius token groups exist.");
   assert("Uploaded asset alt text", cms.assets.every((asset) => nonEmpty(asset.alt)), "Every uploaded asset needs alt text.");
 }
 
 function auditAdminSelectorUx() {
   const source = readFileSync(path.join(root, "src/components/admin/AdminStudio.tsx"), "utf8");
-  const requiredHelpers = ["ChoiceTextInput", "LinkInput", "WebsiteUrlInput", "AssetUrlInput", "CssTokenInput", "DateInput"];
+  const requiredHelpers = ["ChoiceTextInput", "LinkInput", "WebsiteUrlInput", "AssetUrlInput", "CssTokenInput", "DateInput", "IsoDateInput"];
   for (const helper of requiredHelpers) {
     assert(`Admin selector helper: ${helper}`, source.includes(`function ${helper}`), "High-risk syntax fields should render as guided controls.");
   }
 
   assert("Admin links derive from CMS pages and sections", source.includes("for (const page of data.pages)") && source.includes("sortByOrder(page.sections)") && source.includes("linkOptions"), "Link dropdowns must stay connected to page and section data.");
+  assert("Admin blog manager", source.includes('"Blog"') && source.includes("function renderBlogTab") && source.includes("deleteBlogPost") && source.includes("createBlogPostTemplate"), "Admin should manage blog publish/delete/edit flow.");
   assert("Admin assets derive from upload library", source.includes("mediaAssetOptions") && source.includes("imageAssetOptions") && source.includes('asset.kind === "image" || asset.kind === "video"') && source.includes('asset.kind === "image"'), "Media selectors must use uploaded assets with renderable filters.");
   assert("Admin media poster uses image-only options", source.includes("posterOptions={imageAssetOptions}"), "Poster/logo/social image fields should not suggest documents.");
   assert("Public media fallback renderer", readFileSync(path.join(root, "src/components/landing/CmsMediaFrame.tsx"), "utf8").includes("MediaPreview"), "Public landing should show a designed fallback when CMS media URLs are empty.");
@@ -143,7 +155,7 @@ function auditBannedWords() {
 }
 
 function auditDynamicRenderingConfig() {
-  const files = ["src/app/layout.tsx", "src/app/page.tsx", "src/app/policy/page.tsx", "src/app/sitemap.ts", "src/app/robots.ts"];
+  const files = ["src/app/layout.tsx", "src/app/page.tsx", "src/app/policy/page.tsx", "src/app/blog/page.tsx", "src/app/blog/[slug]/page.tsx", "src/app/sitemap.ts", "src/app/robots.ts"];
   for (const file of files) {
     const source = readFileSync(path.join(root, file), "utf8");
     assert(`Dynamic CMS route: ${file}`, source.includes('dynamic = "force-dynamic"') && source.includes("revalidate = 0"), "CMS-backed routes must not be stale SSG output.");
