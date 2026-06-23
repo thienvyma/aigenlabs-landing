@@ -103,7 +103,7 @@ export default async function PolicyPage() {
 
   return (
     <div className="site-shell policy-shell" style={tokensToCssVariables(settings.brand.tokens)}>
-      <SiteNav settings={settings} currentLocale={settings.defaultLocale} currentPath="/policy" />
+      <SiteNav settings={settings} currentLocale={settings.defaultLocale} />
       <main className="policy-main">
         <section className="policy-hero">
           <div className="container-feature policy-hero-inner">

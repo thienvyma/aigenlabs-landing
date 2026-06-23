@@ -14,7 +14,7 @@ export function LandingPage({ page, settings }: LandingPageProps) {
   const sections = sortByOrder(page.sections).filter((section) => section.enabled);
   return (
     <div className="site-shell" style={tokensToCssVariables(settings.brand.tokens)}>
-      <SiteNav settings={settings} currentLocale={page.locale} currentPath={page.path} />
+      <SiteNav settings={settings} currentLocale={page.locale} />
       <main>
         {sections.map((section) => (
           <SectionRenderer key={section.id} section={section} settings={settings} />

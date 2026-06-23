@@ -41,7 +41,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <div className="site-shell blog-shell" style={tokensToCssVariables(settings.brand.tokens)}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <SiteNav settings={settings} currentLocale={settings.defaultLocale} currentPath="/blog" />
+      <SiteNav settings={settings} currentLocale={settings.defaultLocale} />
       <main className="blog-article-main">
         <article className="blog-article">
           <header className="container-faq blog-article-header">

@@ -44,7 +44,7 @@ export default async function BlogIndexPage() {
 
   return (
     <div className="site-shell blog-shell" style={tokensToCssVariables(settings.brand.tokens)}>
-      <SiteNav settings={settings} currentLocale={settings.defaultLocale} currentPath="/blog" />
+      <SiteNav settings={settings} currentLocale={settings.defaultLocale} />
       <main className="blog-index-main">
         <section className="blog-hero">
           <div className="container-feature blog-hero-inner">

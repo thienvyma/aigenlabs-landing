@@ -13,6 +13,7 @@ import {
   Expand,
   Gauge,
   HeartHandshake,
+  Phone,
   Plug,
   RefreshCcw,
   Rocket,
@@ -25,6 +26,9 @@ import {
 } from "lucide-react";
 
 const founderImage = "/about-me/founder-character.png";
+const demoCtaHref =
+  "mailto:edu@aigenlabs.vn?subject=Xem%20demo%2030%20phut%20AigenLabs%20Business%20OS";
+const workflowConsultHref = "tel:+849****3456";
 
 interface IconBadgeProps {
   children: ReactNode;
@@ -56,8 +60,11 @@ function HeroSlide() {
           trưởng nhanh hơn.
         </p>
         <div className="about-hero-actions">
-          <a className="about-btn about-btn-brand" href="mailto:hello@aigenlabs.co">
-            Liên hệ tư vấn <ArrowRight size={18} aria-hidden="true" />
+          <a className="about-btn about-btn-brand" href={demoCtaHref}>
+            Xem demo 30 phút <ArrowRight size={18} aria-hidden="true" />
+          </a>
+          <a className="about-btn about-btn-outline" href={workflowConsultHref}>
+            <Phone size={18} aria-hidden="true" /> Tư vấn workflow
           </a>
           <span className="about-meta">AigenLabs Co., Ltd. · Ho Chi Minh City, Vietnam</span>
         </div>

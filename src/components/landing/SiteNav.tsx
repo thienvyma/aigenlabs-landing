@@ -1,15 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ChevronDown, Globe2, Mail, Menu, Phone, X } from "lucide-react";
+import { ChevronDown, Mail, Menu, Phone, X } from "lucide-react";
 import type { SiteSettings } from "@/lib/types";
-import { getLocalizedPath, getSupportedLocales } from "@/lib/i18n";
+import { getLocalizedPath } from "@/lib/i18n";
 import { cx, isExternalUrl } from "@/lib/utils";
 
 interface SiteNavProps {
   settings: SiteSettings;
   currentLocale: string;
-  currentPath: string;
 }
 
 function SmartLink({
@@ -80,11 +79,9 @@ function ContactIcon({ href, size }: { href: string; size: number }) {
 export function SiteNav({
   settings,
   currentLocale,
-  currentPath,
 }: SiteNavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const locales = getSupportedLocales(settings);
   const homePath = getLocalizedPath("/", currentLocale, settings);
 
   useEffect(() => {
@@ -135,25 +132,6 @@ export function SiteNav({
         </nav>
 
         <div className="site-nav-actions">
-          <div className="nav-language" aria-label="Language selector">
-            <Globe2 size={18} aria-hidden="true" />
-            <span>{settings.navigation.languageLabel}</span>
-            <span className="nav-language-options">
-              {locales.map((locale) => (
-                <SmartLink
-                  key={locale.code}
-                  href={getLocalizedPath(currentPath, locale.code, settings)}
-                  className={cx(
-                    "nav-language-option",
-                    locale.code === currentLocale && "active",
-                  )}
-                  ariaLabel={`View ${locale.nativeLabel}`}
-                >
-                  {locale.code.toUpperCase()}
-                </SmartLink>
-              ))}
-            </span>
-          </div>
           {settings.navigation.secondaryCta.enabled ? (
             <SmartLink
               href={settings.navigation.secondaryCta.href}
@@ -209,20 +187,6 @@ export function SiteNav({
               {item.label}
             </SmartLink>
           ))}
-          <div className="mobile-language-row" aria-label="Language selector">
-            {locales.map((locale) => (
-              <SmartLink
-                key={locale.code}
-                href={getLocalizedPath(currentPath, locale.code, settings)}
-                className={cx(
-                  "mobile-language-link",
-                  locale.code === currentLocale && "active",
-                )}
-              >
-                {locale.nativeLabel}
-              </SmartLink>
-            ))}
-          </div>
           {settings.navigation.secondaryCta.enabled ? (
             <SmartLink
               href={settings.navigation.secondaryCta.href}
