@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, type WheelEvent, useEffect, useMemo, useRef, useState } from "react";
+import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -414,6 +414,7 @@ export function AboutMeDeck() {
   );
   const [activeIndex, setActiveIndex] = useState(0);
   const [transitionDirection, setTransitionDirection] = useState<"forward" | "back">("forward");
+  const slideInteractionRef = useRef<HTMLDivElement | null>(null);
   const wheelLockRef = useRef(false);
   const progress = ((activeIndex + 1) / slides.length) * 100;
   const isFirstSlide = activeIndex === 0;
@@ -441,7 +442,7 @@ export function AboutMeDeck() {
     };
   }, [slides.length]);
 
-  const goToSlide = (index: number) => {
+  const goToSlide = useCallback((index: number) => {
     const nextIndex = Math.max(0, Math.min(slides.length - 1, index));
     if (nextIndex === activeIndex) {
       return;
@@ -450,9 +451,22 @@ export function AboutMeDeck() {
     setTransitionDirection(nextIndex > activeIndex ? "forward" : "back");
     setActiveIndex(nextIndex);
     window.history.pushState(null, "", `#slide-${nextIndex + 1}`);
-  };
+  }, [activeIndex, slides.length]);
 
-  const handleSlideWheel = (event: WheelEvent<HTMLDivElement>) => {
+  const handleSlideWheel = useCallback((event: WheelEvent) => {
+    const slideInteraction = slideInteractionRef.current;
+    const interactionBounds = slideInteraction?.getBoundingClientRect();
+    const isInsideInteraction = interactionBounds
+      ? event.clientX >= interactionBounds.left
+        && event.clientX <= interactionBounds.right
+        && event.clientY >= interactionBounds.top
+        && event.clientY <= interactionBounds.bottom
+      : false;
+
+    if (!isInsideInteraction) {
+      return;
+    }
+
     if (wheelLockRef.current || Math.abs(event.deltaY) < 24) {
       return;
     }
@@ -468,7 +482,19 @@ export function AboutMeDeck() {
     window.setTimeout(() => {
       wheelLockRef.current = false;
     }, 520);
-  };
+  }, [activeIndex, goToSlide, slides.length]);
+
+  useEffect(() => {
+    const slideInteraction = slideInteractionRef.current;
+    if (!slideInteraction) {
+      return undefined;
+    }
+
+    slideInteraction.addEventListener("wheel", handleSlideWheel, { passive: false });
+    return () => {
+      slideInteraction.removeEventListener("wheel", handleSlideWheel);
+    };
+  }, [handleSlideWheel]);
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
@@ -504,9 +530,9 @@ export function AboutMeDeck() {
 
         <div className="about-slide-frame" aria-live="polite">
           <div
+            ref={slideInteractionRef}
             key={activeIndex}
             className={`about-slide-interaction is-${transitionDirection}`}
-            onWheel={handleSlideWheel}
           >
             {slides[activeIndex]}
             <div className="about-scroll-hint" aria-hidden="true">

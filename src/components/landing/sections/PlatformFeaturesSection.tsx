@@ -81,9 +81,12 @@ export function PlatformFeaturesSection({ id, content }: PlatformFeaturesSection
           <p className="section-copy">{content.description}</p>
         </div>
       </div>
-      <div className="proof-marquee-wrap" aria-label={content.heading}>
+      <div className="proof-marquee-wrap proof-marquee-desktop" aria-label={content.heading}>
         <MarqueeRow items={topRow} direction="right" />
         <MarqueeRow items={bottomRow} direction="left" />
+      </div>
+      <div className="proof-marquee-wrap proof-marquee-mobile" aria-label={`${content.heading} mobile`}>
+        <MarqueeRow items={content.features} direction="left" />
       </div>
     </section>
   );
