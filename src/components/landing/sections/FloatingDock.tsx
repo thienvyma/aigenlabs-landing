@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
-import { Bot, Globe2, Headphones, Mail, MessageCircle, MessageSquare, Phone, X } from "lucide-react";
+import { ArrowUp, Bot, Globe2, Headphones, Mail, MessageCircle, Phone, X } from "lucide-react";
 import type { FloatingDockContact, FloatingDockContent } from "@/lib/types";
 import { cx, isExternalUrl } from "@/lib/utils";
 
@@ -84,12 +84,16 @@ function shouldSendWebhook(configuredTrigger: WebhookTrigger, currentTrigger: Ex
 
 export function FloatingDock({ content }: FloatingDockProps) {
   const [open, setOpen] = useState(false);
+  const [showTopButton, setShowTopButton] = useState(false);
   const panelId = useId();
   const contacts = content.contacts.filter((contact) => contact.enabled !== false && contact.href.trim().length > 0);
   const webhook = content.webhook;
   const helperLabel = content.helperLabel || "Hỗ trợ";
   const helperTooltip = content.helperTooltip || helperLabel;
   const helperPlatform = platformFrom(content.helperIcon || "support");
+  const helperEnabled = content.showHelper !== false && (contacts.length > 0 || webhook.enabled);
+  const backToTopEnabled = content.showBackToTop !== false;
+  const backToTopLabel = content.backToTopLabel || "Về đầu trang";
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -99,6 +103,22 @@ export function FloatingDock({ content }: FloatingDockProps) {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
+
+  useEffect(() => {
+    if (!backToTopEnabled) return;
+
+    function updateTopButtonVisibility() {
+      setShowTopButton(window.scrollY > 180);
+    }
+
+    updateTopButtonVisibility();
+    window.addEventListener("scroll", updateTopButtonVisibility, { passive: true });
+    window.addEventListener("resize", updateTopButtonVisibility);
+    return () => {
+      window.removeEventListener("scroll", updateTopButtonVisibility);
+      window.removeEventListener("resize", updateTopButtonVisibility);
+    };
+  }, [backToTopEnabled]);
 
   function sendWebhook(trigger: Exclude<WebhookTrigger, "both">, contact?: FloatingDockContact) {
     if (!webhook.enabled || !webhook.url.trim() || !shouldSendWebhook(webhook.trigger, trigger)) return;
@@ -129,11 +149,15 @@ export function FloatingDock({ content }: FloatingDockProps) {
     if (nextOpen) sendWebhook("helper_open");
   }
 
-  if (!content.showBackToTop || (!contacts.length && !webhook.enabled)) return null;
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  if (!helperEnabled && !backToTopEnabled) return null;
 
   return (
     <div className={cx("floating-dock", open && "floating-dock-open")}>
-      {open ? (
+      {helperEnabled && open ? (
         <div id={panelId} className="floating-helper-panel" aria-hidden={false}>
           {contacts.map((contact) => {
             const href = normalizeContactHref(contact.href);
@@ -160,19 +184,31 @@ export function FloatingDock({ content }: FloatingDockProps) {
           })}
         </div>
       ) : null}
-      <button
-        type="button"
-        className={cx("dock-button", "helper-toggle", `helper-toggle-${helperPlatform}`)}
-        aria-label={helperLabel}
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={toggleHelper}
-      >
-        <span className="helper-toggle-icon">
-          {open ? <X size={22} aria-hidden="true" /> : <ContactIcon icon={content.helperIcon || "support"} size={22} />}
-        </span>
-        <span className="helper-toggle-tooltip">{helperTooltip}</span>
-      </button>
+      {backToTopEnabled && showTopButton ? (
+        <button
+          type="button"
+          className="dock-button back-to-top-button"
+          aria-label={backToTopLabel}
+          onClick={scrollToTop}
+        >
+          <ArrowUp size={18} aria-hidden="true" />
+        </button>
+      ) : null}
+      {helperEnabled ? (
+        <button
+          type="button"
+          className={cx("dock-button", "helper-toggle", `helper-toggle-${helperPlatform}`)}
+          aria-label={helperLabel}
+          aria-expanded={open}
+          aria-controls={panelId}
+          onClick={toggleHelper}
+        >
+          <span className="helper-toggle-icon">
+            {open ? <X size={22} aria-hidden="true" /> : <ContactIcon icon={content.helperIcon || "support"} size={22} />}
+          </span>
+          <span className="helper-toggle-tooltip">{helperTooltip}</span>
+        </button>
+      ) : null}
     </div>
   );
 }

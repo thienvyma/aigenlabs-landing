@@ -1,20 +1,91 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ArrowLeft, CalendarDays, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, CalendarDays, Clock } from "lucide-react";
 import { tokensToCssVariables } from "@/design/tokens";
-import { BlogBody } from "@/components/landing/BlogBody";
+import { BlogBody, getBlogBodyHeadings, type BlogBodyHeading } from "@/components/landing/BlogBody";
 import { SiteFooter } from "@/components/landing/SiteFooter";
 import { SiteNav } from "@/components/landing/SiteNav";
 import { getBlogPostBySlug, getCmsData, getPublishedBlogPosts } from "@/lib/cms";
 import { blogPostPath, estimateReadingMinutes, formatBlogDate, sortBlogPosts } from "@/lib/blog";
 import { getLocalizedSiteSettings } from "@/lib/i18n";
 import { blogPostMetadata, jsonLdForBlogPost } from "@/lib/metadata";
+import type { BlogPost } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
+}
+
+function TableOfContents({ headings }: { headings: BlogBodyHeading[] }) {
+  if (headings.length === 0) return null;
+  return (
+    <nav className="blog-toc-list" aria-label="Mục lục bài viết">
+      {headings.map((heading) => (
+        <a key={heading.id} className={heading.level === 3 ? "subitem" : undefined} href={`#${heading.id}`}>
+          {heading.text}
+        </a>
+      ))}
+    </nav>
+  );
+}
+
+function RecentPostList({ posts }: { posts: BlogPost[] }) {
+  if (posts.length === 0) {
+    return (
+      <a className="blog-sidebar-empty-link" href="/blog">
+        Xem tất cả bài viết
+        <ArrowRight size={15} aria-hidden="true" />
+      </a>
+    );
+  }
+
+  return (
+    <div className="blog-recent-list blog-recent-list-compact">
+      {posts.map((entry) => (
+        <a key={entry.id} href={blogPostPath(entry)}>
+          <strong>{entry.title}</strong>
+          <span>{formatBlogDate(entry.publishedAt || entry.updatedAt)}</span>
+        </a>
+      ))}
+    </div>
+  );
+}
+
+function ArticleSidebar({ headings, recentPosts }: { headings: BlogBodyHeading[]; recentPosts: BlogPost[] }) {
+  return (
+    <aside className="blog-article-sidebar" aria-label="Điều hướng bài viết">
+      {headings.length > 0 ? (
+        <section className="blog-sidebar-panel">
+          <h2>Trong bài viết</h2>
+          <TableOfContents headings={headings} />
+        </section>
+      ) : null}
+      <section className="blog-sidebar-panel">
+        <h2>Bài mới</h2>
+        <RecentPostList posts={recentPosts} />
+      </section>
+    </aside>
+  );
+}
+
+function MobileArticleNavigation({ headings, recentPosts }: { headings: BlogBodyHeading[]; recentPosts: BlogPost[] }) {
+  if (headings.length === 0 && recentPosts.length === 0) return null;
+  return (
+    <div className="blog-mobile-article-nav" aria-label="Điều hướng bài viết trên mobile">
+      {headings.length > 0 ? (
+        <details className="blog-mobile-nav-panel">
+          <summary>Trong bài viết</summary>
+          <TableOfContents headings={headings} />
+        </details>
+      ) : null}
+      <details className="blog-mobile-nav-panel">
+        <summary>Bài mới</summary>
+        <RecentPostList posts={recentPosts} />
+      </details>
+    </div>
+  );
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
@@ -33,9 +104,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
 
-  const relatedPosts = sortBlogPosts(await getPublishedBlogPosts())
-    .filter((entry) => entry.id !== post.id)
-    .slice(0, 3);
+  const otherPosts = sortBlogPosts(await getPublishedBlogPosts()).filter((entry) => entry.id !== post.id);
+  const relatedPosts = otherPosts.slice(0, 3);
+  const recentPosts = otherPosts.slice(0, 4);
+  const headings = getBlogBodyHeadings(post.body);
   const schema = jsonLdForBlogPost(settings, post);
 
   return (
@@ -73,8 +145,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           ) : null}
 
-          <div className="container-faq">
-            <BlogBody body={post.body} />
+          <div className="container-feature blog-article-layout">
+            <div className="blog-article-content">
+              <MobileArticleNavigation headings={headings} recentPosts={recentPosts} />
+              <BlogBody body={post.body} />
+            </div>
+            <ArticleSidebar headings={headings} recentPosts={recentPosts} />
           </div>
         </article>
 

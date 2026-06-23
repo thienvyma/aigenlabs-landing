@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Mail, Menu, Phone, X } from "lucide-react";
 import type { SiteSettings } from "@/lib/types";
 import { getLocalizedPath } from "@/lib/i18n";
@@ -16,17 +16,20 @@ function SmartLink({
   className,
   children,
   ariaLabel,
+  onClick,
 }: {
   href: string;
   className?: string;
   children: React.ReactNode;
   ariaLabel?: string;
+  onClick?: () => void;
 }) {
   return (
     <a
       href={href}
       className={className}
       aria-label={ariaLabel}
+      onClick={onClick}
       target={
         isExternalUrl(href) &&
         !href.startsWith("mailto:") &&
@@ -82,6 +85,7 @@ export function SiteNav({
 }: SiteNavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
   const homePath = getLocalizedPath("/", currentLocale, settings);
 
   useEffect(() => {
@@ -91,8 +95,27 @@ export function SiteNav({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (target instanceof Node && !navRef.current?.contains(target)) {
+        setOpen(false);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
   return (
-    <header className={cx("site-nav", scrolled && "site-nav-scrolled")}>
+    <header ref={navRef} className={cx("site-nav", scrolled && "site-nav-scrolled")}>
       <div className="site-nav-inner">
         <SmartLink
           href={homePath}
@@ -163,7 +186,7 @@ export function SiteNav({
           <button
             type="button"
             className="nav-mobile-toggle"
-            aria-label="Open navigation menu"
+            aria-label={open ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={open}
             onClick={() => setOpen((value) => !value)}
           >
@@ -183,6 +206,7 @@ export function SiteNav({
               key={item.label}
               href={item.href}
               className="mobile-menu-link"
+              onClick={() => setOpen(false)}
             >
               {item.label}
             </SmartLink>
@@ -191,6 +215,7 @@ export function SiteNav({
             <SmartLink
               href={settings.navigation.secondaryCta.href}
               className="btn btn-outline mobile-menu-cta"
+              onClick={() => setOpen(false)}
             >
               <ContactIcon
                 href={settings.navigation.secondaryCta.href}
@@ -203,6 +228,7 @@ export function SiteNav({
             <SmartLink
               href={settings.navigation.primaryCta.href}
               className="btn btn-dark mobile-menu-cta"
+              onClick={() => setOpen(false)}
             >
               <ContactIcon
                 href={settings.navigation.primaryCta.href}

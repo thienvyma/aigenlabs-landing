@@ -329,7 +329,9 @@ export interface FloatingDockWebhook {
 }
 
 export interface FloatingDockContent {
+  showHelper: boolean;
   showBackToTop: boolean;
+  backToTopLabel: string;
   helperLabel: string;
   helperTooltip: string;
   helperIcon: string;

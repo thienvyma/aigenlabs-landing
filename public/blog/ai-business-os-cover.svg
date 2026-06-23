@@ -1,0 +1,32 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#FFFFFF"/>
+  <rect x="64" y="54" width="1072" height="522" rx="32" fill="#FCFBF9" stroke="#E8E1DC" stroke-width="2"/>
+  <circle cx="820" cy="138" r="178" fill="#FFE1E4"/>
+  <circle cx="678" cy="510" r="128" fill="#D9F4F1"/>
+  <circle cx="402" cy="174" r="78" fill="#FFF1F2"/>
+
+  <g transform="translate(348 104)">
+    <rect width="106" height="36" rx="18" fill="#FFF1F2" stroke="#F3C7CC"/>
+    <text x="18" y="24" fill="#C70F1B" font-family="Arial, sans-serif" font-size="14" font-weight="800">AigenLabs</text>
+  </g>
+
+  <g transform="translate(346 184)">
+    <text x="0" y="0" fill="#101828" font-family="Arial, sans-serif" font-size="68" font-weight="900">AI Business OS</text>
+    <text x="0" y="64" fill="#101828" font-family="Arial, sans-serif" font-size="36" font-weight="800">cho doanh nghiep Viet</text>
+    <text x="0" y="126" fill="#667085" font-family="Arial, sans-serif" font-size="24" font-weight="500">Workflow ro rang, AI Agent co vai tro,</text>
+    <text x="0" y="162" fill="#667085" font-family="Arial, sans-serif" font-size="24" font-weight="500">diem duyet an toan truoc buoc nhay cam.</text>
+  </g>
+
+  <g transform="translate(350 374)">
+    <rect width="270" height="48" rx="15" fill="#FFF1F2" stroke="#F3C7CC"/>
+    <rect y="62" width="270" height="48" rx="15" fill="#F4F6F8" stroke="#D0D5DD"/>
+    <rect y="124" width="270" height="48" rx="15" fill="#ECFDF8" stroke="#BFEFE4"/>
+    <circle cx="28" cy="24" r="9" fill="#E11925"/>
+    <circle cx="28" cy="86" r="9" fill="#667085"/>
+    <circle cx="28" cy="148" r="9" fill="#14B8A6"/>
+    <text x="50" y="30" fill="#101828" font-family="Arial, sans-serif" font-size="17" font-weight="800">Map workflow</text>
+    <text x="50" y="92" fill="#101828" font-family="Arial, sans-serif" font-size="17" font-weight="800">Assign roles</text>
+    <text x="50" y="154" fill="#101828" font-family="Arial, sans-serif" font-size="17" font-weight="800">Review output</text>
+  </g>
+
+</svg>

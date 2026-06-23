@@ -32,7 +32,7 @@ export const sectionLabels: Record<SectionType, string> = {
   securityCards: "Security cards",
   conversionCards: "Conversion cards",
   faq: "FAQ",
-  floatingDock: "Floating dock"
+  floatingDock: "Floating support dock"
 };
 
 export interface SectionContentByType {
@@ -187,8 +187,11 @@ const floatingDockContentSchema = z.preprocess((value) => {
     ? content.webhook as Record<string, unknown>
     : {};
   const rawTrigger = typeof webhook.trigger === "string" ? webhook.trigger : "helper_open";
+  const legacyVisibility = typeof content.showBackToTop === "boolean" ? content.showBackToTop : true;
   return {
-    showBackToTop: typeof content.showBackToTop === "boolean" ? content.showBackToTop : true,
+    showHelper: typeof content.showHelper === "boolean" ? content.showHelper : legacyVisibility,
+    showBackToTop: legacyVisibility,
+    backToTopLabel: typeof content.backToTopLabel === "string" ? content.backToTopLabel : "Về đầu trang",
     helperLabel: typeof content.helperLabel === "string" ? content.helperLabel : "Trợ lý",
     helperTooltip: typeof content.helperTooltip === "string" ? content.helperTooltip : "Mở kênh hỗ trợ",
     helperIcon: typeof content.helperIcon === "string" ? content.helperIcon : "support",
@@ -201,7 +204,9 @@ const floatingDockContentSchema = z.preprocess((value) => {
     }
   };
 }, z.object({
+  showHelper: z.boolean(),
   showBackToTop: z.boolean(),
+  backToTopLabel: z.string(),
   helperLabel: z.string(),
   helperTooltip: z.string(),
   helperIcon: z.string(),

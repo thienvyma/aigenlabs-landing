@@ -146,7 +146,9 @@ export function createSectionTemplate(type: SectionType, order: number): CmsSect
       return {
         ...base,
         content: {
+          showHelper: true,
           showBackToTop: true,
+          backToTopLabel: "Về đầu trang",
           helperLabel: "Hỗ trợ",
           helperTooltip: "Mở kênh hỗ trợ",
           helperIcon: "support",

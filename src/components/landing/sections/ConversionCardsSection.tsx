@@ -10,7 +10,7 @@ interface ConversionCardsSectionProps {
 
 export function ConversionCardsSection({ id, content }: ConversionCardsSectionProps) {
   const variant = content.variant ?? "default";
-  const mobileCompact = id === "pain-points" || id === "business-benefits";
+  const adaptiveCards = id === "pain-points" || id === "business-benefits";
 
   return (
     <section
@@ -18,7 +18,9 @@ export function ConversionCardsSection({ id, content }: ConversionCardsSectionPr
       className={cx(
         "conversion section-anchor section-pad",
         `conversion-${variant}`,
-        mobileCompact && "conversion-mobile-compact"
+        adaptiveCards && "conversion-mobile-compact",
+        adaptiveCards && "conversion-desktop-balanced",
+        adaptiveCards && `conversion-card-count-${content.cards.length}`
       )}
     >
       <div className="container-feature">
@@ -58,7 +60,7 @@ export function ConversionCardsSection({ id, content }: ConversionCardsSectionPr
             );
           })}
         </div>
-        {mobileCompact ? (
+        {adaptiveCards ? (
           <div className="conversion-mobile-list">
             {content.cards.map((card) => {
               const badgeLabel = card.price || card.badge;

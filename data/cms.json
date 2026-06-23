@@ -1371,12 +1371,17 @@
         {
           "id": "floating-dock",
           "type": "floatingDock",
-          "name": "Floating dock",
+          "name": "Floating support / Back to top",
           "key": "floating-dock",
           "enabled": true,
           "order": 11,
           "content": {
+            "showHelper": true,
             "showBackToTop": true,
+            "backToTopLabel": "Về đầu trang",
+            "helperLabel": "Hỗ trợ",
+            "helperTooltip": "Mở kênh hỗ trợ",
+            "helperIcon": "support",
             "contacts": [
               {
                 "label": "Email",
@@ -1396,7 +1401,13 @@
                 "icon": "messenger",
                 "enabled": true
               }
-            ]
+            ],
+            "webhook": {
+              "enabled": false,
+              "url": "",
+              "eventName": "floating_helper",
+              "trigger": "helper_open"
+            }
           }
         }
       ],
@@ -1405,6 +1416,42 @@
       "publishedAt": "2026-06-15T00:00:00.000Z"
     }
   ],
-  "blogPosts": [],
+  "blogPosts": [
+    {
+      "id": "blog-ai-business-os-cho-doanh-nghiep-viet-2026-06-23",
+      "slug": "ai-business-os-cho-doanh-nghiep-viet",
+      "locale": "vi",
+      "status": "published",
+      "title": "AI Business OS là gì? Góc nhìn AigenLabs cho doanh nghiệp Việt",
+      "excerpt": "AI Business OS không chỉ là chatbot. Đó là cách chuẩn hóa dữ liệu, workflow, vai trò AI Agent và điểm duyệt để doanh nghiệp Việt đưa AI vào vận hành thật.",
+      "category": "AI Business OS",
+      "authorName": "Huỳnh Vỹ - AigenLabs",
+      "coverImage": "/blog/ai-business-os-cover.svg",
+      "coverAlt": "AigenLabs AI Business OS cho doanh nghiệp Việt",
+      "body": "## Vì sao doanh nghiệp cần AI Business OS\nNhiều doanh nghiệp bắt đầu với AI bằng một công cụ chat. Cách này hữu ích cho việc hỏi đáp, viết nháp hoặc xử lý một tác vụ nhỏ, nhưng nó chưa đủ để vận hành công ty. Vận hành cần dữ liệu đúng, quy trình rõ, người chịu trách nhiệm, trạng thái công việc, tiêu chí hoàn thành và điểm duyệt trước các hành động nhạy cảm.\n\nAigenLabs nhìn AI Business OS như một lớp vận hành nằm giữa mục tiêu kinh doanh và các AI Agent. Lớp này giúp doanh nghiệp biến nhu cầu rời rạc thành workflow có cấu trúc, để AI không chỉ trả lời mà còn biết việc nào cần làm, đầu vào ở đâu, đầu ra phải ra sao và khi nào cần con người phê duyệt.\n\n## AI Business OS khác gì chatbot\nChatbot thường bắt đầu từ một câu hỏi. AI Business OS bắt đầu từ một quy trình. Thay vì chỉ hỏi AI “hãy viết giúp tôi”, doanh nghiệp định nghĩa rõ công việc cần vận hành: báo cáo tuần, kiểm tra backlog, chuẩn bị nội dung, tổng hợp research, follow-up khách hàng, rà landing page hoặc tạo đề xuất quyết định.\n\n- Chatbot tối ưu cho phản hồi nhanh.\n- AI Business OS tối ưu cho đầu ra lặp lại, có trách nhiệm và có thể kiểm tra.\n- Chatbot phụ thuộc nhiều vào người prompt.\n- AI Business OS lưu lại bối cảnh, vai trò, tiêu chí và lịch sử thực thi.\n\nĐiểm khác biệt lớn nhất là hệ thống. Khi workflow đã rõ, AI Agent có thể làm việc như một vai trò trong đội ngũ: nhận nhiệm vụ, xử lý phần việc, trả kết quả và chờ duyệt ở những bước cần kiểm soát.\n\n## Bốn lớp nền tảng của AigenLabs\nTừ About Me deck của AigenLabs, có thể tóm gọn hệ thống thành bốn lớp chính: dữ liệu, quy trình, ứng dụng và con người. AI chỉ tạo ra giá trị bền vững khi bốn lớp này được nối với nhau.\n\n### 1. Dữ liệu hợp nhất\nAI Agent cần ngữ cảnh đúng. Nếu dữ liệu nằm rải rác trong chat, file cá nhân, CRM, sheet và trí nhớ của từng người, AI sẽ khó tạo đầu ra ổn định. Bước đầu tiên là xác định nguồn dữ liệu nào được dùng, dữ liệu nào chưa được phép dùng và đầu ra nào phải lưu lại.\n\n### 2. Quy trình chuẩn hóa\nMỗi workflow cần có đầu vào, đầu ra, người phụ trách, tiêu chí hoàn thành và trạng thái. Đây là phần nhiều doanh nghiệp bỏ qua khi thử AI, dẫn đến kết quả không đều và founder phải giải thích lại từ đầu trong mỗi phiên làm việc.\n\n### 3. Vai trò AI Agent\nAI Agent không nên là một thực thể chung chung. Một agent có thể đóng vai COO, Research, Content, Sales, Customer Success hoặc Quality Reviewer. Mỗi vai trò cần phạm vi nhiệm vụ, công cụ và chuẩn đầu ra riêng.\n\n### 4. Điểm duyệt và kiểm soát rủi ro\nKhông phải việc nào cũng nên tự động hóa ngay. Gửi email, đăng bài, đổi giá, dùng dữ liệu cá nhân, kết nối tài khoản thật hoặc chi ngân sách đều cần điểm duyệt. AI Business OS tốt phải phân biệt việc nội bộ và hành động bên ngoài.\n\n## Cách triển khai thực tế\nAigenLabs không khuyến nghị bắt đầu bằng một hệ thống quá lớn. Cách triển khai thực tế hơn là chọn một workflow ưu tiên, chạy thử trong phạm vi an toàn, đo kết quả rồi mới mở rộng.\n\n- Khảo sát mô hình vận hành và chọn use case có tác động rõ.\n- Vẽ workflow với đầu vào, đầu ra, người phụ trách và điểm duyệt.\n- Thiết lập AI Agent theo vai trò thay vì dùng một chatbot chung.\n- Chạy thử với dữ liệu an toàn và hành động nội bộ trước.\n- Đo thời gian tiết kiệm, chất lượng đầu ra và rủi ro phát sinh.\n- Mở rộng sang marketing, sales, research, CS hoặc operations khi workflow đầu tiên đã ổn.\n\n## Founder nên bắt đầu từ đâu\nNếu bạn là founder hoặc operator, câu hỏi đầu tiên không phải là “nên dùng model nào”. Câu hỏi đúng hơn là: công việc lặp lại nào đang lấy nhiều thời gian nhất, có đầu ra rõ nhất và rủi ro thấp nhất để thử nghiệm?\n\nMột workflow tốt cho pilot thường có ba đặc điểm: diễn ra thường xuyên, có tiêu chí đầu ra rõ, và nếu AI làm sai thì vẫn có người kiểm tra trước khi ảnh hưởng đến khách hàng hoặc ngân sách.\n\n## Kết luận\nAI Business OS là cách đưa AI vào vận hành bằng hệ thống thay vì bằng cảm hứng từng phiên chat. Khi dữ liệu, workflow, vai trò AI Agent và điểm duyệt được thiết kế rõ, doanh nghiệp có thể dùng AI để giảm việc lặp lại, tăng tốc ra quyết định và giữ quyền kiểm soát ở những bước quan trọng.\n\nAigenLabs bắt đầu từ một workflow nhỏ, đo kết quả thật và mở rộng dần. Đây là cách thực tế hơn để doanh nghiệp Việt chuyển từ thử AI sang vận hành với AI.",
+      "seo": {
+        "title": "AI Business OS là gì? Góc nhìn AigenLabs cho doanh nghiệp Việt",
+        "description": "AI Business OS giúp chuẩn hóa dữ liệu, workflow, vai trò AI Agent và điểm duyệt để doanh nghiệp Việt đưa AI vào vận hành thật, an toàn và có thể đo lường.",
+        "canonicalPath": "/blog/ai-business-os-cho-doanh-nghiep-viet",
+        "robotsIndex": true,
+        "robotsFollow": true,
+        "ogTitle": "AI Business OS là gì? Góc nhìn AigenLabs cho doanh nghiệp Việt",
+        "ogDescription": "Từ chatbot rời rạc đến hệ thống vận hành với AI Agent, workflow, dữ liệu và điểm duyệt rõ ràng.",
+        "ogImage": "/blog/ai-business-os-cover.svg",
+        "twitterCard": "summary_large_image",
+        "keywords": [
+          "AI Business OS",
+          "AI Agent",
+          "workflow doanh nghiệp",
+          "AigenLabs",
+          "tự động hóa vận hành",
+          "doanh nghiệp Việt"
+        ]
+      },
+      "createdAt": "2026-06-23T06:19:37Z",
+      "updatedAt": "2026-06-23T06:19:37Z",
+      "publishedAt": "2026-06-23T00:00:00.000Z"
+    }
+  ],
   "redirects": []
 }

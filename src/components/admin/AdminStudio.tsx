@@ -351,16 +351,60 @@ function WebsiteUrlInput({ label, value, onChange }: { label: string; value: str
   );
 }
 
-function AssetUrlInput({ label, value, onChange, options }: { label: string; value: string; onChange: (value: string) => void; options: SelectOption[] }) {
+function AssetUrlInput({
+  label,
+  value,
+  onChange,
+  options,
+  help = "Choose an uploaded asset when possible.",
+  previewImage = false,
+  uploadLabel,
+  uploading = false,
+  onUpload,
+  onManageAssets
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: SelectOption[];
+  help?: string;
+  previewImage?: boolean;
+  uploadLabel?: string;
+  uploading?: boolean;
+  onUpload?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onManageAssets?: () => void;
+}) {
   return (
-    <ChoiceTextInput
-      label={label}
-      value={value}
-      options={optionsWithCurrent(options, value)}
-      onChange={onChange}
-      customLabel="Custom media URL"
-      help="Choose an uploaded asset when possible."
-    />
+    <div className="asset-url-field">
+      <ChoiceTextInput
+        label={label}
+        value={value}
+        options={optionsWithCurrent(options, value)}
+        onChange={onChange}
+        customLabel="Custom media URL"
+        help={help}
+      />
+      {previewImage && value ? (
+        <div className="asset-url-preview">
+          <img src={value} alt="" />
+        </div>
+      ) : null}
+      {onUpload || onManageAssets ? (
+        <div className="asset-url-actions">
+          {onUpload ? (
+            <label className="asset-file">
+              {uploading ? "Uploading..." : uploadLabel ?? "Upload asset"}
+              <input type="file" accept="image/jpeg,image/png,image/webp" disabled={uploading} onChange={onUpload} />
+            </label>
+          ) : null}
+          {onManageAssets ? (
+            <button type="button" className="admin-secondary" onClick={onManageAssets}>
+              Manage assets
+            </button>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
   );
 }
 
@@ -571,6 +615,7 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
   const [status, setStatus] = useState("");
   const [uploadAlt, setUploadAlt] = useState("");
   const [replacingAssetId, setReplacingAssetId] = useState("");
+  const [uploadingBlogImageTarget, setUploadingBlogImageTarget] = useState("");
 
   const selectedPage = data.pages[0];
   const blogPosts = data.blogPosts ?? [];
@@ -752,23 +797,81 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
     window.location.href = "/admin/login";
   }
 
-  async function upload(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (!file) return;
+  async function uploadAssetFile(file: File, alt: string, label = "asset"): Promise<AssetItem | null> {
     const form = new FormData();
     form.append("file", file);
-    form.append("alt", uploadAlt);
-    setStatus("Uploading asset...");
+    form.append("alt", alt);
+    setStatus(`Uploading ${label}...`);
     const response = await fetch("/api/admin/upload", { method: "POST", body: form });
     if (!response.ok) {
       const body = (await response.json().catch(() => null)) as { error?: string } | null;
       setStatus(body?.error || "Upload failed. Please try a smaller JPG, PNG, WebP, MP4, WebM, or PDF file.");
-      return;
+      return null;
     }
     const body = (await response.json()) as { asset: AssetItem };
-    syncData({ ...data, assets: [body.asset, ...data.assets] }, "Asset uploaded. You can now use its URL in a section.");
+    return body.asset;
+  }
+
+  async function upload(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const asset = await uploadAssetFile(file, uploadAlt, "asset");
+    if (!asset) {
+      event.target.value = "";
+      return;
+    }
+    syncData({ ...data, assets: [asset, ...data.assets] }, "Asset uploaded. You can now use its URL in a section.");
     setUploadAlt("");
     event.target.value = "";
+  }
+
+  async function uploadBlogImage(postId: string, target: "cover" | "social", event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const post = blogPosts.find((entry) => entry.id === postId);
+    if (!post) return;
+
+    const loadingKey = `${postId}:${target}`;
+    setUploadingBlogImageTarget(loadingKey);
+    try {
+      const asset = await uploadAssetFile(
+        file,
+        post.coverAlt || post.title,
+        target === "cover" ? "blog cover image" : "blog social image"
+      );
+      if (!asset) return;
+      const now = nowIso();
+
+      syncData({
+        ...data,
+        assets: [asset, ...data.assets],
+        blogPosts: blogPosts.map((entry) => {
+          if (entry.id !== postId) return entry;
+          if (target === "social") {
+            return {
+              ...entry,
+              updatedAt: now,
+              seo: { ...entry.seo, ogImage: asset.url }
+            };
+          }
+
+          const previousCoverImage = entry.coverImage;
+          return {
+            ...entry,
+            coverImage: asset.url,
+            coverAlt: entry.coverAlt || asset.alt || entry.title,
+            updatedAt: now,
+            seo: {
+              ...entry.seo,
+              ogImage: !entry.seo.ogImage || entry.seo.ogImage === previousCoverImage ? asset.url : entry.seo.ogImage
+            }
+          };
+        })
+      }, "Image uploaded and selected. Click Save changes to update this blog post.");
+    } finally {
+      setUploadingBlogImageTarget("");
+      event.target.value = "";
+    }
   }
 
   async function replaceAssetFile(asset: AssetItem, event: ChangeEvent<HTMLInputElement>) {
@@ -1143,13 +1246,18 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
     return (
       <>
         <div className="nested-editor">
-          <h4>Helper button</h4>
+          <h4>Floating support button</h4>
           <div className="admin-form-grid">
-            <ToggleInput label="Show floating helper" checked={content.showBackToTop} onChange={(showBackToTop) => updateSectionContent<FloatingDockContent>({ showBackToTop })} />
-            <TextInput label="Helper label" value={content.helperLabel} onChange={(helperLabel) => updateSectionContent<FloatingDockContent>({ helperLabel })} />
-            <TextInput label="Helper tooltip" value={content.helperTooltip} onChange={(helperTooltip) => updateSectionContent<FloatingDockContent>({ helperTooltip })} />
+            <ToggleInput
+              label="Show support button"
+              checked={content.showHelper !== false}
+              onChange={(showHelper) => updateSectionContent<FloatingDockContent>({ showHelper })}
+              help="Controls the round support button at the bottom-right corner."
+            />
+            <TextInput label="Support button label" value={content.helperLabel} onChange={(helperLabel) => updateSectionContent<FloatingDockContent>({ helperLabel })} />
+            <TextInput label="Support button tooltip" value={content.helperTooltip} onChange={(helperTooltip) => updateSectionContent<FloatingDockContent>({ helperTooltip })} />
             <SelectInput
-              label="Helper icon"
+              label="Support button icon"
               value={content.helperIcon}
               options={optionsWithCurrent([...floatingDockIconOptions], content.helperIcon)}
               onChange={(helperIcon) => updateSectionContent<FloatingDockContent>({ helperIcon })}
@@ -1157,7 +1265,7 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
           </div>
         </div>
         <EditableList<FloatingDockContact>
-          label="Contact channel"
+          label="Support channel"
           addLabel="Add contact"
           items={content.contacts}
           createItem={() => ({ label: "Messenger", href: "", icon: "messenger", enabled: false })}
@@ -1176,6 +1284,22 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
             </div>
           )}
         />
+        <div className="nested-editor">
+          <h4>Back-to-top arrow</h4>
+          <div className="admin-form-grid">
+            <ToggleInput
+              label="Show back-to-top arrow"
+              checked={content.showBackToTop !== false}
+              onChange={(showBackToTop) => updateSectionContent<FloatingDockContent>({ showBackToTop })}
+              help="Shows a small arrow above the support button after visitors scroll down."
+            />
+            <TextInput
+              label="Back-to-top accessibility label"
+              value={content.backToTopLabel}
+              onChange={(backToTopLabel) => updateSectionContent<FloatingDockContent>({ backToTopLabel })}
+            />
+          </div>
+        </div>
         <div className="nested-editor">
           <h4>Webhook for future chatbot</h4>
           <div className="admin-form-grid">
@@ -1435,7 +1559,18 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
                       }
                     }))}
                   />
-                  <AssetUrlInput label="Cover image" value={selectedBlogPost.coverImage} onChange={(coverImage) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, coverImage }))} options={imageAssetOptions} />
+                  <AssetUrlInput
+                    label="Cover image"
+                    value={selectedBlogPost.coverImage}
+                    onChange={(coverImage) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, coverImage }))}
+                    options={imageAssetOptions}
+                    previewImage
+                    uploadLabel="Upload cover image"
+                    uploading={uploadingBlogImageTarget === `${selectedBlogPost.id}:cover`}
+                    onUpload={(event) => void uploadBlogImage(selectedBlogPost.id, "cover", event)}
+                    onManageAssets={() => setActiveTab("Assets")}
+                    help="Choose an uploaded asset, paste a media URL, or upload a new cover image here."
+                  />
                   <TextInput label="Cover alt text" value={selectedBlogPost.coverAlt} onChange={(coverAlt) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, coverAlt }))} />
                 </div>
                 <TextAreaInput
@@ -1459,7 +1594,18 @@ export function AdminStudio({ initialData, userEmail }: AdminStudioProps) {
                   <TextAreaInput label="Meta description" value={selectedBlogPost.seo.description} rows={3} onChange={(description) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, description } }))} />
                   <TextAreaInput label="Keywords, one per line" value={linesFromArray(selectedBlogPost.seo.keywords)} rows={3} onChange={(value) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, keywords: arraysFromLines(value) } }))} />
                   <TextInput label="Social title" value={selectedBlogPost.seo.ogTitle} onChange={(ogTitle) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, ogTitle } }))} />
-                  <AssetUrlInput label="Social image" value={selectedBlogPost.seo.ogImage} onChange={(ogImage) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, ogImage } }))} options={imageAssetOptions} />
+                  <AssetUrlInput
+                    label="Social image"
+                    value={selectedBlogPost.seo.ogImage}
+                    onChange={(ogImage) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, ogImage } }))}
+                    options={imageAssetOptions}
+                    previewImage
+                    uploadLabel="Upload social image"
+                    uploading={uploadingBlogImageTarget === `${selectedBlogPost.id}:social`}
+                    onUpload={(event) => void uploadBlogImage(selectedBlogPost.id, "social", event)}
+                    onManageAssets={() => setActiveTab("Assets")}
+                    help="Choose an uploaded image, paste a social image URL, or upload a new image here."
+                  />
                   <TextAreaInput label="Social description" value={selectedBlogPost.seo.ogDescription} rows={3} onChange={(ogDescription) => updateBlogPost(selectedBlogPost.id, (post) => ({ ...post, seo: { ...post.seo, ogDescription } }))} />
                   <SelectInput
                     label="Twitter card"
