@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, useEffect, useMemo, useState } from "react";
+import { type ReactNode, type WheelEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -356,35 +356,36 @@ function FounderSlide() {
           <span>Về AigenLabs</span>
         </div>
         <h3>Huỳnh Vỹ</h3>
-        <p className="role">Founder & CEO</p>
+        <p className="role">Founder / Builder</p>
         <p>
-          Với hơn 10 năm kinh nghiệm trong công nghệ và tư vấn chuyển đổi số,
-          tôi tin rằng AI chỉ thực sự tạo ra giá trị khi được đặt đúng vào bối
-          cảnh kinh doanh và quy trình vận hành của doanh nghiệp.
+          Tôi xây dựng AigenLabs với góc nhìn của một founder trực tiếp làm sản
+          phẩm: AI chỉ tạo ra giá trị khi được đặt vào đúng workflow, có dữ
+          liệu rõ ràng, vai trò cụ thể và điểm duyệt của con người.
         </p>
         <p>
-          AigenLabs ra đời với sứ mệnh trở thành hệ điều hành AI cho doanh
-          nghiệp Việt, giúp họ vận hành thông minh hơn, ra quyết định nhanh hơn
-          và tăng trưởng bền vững.
+          AigenLabs tập trung giúp founder và team nhỏ biến một quy trình vận
+          hành quan trọng thành AI Agent có thể kiểm tra, báo cáo và cải tiến
+          từng bước trước khi mở rộng sang nhiều use case hơn.
         </p>
       </section>
       <section className="about-founder-stats" aria-label="Founder highlights">
-        <div><ShieldCheck size={26} aria-hidden="true" /><strong>10+ năm</strong><p>Kinh nghiệm công nghệ & tư vấn</p></div>
-        <div><Rocket size={26} aria-hidden="true" /><strong>50+</strong><p>Dự án triển khai thành công</p></div>
-        <div><UsersRound size={26} aria-hidden="true" /><strong>20+</strong><p>Khách hàng doanh nghiệp tin tưởng đồng hành</p></div>
-        <div><HeartHandshake size={26} aria-hidden="true" /><strong>1 mục tiêu</strong><p>Giúp doanh nghiệp Việt bứt phá với AI</p></div>
+        <div><ShieldCheck size={26} aria-hidden="true" /><strong>Workflow-first</strong><p>Bắt đầu từ quy trình thật của doanh nghiệp</p></div>
+        <div><Rocket size={26} aria-hidden="true" /><strong>Demo thật</strong><p>Minh họa bằng bài toán và dữ liệu an toàn</p></div>
+        <div><UsersRound size={26} aria-hidden="true" /><strong>Human-in-loop</strong><p>Con người giữ quyền duyệt ở bước quan trọng</p></div>
+        <div><HeartHandshake size={26} aria-hidden="true" /><strong>Thực dụng</strong><p>Ưu tiên kết quả kiểm chứng được thay vì lời hứa</p></div>
       </section>
       <aside className="about-why-card">
-        <h3>Vì sao chọn AigenLabs?</h3>
+        <h3>Nguyên tắc triển khai AigenLabs</h3>
         <ul>
-          <li>Hiểu doanh nghiệp Việt</li>
-          <li>Giải pháp thực tiễn, dễ áp dụng</li>
-          <li>Công nghệ AI tiên tiến, an toàn</li>
-          <li>Đồng hành dài hạn, tạo giá trị thật</li>
+          <li>Chọn một workflow ưu tiên</li>
+          <li>Làm rõ đầu vào, đầu ra và người duyệt</li>
+          <li>Chạy thử bằng dữ liệu mẫu hoặc dữ liệu đã được phép</li>
+          <li>Mở rộng sau khi quy trình chứng minh được giá trị</li>
         </ul>
         <blockquote>
-          Chúng tôi không chỉ cung cấp phần mềm. Chúng tôi đồng hành để kiến tạo
-          năng lực vận hành và tăng trưởng mới cho doanh nghiệp.
+          AigenLabs không bán lời hứa AI tự động hóa mọi thứ. Sản phẩm tập
+          trung vào workflow rõ ràng, quyền kiểm soát của con người và kết quả
+          có thể kiểm chứng.
         </blockquote>
       </aside>
     </article>
@@ -405,13 +406,23 @@ export function AboutMeDeck() {
     [],
   );
   const [activeIndex, setActiveIndex] = useState(0);
+  const [transitionDirection, setTransitionDirection] = useState<"forward" | "back">("forward");
+  const wheelLockRef = useRef(false);
   const progress = ((activeIndex + 1) / slides.length) * 100;
+  const isFirstSlide = activeIndex === 0;
+  const isLastSlide = activeIndex === slides.length - 1;
 
   useEffect(() => {
     const syncFromHash = () => {
       const match = window.location.hash.match(/^#slide-(\d+)$/);
       const hashIndex = match ? Number(match[1]) - 1 : 0;
-      setActiveIndex(Math.max(0, Math.min(slides.length - 1, hashIndex)));
+      const nextIndex = Math.max(0, Math.min(slides.length - 1, hashIndex));
+      setActiveIndex((currentIndex) => {
+        if (nextIndex !== currentIndex) {
+          setTransitionDirection(nextIndex > currentIndex ? "forward" : "back");
+        }
+        return nextIndex;
+      });
     };
 
     syncFromHash();
@@ -425,8 +436,31 @@ export function AboutMeDeck() {
 
   const goToSlide = (index: number) => {
     const nextIndex = Math.max(0, Math.min(slides.length - 1, index));
+    if (nextIndex === activeIndex) {
+      return;
+    }
+
+    setTransitionDirection(nextIndex > activeIndex ? "forward" : "back");
     setActiveIndex(nextIndex);
     window.history.pushState(null, "", `#slide-${nextIndex + 1}`);
+  };
+
+  const handleSlideWheel = (event: WheelEvent<HTMLDivElement>) => {
+    if (wheelLockRef.current || Math.abs(event.deltaY) < 24) {
+      return;
+    }
+
+    const nextIndex = event.deltaY > 0 ? activeIndex + 1 : activeIndex - 1;
+    if (nextIndex < 0 || nextIndex >= slides.length) {
+      return;
+    }
+
+    event.preventDefault();
+    wheelLockRef.current = true;
+    goToSlide(nextIndex);
+    window.setTimeout(() => {
+      wheelLockRef.current = false;
+    }, 520);
   };
 
   const toggleFullscreen = () => {
@@ -452,24 +486,6 @@ export function AboutMeDeck() {
           <div className="about-actions" aria-label="Slide actions">
             <button
               type="button"
-              className="about-btn about-btn-outline"
-              onClick={() => goToSlide(activeIndex - 1)}
-              disabled={activeIndex === 0}
-            >
-              <ArrowLeft size={17} aria-hidden="true" />
-              Back
-            </button>
-            <button
-              type="button"
-              className="about-btn about-btn-brand"
-              onClick={() => goToSlide(activeIndex + 1)}
-              disabled={activeIndex === slides.length - 1}
-            >
-              Next
-              <ArrowRight size={17} aria-hidden="true" />
-            </button>
-            <button
-              type="button"
               className="about-icon-button"
               onClick={toggleFullscreen}
               aria-label="Fullscreen"
@@ -480,8 +496,36 @@ export function AboutMeDeck() {
         </div>
 
         <div className="about-slide-frame" aria-live="polite">
-          {slides[activeIndex]}
+          <div
+            key={activeIndex}
+            className={`about-slide-interaction is-${transitionDirection}`}
+            onWheel={handleSlideWheel}
+          >
+            {slides[activeIndex]}
+            <div className="about-scroll-hint" aria-hidden="true">
+              {isLastSlide ? "Cuộn lên để quay lại" : "Cuộn để chuyển slide"}
+            </div>
+          </div>
         </div>
+
+        <button
+          type="button"
+          className="about-slide-arrow about-slide-arrow-prev"
+          onClick={() => goToSlide(activeIndex - 1)}
+          disabled={isFirstSlide}
+          aria-label="Slide trước"
+        >
+          <ArrowLeft size={22} aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          className="about-slide-arrow about-slide-arrow-next"
+          onClick={() => goToSlide(activeIndex + 1)}
+          disabled={isLastSlide}
+          aria-label="Slide tiếp theo"
+        >
+          <ArrowRight size={22} aria-hidden="true" />
+        </button>
 
         <div className="about-slide-dots" aria-label="Slide navigation">
           {slides.map((_, index) => (
