@@ -56,8 +56,7 @@ function HeroSlide() {
           Enterprises
         </h1>
         <p>
-          Hợp nhất dữ liệu, AI và quy trình để vận hành thông minh hơn, tăng
-          trưởng nhanh hơn.
+          Tập hợp dữ liệu, AI và quy trình để vận hành thông minh hơn.
         </p>
         <div className="about-hero-actions">
           <a className="about-btn about-btn-brand" href={demoCtaHref}>
@@ -94,16 +93,12 @@ function HeroSlide() {
 
 function BusinessOsSlide() {
   const left = [
-    ["Dữ liệu hợp nhất", Database],
-    ["Quy trình chuẩn hóa", Workflow],
-    ["Ứng dụng & Hệ thống", Boxes],
-    ["Con người & Vai trò", UsersRound],
+    ["Tập trung Dữ liệu", Database],
+    ["Chuẩn hoá Quy trình", Workflow],
   ] as const;
   const right = [
-    ["Tự động hóa thông minh", Bot],
-    ["Ra quyết định dựa trên AI", BrainCircuit],
-    ["Trải nghiệm khách hàng", HeartHandshake],
-    ["Tăng trưởng bền vững", Rocket],
+    ["Tự động tác vụ lặp lại", Bot],
+    ["Ai làm việc & Bạn phê duyệt", BrainCircuit],
   ] as const;
 
   return (
@@ -111,7 +106,7 @@ function BusinessOsSlide() {
       <span className="about-slide-index">2</span>
       <header className="about-slide-header">
         <h2>AI Business OS</h2>
-        <p>Hợp nhất. Thông minh. Tăng trưởng.</p>
+        <p>Vận hành gọn . ra quyêt định nhanh. Tăng trưởng có kiểm soát.</p>
       </header>
       <div className="about-hub">
         <div className="about-hub-column">
@@ -146,16 +141,16 @@ function BusinessOsSlide() {
 
 function ProblemSlide() {
   const problems = [
-    ["Dữ liệu phân tán", "Không đồng nhất, khó khai thác"],
-    ["Quy trình thủ công", "Tốn thời gian, dễ sai sót"],
-    ["Thiếu góc nhìn tổng thể", "Khó ra quyết định kịp thời"],
-    ["Chi phí vận hành cao", "Nguồn lực phân tán, kém hiệu quả"],
+    ["Dữ liệu phân tán", "Sales,marketing,khách hàng và vận hành không kết nối với nhau"],
+    ["Quy trình chưa chuẩn hoá", "Nhiều việc phụ thuộc vào con người , khó theo dõi và khó bàn giao"],
+    ["Thiếu góc nhìn điều hành", "Chủ doanh nghiệp khó biết vấn đề đang nằm ở đâu và ưu tiên việc gì"],
+    ["Vận hành tốn nguồn lực", "Nguồn lực phân tán, kém hiệu quả"],
   ];
   const solutions = [
-    ["Hợp nhất dữ liệu & hệ thống", "Một nguồn dữ liệu tin cậy"],
-    ["Tự động hóa thông minh", "Giảm thời gian, tăng độ chính xác"],
+    ["Chuẩn hoá dữ liệu & hệ thống", "Một nguồn dữ liệu tin cậy"],
+    ["Tự động Và tự động hoá quy trình", "Biến công việc lặp lại thành workflow rõ ràng , dễ theo dõi và tối ưu"],
     ["Dashboard & AI Insights", "Ra quyết định nhanh, chính xác"],
-    ["Tối ưu chi phí vận hành", "Tăng năng suất, tối đa hiệu quả"],
+    ["Tăng hiệu suất vận hành", "Giảm thao tác thủ công , giảm sai sót và tăng năng suất đội ngũ"],
   ];
 
   return (
@@ -199,11 +194,11 @@ function ProblemSlide() {
 
 function ProcessSlide() {
   const steps = [
-    ["01", "Khảo sát & Đánh giá", "Hiểu rõ mô hình và nhu cầu doanh nghiệp", Search],
-    ["02", "Thiết kế giải pháp & Lộ trình", "Xây dựng giải pháp phù hợp và khả thi", Settings2],
-    ["03", "Triển khai & Tích hợp", "Kết nối hệ thống, đào tạo và chuyển giao", Plug],
+    ["01", "Khảo sát hiện trạng", "Hiểu rõ workflow và nhu cầu ưu tiên", Search],
+    ["02", "Thiết kế Lộ trình", "xác dịnh bài toán trọng tâm , phạm vi và kế hoạch triển khai ", Settings2],
+    ["03", "Triển khai & Tích hợp", "Kết nối dữ liệu và workflow trên Aigenlabs", Plug],
     ["04", "Vận hành & Tối ưu", "Đồng hành vận hành, đo lường và cải tiến", RefreshCcw],
-    ["05", "Mở rộng & Tăng trưởng", "Mở rộng năng lực, đổi mới và bứt phá", Rocket],
+    ["05", "Mở rộng quy mô", "nhân rộng worrkflow hiệu quả và mở rộng Ai agent theo phòng ban", Rocket],
   ] as const;
 
   return (
@@ -224,77 +219,7 @@ function ProcessSlide() {
         ))}
       </div>
       <div className="about-brand-callout">
-        Phương pháp Agile - triển khai theo từng giai đoạn, tối ưu giá trị liên tục.
-      </div>
-    </article>
-  );
-}
-
-function PlatformSlide() {
-  const tabs = [
-    "CRM & Sales",
-    "Marketing Automation",
-    "Service & Support",
-    "Project & Workflow",
-    "Finance & Operation",
-    "People & Culture",
-    "AI & Analytics",
-  ];
-  const metrics = [
-    ["Doanh thu", "128.6B", "+24.5%"],
-    ["Khách hàng mới", "2,345", "+18.2%"],
-    ["Hiệu suất CSKH", "96.7%", "+12.1%"],
-    ["Tự động hóa", "78%", "+15.3%"],
-  ];
-
-  return (
-    <article className="about-slide about-platform-slide">
-      <span className="about-slide-index">5</span>
-      <header className="about-slide-header">
-        <h2>Năng lực nền tảng</h2>
-        <p>Một nền tảng toàn diện cho mọi phòng ban.</p>
-      </header>
-      <div className="about-platform-layout">
-        <aside className="about-tabs">
-          {tabs.map((tab, index) => (
-            <span className={index === 0 ? "active" : undefined} key={tab}>
-              {tab}
-            </span>
-          ))}
-        </aside>
-        <div className="about-dashboard">
-          <div className="about-metrics">
-            {metrics.map(([label, value, delta]) => (
-              <section key={label}>
-                <span>{label}</span>
-                <strong>{value}</strong>
-                <em>{delta}</em>
-              </section>
-            ))}
-          </div>
-          <div className="about-chart-row">
-            <div className="about-line-chart">
-              <svg viewBox="0 0 360 190" aria-hidden="true">
-                <polyline points="12,142 48,92 86,118 124,55 162,112 204,76 246,143 292,82 348,46" />
-              </svg>
-            </div>
-            <div className="about-donut-wrap">
-              <div className="about-donut" />
-              <ul>
-                <li>Website <b>40%</b></li>
-                <li>Referral <b>25%</b></li>
-                <li>Campaign <b>18%</b></li>
-                <li>Other <b>10%</b></li>
-              </ul>
-            </div>
-          </div>
-          <div className="about-mini-stats">
-            <span><b>12.6%</b>Tỷ lệ chuyển đổi</span>
-            <span><b>2.8M</b>Giá trị đơn hàng TB</span>
-            <span><b>85.4%</b>Tỷ lệ giữ chân KH</span>
-            <span><b>72</b>NPS</span>
-          </div>
-        </div>
+        Triển khai theo từng giai đoạn, đo lường nhanh và cải tiến liên tục.
       </div>
     </article>
   );
@@ -320,12 +245,10 @@ function FitSlide() {
       </header>
       <div className="about-fit-layout">
         <div className="about-matrix">
-          <span className="axis-y">Quy mô doanh nghiệp</span>
-          <span className="axis-x">Mức độ phức tạp quy trình</span>
           <section className="q1"><strong>Tối ưu & Tăng tốc</strong><p>Tối ưu quy trình phức tạp, tăng trưởng hiệu quả</p></section>
-          <section className="q2"><strong>Chuyển đổi toàn diện</strong><p>Hợp nhất hệ thống, tái thiết quy trình và tăng trưởng bứt phá</p></section>
-          <section className="q3"><strong>Khởi đầu số hóa</strong><p>Chuẩn hóa dữ liệu, quy trình và xây nền tảng số</p></section>
-          <section className="q4"><strong>Tùy biến & Đột phá</strong><p>Giải pháp liền mạch theo đặc thù ngành nghề</p></section>
+          <section className="q2"><strong>Chuyển đổi toàn diện</strong><p>Chuẩn hoá quy trình rõ ràng và cải thiện tăng trưởng hiệu quả</p></section>
+          <section className="q3"><strong>Khởi đầu số hóa</strong><p>Chuẩn hóa dữ liệu, quy trình và xây nền tảng nhân sự Ai Agent</p></section>
+          <section className="q4"><strong>Tùy biến theo doanh nghiệp</strong><p>Giải pháp liền mạch theo đặc thù ngành nghề</p></section>
           <i className="point p1" />
           <i className="point p2" />
           <i className="point p3" />
@@ -365,35 +288,24 @@ function FounderSlide() {
         <h3>Huỳnh Vỹ</h3>
         <p className="role">Founder / Builder</p>
         <p>
-          Tôi xây dựng AigenLabs với góc nhìn của một founder trực tiếp làm sản
-          phẩm: AI chỉ tạo ra giá trị khi được đặt vào đúng workflow, có dữ
-          liệu rõ ràng, vai trò cụ thể và điểm duyệt của con người.
-        </p>
-        <p>
-          AigenLabs tập trung giúp founder và team nhỏ biến một quy trình vận
-          hành quan trọng thành AI Agent có thể kiểm tra, báo cáo và cải tiến
-          từng bước trước khi mở rộng sang nhiều use case hơn.
+          Tôi xây dựng AigenLabs với mục tiêu cố gắng hướng tới gần nhất mô hình one persion one business bằng cách kết hợp AI Agent: AI chỉ tạo ra giá trị khi được đặt vào đúng workflow, có dữ
+          liệu rõ ràng, vai trò cụ thể và kiểm duyệt của con người.
         </p>
       </section>
       <section className="about-founder-stats" aria-label="Founder highlights">
-        <div><ShieldCheck size={26} aria-hidden="true" /><strong>Workflow-first</strong><p>Bắt đầu từ quy trình thật của doanh nghiệp</p></div>
-        <div><Rocket size={26} aria-hidden="true" /><strong>Demo thật</strong><p>Minh họa bằng bài toán và dữ liệu an toàn</p></div>
+        <div><ShieldCheck size={26} aria-hidden="true" /><strong>Data-first</strong><p>Khảo sát tập hợp dữ liệu</p></div>
+        <div><Rocket size={26} aria-hidden="true" /><strong>Workflow thật</strong><p>Bắt đầu từ quy trình thật của doanh nghiệp</p></div>
         <div><UsersRound size={26} aria-hidden="true" /><strong>Human-in-loop</strong><p>Con người giữ quyền duyệt ở bước quan trọng</p></div>
-        <div><HeartHandshake size={26} aria-hidden="true" /><strong>Thực dụng</strong><p>Ưu tiên kết quả kiểm chứng được thay vì lời hứa</p></div>
+        <div><HeartHandshake size={26} aria-hidden="true" /><strong>Thực dụng</strong><p>Ưu tiên kết quả kiểm chứng được thay vì tin tuyệt đối vào AI</p></div>
       </section>
       <aside className="about-why-card">
-        <h3>Nguyên tắc triển khai AigenLabs</h3>
+        <h3>Liên hệ AigenLabs</h3>
         <ul>
-          <li>Chọn một workflow ưu tiên</li>
-          <li>Làm rõ đầu vào, đầu ra và người duyệt</li>
-          <li>Chạy thử bằng dữ liệu mẫu hoặc dữ liệu đã được phép</li>
-          <li>Mở rộng sau khi quy trình chứng minh được giá trị</li>
+          <li>SĐT : 0981413456</li>
+          <li>Địa chỉ : Khu phố 5 , Phường Tân Thành , Tp Hồ Chí Minh</li>
+          <li>Email : Edu@aigenlabs.vn</li>
+          <li>Website : Aigenlabs.vn </li>
         </ul>
-        <blockquote>
-          AigenLabs không bán lời hứa AI tự động hóa mọi thứ. Sản phẩm tập
-          trung vào workflow rõ ràng, quyền kiểm soát của con người và kết quả
-          có thể kiểm chứng.
-        </blockquote>
       </aside>
     </article>
   );
@@ -406,7 +318,6 @@ export function AboutMeDeck() {
       <BusinessOsSlide key="business-os" />,
       <ProblemSlide key="problem" />,
       <ProcessSlide key="process" />,
-      <PlatformSlide key="platform" />,
       <FitSlide key="fit" />,
       <FounderSlide key="founder" />,
     ],
