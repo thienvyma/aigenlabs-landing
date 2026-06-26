@@ -195,7 +195,7 @@ function ProblemSlide() {
 function ProcessSlide() {
   const steps = [
     ["01", "Khảo sát hiện trạng", "Hiểu rõ workflow và nhu cầu ưu tiên", Search],
-    ["02", "Thiết kế Lộ trình", "xác dịnh bài toán trọng tâm , phạm vi và kế hoạch triển khai ", Settings2],
+    ["02", "Thiết kế Lộ trình", "Xác Định bài toán trọng tâm , phạm vi và kế hoạch triển khai ", Settings2],
     ["03", "Triển khai & Tích hợp", "Kết nối dữ liệu và workflow trên Aigenlabs", Plug],
     ["04", "Vận hành & Tối ưu", "Đồng hành vận hành, đo lường và cải tiến", RefreshCcw],
     ["05", "Mở rộng quy mô", "nhân rộng worrkflow hiệu quả và mở rộng Ai agent theo phòng ban", Rocket],
@@ -231,9 +231,9 @@ function FitSlide() {
     "Sản xuất",
     "Dịch vụ chuyên nghiệp",
     "Giáo dục",
-    "Y tế",
     "Bất động sản",
-    "Logistics",
+    "SME & Startups",
+
   ];
 
   return (
